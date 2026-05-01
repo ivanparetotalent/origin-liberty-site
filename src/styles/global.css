@@ -124,9 +124,14 @@
   html.lenis.lenis-stopped body {
     overflow: clip;
   }
-  html.lenis.lenis-smooth iframe {
-    pointer-events: none;
-  }
+  /*
+   * NOTE: Lenis's recommended CSS includes `iframe { pointer-events: none }`
+   * to stop iframes from capturing wheel events during scroll. We deliberately
+   * DO NOT include that rule here because it kills interactive embeds (the
+   * booking calendar, blog comment widgets, etc.) — clicks are dead while
+   * Lenis is active. Trade-off: scrolling the wheel directly over an iframe
+   * may scroll the iframe instead of the page. Acceptable.
+   */
 
   .hairline {
     @apply h-px w-full bg-border-soft;

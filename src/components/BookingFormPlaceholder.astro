@@ -14,12 +14,15 @@ const {
   embedScript = BOOKING.embedScript,
   iframeId = BOOKING.iframeId,
   title = 'Book a discovery call',
-  minHeight = 720,
+  minHeight = 760,
 } = Astro.props;
 ---
 
 {embedUrl ? (
-  <div class="overflow-hidden rounded-2xl border border-border-soft bg-bone-soft">
+  <div
+    class="overflow-hidden rounded-2xl border border-border-soft bg-bone-soft"
+    data-lenis-prevent
+  >
     <iframe
       src={embedUrl}
       title={title}
@@ -27,10 +30,15 @@ const {
       class="block w-full"
       style={`min-height: ${minHeight}px; border: 0;`}
       scrolling="no"
-      loading="lazy"
     ></iframe>
+    {/*
+      The form_embed.js script handles postMessage-based auto-resize.
+      Loaded synchronously (no async/defer) and AFTER the iframe so it
+      definitely sees the iframe element when it registers listeners.
+      Matches the original LeadConnector embed snippet pattern.
+    */}
     {embedScript && (
-      <script is:inline async src={embedScript}></script>
+      <script is:inline src={embedScript} type="text/javascript"></script>
     )}
   </div>
 ) : (

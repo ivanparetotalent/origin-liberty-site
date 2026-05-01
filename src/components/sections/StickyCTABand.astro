@@ -36,9 +36,15 @@ const { embedUrl } = Astro.props;
         </div>
       </ScrollReveal>
 
-      <ScrollReveal class="lg:col-span-7">
+      {/*
+        Intentionally NOT wrapped in <ScrollReveal>. The iframe must be
+        immediately visible (opacity:1, no transform/blur) so it loads
+        and renders cleanly even if the user lands on #book directly via
+        URL hash and the IntersectionObserver has already evaluated.
+      */}
+      <div class="lg:col-span-7">
         <BookingFormPlaceholder embedUrl={embedUrl} />
-      </ScrollReveal>
+      </div>
     </div>
   </div>
 </section>

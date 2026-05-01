@@ -1,0 +1,65 @@
+---
+/**
+ * Lightweight srcset-aware image. Pairs with scripts/process-images.mjs
+ * which writes <name>-{800,1200,1600}.{webp,jpg} into public/images/.
+ *
+ * Usage:
+ *   <ResponsiveImage
+ *     base="/images/hero-montevideo"
+ *     widths={[800, 1200, 1600]}
+ *     sizes="(min-width: 1024px) 40vw, 100vw"
+ *     alt="Palacio Salvo, Montevideo, in fog"
+ *     ratio="4/5"
+ *     priority
+ *   />
+ */
+interface Props {
+  base: string;
+  widths: number[];
+  sizes: string;
+  alt: string;
+  ratio?: string;
+  priority?: boolean;
+  class?: string;
+  imgClass?: string;
+}
+
+const {
+  base,
+  widths,
+  sizes,
+  alt,
+  ratio = '4/5',
+  priority = false,
+  class: wrapperClass = '',
+  imgClass = 'h-full w-full object-cover',
+} = Astro.props;
+
+const buildSrcset = (ext: 'webp' | 'jpg') =>
+  widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(', ');
+
+const fallback = `${base}-${widths[Math.min(1, widths.length - 1)]}.jpg`;
+
+const ratioParts = ratio.split('/').map(Number);
+const ratioW = ratioParts[0] || 4;
+const ratioH = ratioParts[1] || 5;
+const widestW = widths[widths.length - 1];
+const widestH = Math.round((widestW * ratioH) / ratioW);
+---
+
+<div class={`relative overflow-hidden ${wrapperClass}`} style={`aspect-ratio: ${ratio};`}>
+  <picture>
+    <source type="image/webp" srcset={buildSrcset('webp')} sizes={sizes} />
+    <source type="image/jpeg" srcset={buildSrcset('jpg')} sizes={sizes} />
+    <img
+      src={fallback}
+      alt={alt}
+      class={imgClass}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding={priority ? 'sync' : 'async'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      width={widestW}
+      height={widestH}
+    />
+  </picture>
+</div>

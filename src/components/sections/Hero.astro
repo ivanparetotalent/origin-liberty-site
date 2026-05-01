@@ -1,50 +1,70 @@
 ---
 import Button from '../ui/Button.astro';
 import PillBadge from '../ui/PillBadge.astro';
+import ResponsiveImage from '../ui/ResponsiveImage.astro';
 import ScrollReveal from '../ui/ScrollReveal.astro';
 ---
 
-<section class="relative overflow-hidden pt-16 md:pt-20 lg:pt-24">
-  <!-- Subtle radial gradient backdrop -->
+<section
+  class="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden pt-20 md:pt-24"
+  data-hero
+>
+  <!--
+    Layered atmospheric backdrop:
+    1. soft warm-gray ellipse drifting in from the top-right (the
+       reference look — light gray fading into bone)
+    2. a fainter cool wash from the bottom-left to keep the canvas alive
+    3. a faint diagonal noise/grain via SVG to add tooth
+  -->
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 -z-10"
-    style="background: radial-gradient(ellipse 80% 60% at 30% 20%, #FAF7F1 0%, #F5F0E8 55%, #F5F0E8 100%);"
-  />
+    style="background:
+      radial-gradient(ellipse 70% 70% at 100% 0%, rgba(212, 207, 197, 0.55) 0%, rgba(245, 240, 232, 0) 60%),
+      radial-gradient(ellipse 60% 80% at 0% 100%, rgba(164, 113, 72, 0.05) 0%, rgba(245, 240, 232, 0) 55%),
+      linear-gradient(180deg, #FAF7F1 0%, #F5F0E8 100%);"
+  ></div>
 
-  <div class="container-edge pb-20 md:pb-28 lg:pb-36">
-    <div class="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-12">
+  <!-- Subtle film grain -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 opacity-[0.025] mix-blend-multiply"
+    style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E&quot;); background-size: 200px 200px;"
+  ></div>
+
+  <div class="container-edge w-full pb-12 md:pb-16">
+    <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left: copy -->
-      <ScrollReveal stagger class="flex flex-col gap-7 lg:col-span-7">
+      <ScrollReveal stagger class="flex flex-col gap-5 lg:col-span-7 lg:gap-6">
         <div class="reveal">
           <PillBadge tone="oxblood">Inaugural cohort &mdash; June 2026</PillBadge>
         </div>
 
         <h1
           class="reveal font-display text-ink text-balance"
-          style="font-size: clamp(2.75rem, 6vw, 5.5rem); line-height: 1.02; font-variation-settings: 'opsz' 96, 'wght' 400; letter-spacing: -0.015em;"
+          style="font-size: clamp(2rem, 4.6vw, 4rem); line-height: 1.04; font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.02em;"
         >
           The most expensive thing you haven't hedged is the country your family lives in.
         </h1>
 
-        <p class="reveal text-lg leading-relaxed text-ink-muted text-pretty md:text-[1.2rem]">
+        <p class="reveal max-w-xl text-base leading-relaxed text-ink-muted text-pretty md:text-[1.1rem]">
           You diversify suppliers. You hedge currency. You structure your business across jurisdictions because that's how serious operators think. The country your family physically sleeps in at night is the one variable on your dashboard you haven't restructured. We restructure it.
         </p>
 
-        <p class="reveal text-base leading-relaxed text-ink-muted md:text-[1.05rem]">
+        <p class="reveal max-w-xl text-sm leading-relaxed text-ink-soft md:text-[0.95rem]">
           Ninety days from your decision: family landed in Uruguay, residency filed, tax structure clean, apartment furnished, business uninterrupted. Built by a founder who just did this himself.
         </p>
 
-        <div class="reveal flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
-          <Button href="#book" variant="primary" size="lg">
-            Book your free diagnostic call <span aria-hidden="true">→</span>
+        <div class="reveal mt-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <Button href="#book" variant="primary" size="md">
+            Book your discovery call <span aria-hidden="true">→</span>
           </Button>
-          <Button href="#offer" variant="secondary" size="lg">
+          <Button href="#offer" variant="secondary" size="md">
             How it works
           </Button>
         </div>
 
-        <div class="reveal mt-3 flex items-center gap-3">
+        <div class="reveal mt-4 flex items-center gap-3">
           <div class="flex" aria-hidden="true">
             {Array.from({ length: 5 }).map(() => (
               <svg class="h-4 w-4 text-brass" viewBox="0 0 20 20" fill="currentColor">
@@ -52,74 +72,70 @@ import ScrollReveal from '../ui/ScrollReveal.astro';
               </svg>
             ))}
           </div>
-          <p class="text-sm italic text-ink-soft">
+          <p class="text-xs italic text-ink-soft md:text-sm">
             Inaugural cohort. Eight founder families. June 2026.
           </p>
         </div>
       </ScrollReveal>
 
-      <!-- Right: paired visual cards -->
-      <ScrollReveal class="relative lg:col-span-5">
-        <div class="relative mx-auto max-w-[460px]">
-          <!-- Top tall card -->
-          <div
-            class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border-soft bg-bone-deeper shadow-card"
+      <!-- Right: single tall photo card with subtle parallax + reveal -->
+      <ScrollReveal class="lg:col-span-5">
+        <figure
+          class="relative mx-auto w-full max-w-[440px] lg:max-w-none"
+          data-hero-figure
+        >
+          <ResponsiveImage
+            base="/images/hero-montevideo"
+            widths={[800, 1200, 1600]}
+            sizes="(min-width: 1024px) 38vw, 90vw"
+            alt="Palacio Salvo, Montevideo, in early-morning fog."
+            ratio="4/5"
+            priority
+            class="rounded-2xl border border-border-soft bg-bone-deeper shadow-card"
+            imgClass="h-full w-full object-cover transition-transform duration-1000 ease-editorial will-change-transform"
+          />
+
+          <figcaption
+            class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full border border-border-soft bg-bone/85 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-eyebrow text-ink-muted backdrop-blur"
           >
-            <div
-              aria-hidden="true"
-              class="absolute inset-0"
-              style="background: linear-gradient(140deg, #EDE6DA 0%, #D4CFC5 100%);"
-            />
-            <div class="absolute inset-0 flex flex-col justify-end p-6">
-              <div class="rounded-xl bg-bone/85 px-4 py-3 backdrop-blur-sm">
-                <p class="text-xs uppercase tracking-eyebrow text-ink-soft">Photo placeholder</p>
-                <p class="mt-1 text-sm text-ink-muted">Montevideo doorway</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom data card, overlapped -->
-          <div
-            class="relative -mt-16 ml-auto w-[78%] max-w-[320px] rounded-2xl border border-border-soft bg-bone-soft p-5 shadow-card"
-          >
-            <div class="flex items-center justify-between">
-              <p class="text-[0.7rem] uppercase tracking-eyebrow text-ink-soft">
-                Portfolio shift
-              </p>
-              <span class="rounded-full bg-bone-deeper px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-eyebrow text-ink-muted">
-                90 days
-              </span>
-            </div>
-
-            <div class="mt-4 h-24 w-full">
-              <svg viewBox="0 0 200 80" class="h-full w-full" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <linearGradient id="grad-up" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#591C2A" stop-opacity="0.18" />
-                    <stop offset="100%" stop-color="#591C2A" stop-opacity="0" />
-                  </linearGradient>
-                </defs>
-                <!-- Tax exposure: down -->
-                <path d="M0 18 C 40 26, 80 36, 120 50 S 180 70, 200 72" stroke="#A47148" stroke-width="1.6" fill="none" />
-                <!-- Optionality: up -->
-                <path d="M0 62 C 40 56, 80 44, 120 30 S 180 14, 200 10" stroke="#591C2A" stroke-width="1.8" fill="none" />
-                <path d="M0 62 C 40 56, 80 44, 120 30 S 180 14, 200 10 L 200 80 L 0 80 Z" fill="url(#grad-up)" />
-              </svg>
-            </div>
-
-            <div class="mt-3 grid grid-cols-2 gap-3 text-[0.7rem]">
-              <div class="flex items-center gap-2">
-                <span class="block h-2 w-2 rounded-full bg-brass"></span>
-                <span class="text-ink-muted">Tax exposure</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="block h-2 w-2 rounded-full bg-oxblood"></span>
-                <span class="text-ink-muted">Optionality</span>
-              </div>
-            </div>
-          </div>
-        </div>
+            <span class="h-1.5 w-1.5 rounded-full bg-brass" aria-hidden="true"></span>
+            Montevideo, 2026
+          </figcaption>
+        </figure>
       </ScrollReveal>
     </div>
   </div>
+
+  <!-- Quiet scroll hint at the bottom -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-ink-soft md:flex"
+  >
+    <span class="text-[0.65rem] uppercase tracking-eyebrow">Scroll</span>
+    <span class="block h-8 w-px animate-[scroll-hint_2.4s_cubic-bezier(0.16,1,0.3,1)_infinite] bg-gradient-to-b from-ink-soft via-ink-soft to-transparent"></span>
+  </div>
 </section>
+
+<style>
+  @keyframes scroll-hint {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 0.2; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 0.6; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+
+  /*
+   * Subtle scale-in on the hero image card. JS confirms reveal support;
+   * if it doesn't, the image stays at its natural scale (no .js-reveal
+   * class on <html> means none of this CSS applies).
+   */
+  html.js-reveal [data-hero-figure] img {
+    transform: scale(1.04);
+  }
+  html.js-reveal .reveal.is-visible [data-hero-figure] img {
+    transform: scale(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html.js-reveal [data-hero-figure] img { transform: none !important; }
+  }
+</style>

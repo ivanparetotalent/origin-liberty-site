@@ -30,3 +30,8 @@ pnpm-debug.log*
 
 # local Claude Code preview config
 .claude/
+
+# raw photo source files (large, processed into public/images/ via npm run images)
+montevideo.JPG
+*-raw.jpg
+*-raw.png

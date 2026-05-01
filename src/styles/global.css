@@ -71,33 +71,62 @@
    * JS sets `html.js-reveal` once the IntersectionObserver is wired.
    * Only then do uninvisited reveals get hidden, so a JS failure (CSP,
    * parse error, slow client) leaves the content readable.
+   *
+   * Tuning notes:
+   *  - 1100ms duration with the editorial easing to feel slow/refined.
+   *  - 24px lift instead of 16, tiny scale, subtle blur-out — this is
+   *    what gives "premium" feel; keep it small or it looks dated.
    */
   .reveal {
-    transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-                transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   html.js-reveal .reveal:not(.is-visible) {
     opacity: 0;
-    transform: translateY(16px);
-    will-change: opacity, transform;
+    transform: translateY(24px) scale(0.985);
+    filter: blur(4px);
+    will-change: opacity, transform, filter;
   }
 
   /* Children of a stagger parent become visible when the parent does. */
   html.js-reveal .reveal-stagger.is-visible > .reveal {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: none;
   }
 
   /* Stagger children when parent reveal-stagger becomes visible */
   html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(1) { transition-delay: 0ms; }
-  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(2) { transition-delay: 80ms; }
-  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(3) { transition-delay: 160ms; }
-  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(4) { transition-delay: 240ms; }
-  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(5) { transition-delay: 320ms; }
-  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(6) { transition-delay: 400ms; }
-  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(7) { transition-delay: 480ms; }
-  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(8) { transition-delay: 560ms; }
+  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(2) { transition-delay: 90ms; }
+  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(3) { transition-delay: 180ms; }
+  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(4) { transition-delay: 270ms; }
+  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(5) { transition-delay: 360ms; }
+  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(6) { transition-delay: 450ms; }
+  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(7) { transition-delay: 540ms; }
+  html.js-reveal .reveal-stagger.is-visible > .reveal:nth-child(8) { transition-delay: 630ms; }
+
+  /* Lenis smooth-scroll: kill native smooth-scroll while Lenis is driving. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  html.lenis {
+    scroll-behavior: auto;
+  }
+  html.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  html.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  html.lenis.lenis-stopped body {
+    overflow: clip;
+  }
+  html.lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
 
   .hairline {
     @apply h-px w-full bg-border-soft;

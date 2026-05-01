@@ -1,75 +1,218 @@
 ---
-import SectionHeader from '../ui/SectionHeader.astro';
-import ScrollReveal from '../ui/ScrollReveal.astro';
+import { Icon } from 'astro-icon/components';
+import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
+import PillBadge from '../ui/PillBadge.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
 
-const rows = [
-  { item: 'Custom Move Plan', price: '$2,500' },
-  { item: 'U.S. tax structure with CPA partner', price: '$5,000' },
-  { item: 'Uruguay residency, family of 2 included', price: '$8,000' },
-  { item: 'Apartment sourcing + lease negotiation', price: '$5,000' },
-  { item: 'Furnished living, 6 months', price: '$4,500' },
-  { item: 'Spanish-speaking embedded EA, 6 months ($2,000/mo)', price: '$12,000' },
-  { item: 'Founder onboarding weekend', price: '$1,500' },
-  { item: 'Founder Network (lifetime)', price: '$2,500' },
-  { item: '24/7 WhatsApp support, 6 months', price: '$1,500' },
-  { item: 'Banking, healthcare, utilities, school setup', price: '$3,000' },
+/**
+ * Two-tier offer presentation. The Hedge (plan-B readiness, $10K) sits
+ * left; The Move (full 90-day execution, $30K) sits right and is
+ * visually emphasized as the recommended path. The Hedge price credits
+ * toward The Move when the founder triggers — a single line of copy
+ * carries that mechanism so it doesn't read as a bait-and-switch.
+ *
+ * Voice: founder-to-founder, second-person, short sentences. No
+ * "exclusive" / "premium" / "discerning" language anywhere.
+ */
+
+const hedgeIncludes = [
+  {
+    title: 'A trigger workshop.',
+    body: 'We map exactly what would activate your move — political event, regulatory change, family or business trigger. The list is yours and we hold a copy.',
+  },
+  {
+    title: 'Your custom 20-page Move Plan.',
+    body: 'The same plan you would get in The Move. Tax sequence, neighborhood selection, school shortlist, banking partner, 90-day timeline.',
+  },
+  {
+    title: 'Documents prepared and held.',
+    body: 'Apostilles, translations, financial records, residency-application packet. The 8–10 weeks of paperwork done before you need it.',
+  },
+  {
+    title: 'Two hours with our CPA partner.',
+    body: 'Pre-move tax-structure analysis. Hybrid US LLC + Uruguay subsidiary, sequencing, what changes the day you trigger.',
+  },
+  {
+    title: '12 months of WhatsApp concierge.',
+    body: '"What does this news mean for me?" "Should I trigger?" One thread, the team on the other side. Renewable.',
+  },
+  {
+    title: 'Founder Network access. Permanent.',
+    body: 'The private Slack of US-to-Uruguay relocated founders. Twice-yearly in-person dinners. You meet the cohort before you decide.',
+  },
+];
+
+const moveIncludes = [
+  {
+    title: 'Everything in The Hedge.',
+    body: 'Trigger work, plan, documents, CPA hours, concierge, Founder Network — all rolled in.',
+  },
+  {
+    title: 'Full Uruguay residency filing.',
+    body: 'Top-tier immigration firm in our partner network. Document preparation, filing, translations, follow-ups, your cédula, full path to permanent residency. Family of two included.',
+  },
+  {
+    title: 'Apartment sourced and furnished.',
+    body: 'We source the apartment in vetted neighborhoods, negotiate the lease in Spanish, handle the deposit, and furnish it for six months. You walk into a finished apartment.',
+  },
+  {
+    title: 'Embedded Spanish-speaking EA — six months.',
+    body: 'One dedicated EA holds the rope for the entire move. Banking, healthcare, schools, driver’s license, every queue and form. You never make a Spanish-language phone call.',
+  },
+  {
+    title: 'Founder onboarding weekend.',
+    body: 'First weekend on the ground, my wife and I host you. Asado, neighborhood walkthrough, intros to other relocated founders.',
+  },
+  {
+    title: '24/7 WhatsApp support — six months.',
+    body: 'One thread. Your EA, me, the team. Anything that comes up.',
+  },
 ];
 ---
 
-<section class="section-y bg-bone-deeper/30">
+<section class="section-y bg-bone-deeper/30" id="pricing">
   <div class="container-edge">
-    <ScrollReveal class="mx-auto max-w-[880px]">
+    <ScrollReveal class="mx-auto max-w-3xl">
       <div class="flex flex-col items-center text-center">
-        <SectionHeader
-          eyebrow="Investment"
-          title="$20,000."
-          subhead="Family of 2 included. Each additional dependent: $3,500."
-        />
-        <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-muted md:text-[1.05rem]">
-          This is the <strong class="font-medium text-ink">inaugural cohort price</strong>. Eight families. June 2026 cohort. After that, standard price moves to $35,000.
+        <PillBadge>Investment</PillBadge>
+
+        <h2
+          class="mt-5 font-display text-ink text-balance"
+          style="font-size: clamp(2.1rem, 4.4vw, 3.6rem); line-height: 1.06; font-variation-settings: 'opsz' 96, 'wght' 380;"
+        >
+          Two paths. One destination.
+        </h2>
+
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted text-pretty md:text-[1.1rem]">
+          A standby package that gets your full Plan B prepared and on the shelf. Or the full ninety-day move. The first credits toward the second whenever you're ready.
         </p>
       </div>
     </ScrollReveal>
 
-    <ScrollReveal class="mx-auto mt-14 max-w-[880px]">
-      <Card variant="soft" padding="none" class="overflow-hidden">
-        <div class="px-6 py-6 md:px-10 md:py-8">
-          <div class="flex items-baseline justify-between border-b border-border-soft pb-4">
-            <h3 class="font-display text-xl text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;">
-              Component
+    <ScrollReveal class="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 lg:mt-16 lg:grid-cols-2 lg:gap-7">
+      <!-- The Hedge -->
+      <Card as="article" variant="soft" padding="none" class="flex h-full flex-col overflow-hidden">
+        <div class="flex flex-col gap-7 p-8 md:p-10">
+          <header class="flex flex-col gap-4">
+            <PillBadge>Plan B readiness</PillBadge>
+            <h3
+              class="font-display text-[2.2rem] text-ink"
+              style="font-variation-settings: 'opsz' 96, 'wght' 400; line-height: 1.05; letter-spacing: -0.01em;"
+            >
+              The Hedge.
             </h3>
-            <p class="text-xs uppercase tracking-eyebrow text-ink-soft">
-              What you'd pay alone
+            <p class="text-[1rem] leading-relaxed text-ink-muted">
+              For founders who haven't decided yet but want everything ready for when they do.
+            </p>
+          </header>
+
+          <div class="flex items-baseline gap-3 border-y border-border-soft py-5">
+            <span class="font-display text-[2.6rem] text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 460;">
+              $10,000
+            </span>
+            <span class="text-sm text-ink-soft">one-time</span>
+          </div>
+
+          <ul class="flex flex-1 flex-col gap-5">
+            {hedgeIncludes.map((item) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-brass/15 text-brass-deep">
+                  <Icon name="lucide:check" class="h-3 w-3" aria-hidden="true" />
+                </span>
+                <div class="flex flex-col gap-1">
+                  <p class="text-[0.95rem] font-medium text-ink">{item.title}</p>
+                  <p class="text-[0.92rem] leading-relaxed text-ink-muted">{item.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div class="rounded-2xl border border-border-soft bg-bone-deeper/40 p-5">
+            <p class="text-[0.92rem] leading-relaxed text-ink">
+              <strong class="font-medium">When your trigger fires, the $10,000 credits toward The Move.</strong>
+              Your 90-day clock starts the day you say go. No re-onboarding, no second discovery — the work is already done.
             </p>
           </div>
 
-          <dl class="divide-y divide-border-soft">
-            {rows.map((r) => (
-              <div class="flex items-center justify-between gap-6 py-4">
-                <dt class="text-[0.98rem] leading-snug text-ink-muted">{r.item}</dt>
-                <dd class="font-mono text-[0.98rem] tabular-nums text-ink">{r.price}</dd>
-              </div>
-            ))}
-
-            <div class="flex items-center justify-between gap-6 border-t border-border bg-bone py-5 px-2">
-              <dt class="text-[1.02rem] font-medium text-ink">Total if you bought it standalone</dt>
-              <dd class="font-mono text-[1.05rem] font-medium tabular-nums text-ink">$45,500</dd>
-            </div>
-            <div class="flex items-center justify-between gap-6 bg-bone py-5 px-2">
-              <dt class="text-[1.05rem] font-medium text-ink">Inaugural cohort</dt>
-              <dd class="font-mono text-[1.1rem] font-semibold tabular-nums text-ink">$20,000</dd>
-            </div>
-            <div class="flex items-center justify-between gap-6 bg-oxblood/5 py-5 px-2">
-              <dt class="text-[1.05rem] font-semibold text-oxblood">You save</dt>
-              <dd class="font-mono text-[1.2rem] font-semibold tabular-nums text-oxblood">$25,500</dd>
-            </div>
-          </dl>
+          <Button href="#book" variant="secondary" size="md" class="w-full">
+            Book a discovery call <span aria-hidden="true">→</span>
+          </Button>
         </div>
       </Card>
 
-      <p class="mx-auto mt-8 max-w-[760px] text-center text-sm leading-relaxed text-ink-muted md:text-[0.95rem]">
-        You can't actually buy most of these &agrave; la carte at the prices listed. The Spanish-speaking EA at $12,000 is the closest market price for what we deliver. The rest is what a vendor would charge a stranger off the street.
+      <!-- The Move (recommended) -->
+      <Card
+        as="article"
+        variant="soft"
+        padding="none"
+        class="relative flex h-full flex-col overflow-hidden ring-1 ring-oxblood/15 shadow-card"
+      >
+        <span
+          class="absolute right-6 top-6 inline-flex items-center gap-2 rounded-full bg-oxblood px-3 py-1 text-[0.65rem] font-medium uppercase tracking-eyebrow text-bone"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-bone" aria-hidden="true"></span>
+          Inaugural cohort
+        </span>
+
+        <div class="flex flex-col gap-7 p-8 md:p-10">
+          <header class="flex flex-col gap-4">
+            <PillBadge tone="oxblood">90-day relocation</PillBadge>
+            <h3
+              class="font-display text-[2.2rem] text-ink"
+              style="font-variation-settings: 'opsz' 96, 'wght' 400; line-height: 1.05; letter-spacing: -0.01em;"
+            >
+              The Move.
+            </h3>
+            <p class="text-[1rem] leading-relaxed text-ink-muted">
+              For founders ready to land in Montevideo this quarter.
+            </p>
+          </header>
+
+          <div class="flex flex-col gap-2 border-y border-border-soft py-5">
+            <div class="flex items-baseline gap-3">
+              <span class="font-display text-[2.6rem] text-oxblood" style="font-variation-settings: 'opsz' 96, 'wght' 460;">
+                $30,000
+              </span>
+              <span class="text-sm text-ink-soft">family of 2 included</span>
+            </div>
+            <p class="text-xs text-ink-soft">
+              Each additional dependent: $3,500. Standard pricing rises to $45,000 in Q4 2026.
+            </p>
+          </div>
+
+          <ul class="flex flex-1 flex-col gap-5">
+            {moveIncludes.map((item, i) => (
+              <li class="flex items-start gap-3">
+                <span class={`mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full ${i === 0 ? 'bg-brass/15 text-brass-deep' : 'bg-oxblood/12 text-oxblood'}`}>
+                  <Icon name="lucide:check" class="h-3 w-3" aria-hidden="true" />
+                </span>
+                <div class="flex flex-col gap-1">
+                  <p class="text-[0.95rem] font-medium text-ink">{item.title}</p>
+                  <p class="text-[0.92rem] leading-relaxed text-ink-muted">{item.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div class="rounded-2xl border border-oxblood/15 bg-oxblood/5 p-5">
+            <p class="text-[0.92rem] leading-relaxed text-ink">
+              <strong class="font-medium text-oxblood">Inaugural cohort price.</strong>
+              Eight families, June 2026. Standard pricing $45,000 from Q4 2026 — no retroactive grandfathering.
+            </p>
+          </div>
+
+          <Button href="#book" variant="primary" size="md" class="w-full">
+            Book a discovery call <span aria-hidden="true">→</span>
+          </Button>
+        </div>
+      </Card>
+    </ScrollReveal>
+
+    <ScrollReveal class="mx-auto mt-10 max-w-3xl text-center">
+      <p class="text-sm leading-relaxed text-ink-muted md:text-[0.95rem]">
+        Government fees, security deposits, and recoverable costs (rental deposits, furniture deposits) are disclosed up-front in writing and billed at-cost.
+        <strong class="font-medium text-ink"> Zero markup. Zero surprises.</strong>
       </p>
     </ScrollReveal>
   </div>

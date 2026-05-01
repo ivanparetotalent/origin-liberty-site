@@ -1,0 +1,110 @@
+---
+import { Icon } from 'astro-icon/components';
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+const cards = [
+  {
+    icon: 'lucide:phone-call',
+    title: 'A 60-minute diagnostic call.',
+    body: "You and me. Not a salesperson. Free. We talk about your situation — business, family, tax exposure, timeline, why you're considering Uruguay versus alternatives. At the end of 60 minutes I tell you one of three things: yes and we should do it; yes Uruguay but you're six months early; or no this isn't right and here's what might be. Most relocation services start by selling you. We start by telling you the truth.",
+  },
+  {
+    icon: 'lucide:file-text',
+    title: 'A custom 20-page Move Plan.',
+    body: 'Whatever the call concludes. Delivered in writing within 48 hours. Tax sequence, neighborhood selection, school shortlist, banking partner, 90-day timeline. Yours to keep regardless of whether you sign with us.',
+  },
+  {
+    icon: 'lucide:stamp',
+    title: 'Full residency filing.',
+    body: 'Top-tier Uruguay immigration firm in our partner network. Document preparation, filing, translations, follow-ups, your *cédula* (national ID), full path to permanent residency. Family of four included in base price.',
+  },
+  {
+    icon: 'lucide:calculator',
+    title: 'U.S. tax structure.',
+    body: "Pre-move planning with our vetted CPA partner. Entity structure, GILTI, FEIE, distribution timing, sequencing your exit event correctly so you don't get sandbagged in April. The single highest-leverage line in the package — most relocation services skip it entirely.",
+  },
+  {
+    icon: 'lucide:home',
+    title: 'Apartment and furnished living.',
+    body: 'We source the apartment in vetted neighborhoods (Pocitos, Carrasco, Punta Carretas — depending on your family). We negotiate the lease in Spanish. We handle the deposit. We furnish it for six months. You walk into a finished apartment.',
+  },
+  {
+    icon: 'lucide:users',
+    title: 'A Spanish-speaking executive assistant.',
+    body: 'One dedicated EA, embedded with your move for six months. They open your bank account. They register your healthcare. They enroll your kids in school. They get your *cédula*, your driver’s license. They negotiate with the electric company, the broker, the locksmith, the woman at DGI who asks for one more form. You never make a Spanish-language phone call.',
+  },
+  {
+    icon: 'lucide:utensils',
+    title: 'A founder onboarding weekend.',
+    body: "First weekend you're in the country, my wife and I host you. Asado at our place. Walk through Pocitos. Intros to other relocated founders. The five things I wish someone had told me on day one. This isn't a feature, it's friendship — but you get it because we built this for the kind of person we'd want at our table.",
+  },
+  {
+    icon: 'lucide:message-square',
+    title: 'The founder network.',
+    body: "A private Slack of U.S.-to-Uruguay relocated founders. Twice-yearly in-person dinners. Permanent. You don't lose access at month six.",
+  },
+  {
+    icon: 'lucide:headphones',
+    title: '24/7 WhatsApp support — six months.',
+    body: "One thread. Your EA, me, the team. Anything that comes up — paperwork, emergencies, “the elevator is broken in our building and I don’t know who to call” — message us, problem moves.",
+  },
+  {
+    icon: 'lucide:building-2',
+    title: 'Banking, healthcare, utilities, school setup.',
+    body: 'All coordinated by your EA. You sign documents. We handle queues, in-person visits, and the system that requires three originals of everything.',
+  },
+];
+
+// Simple italic *word* renderer for "*cédula*" etc.
+function renderEmphasized(input: string) {
+  // Split on *...* preserving delimiters
+  const parts = input.split(/(\*[^*]+\*)/g);
+  return parts
+    .map((p) =>
+      p.startsWith('*') && p.endsWith('*')
+        ? `<em class="italic text-ink">${p.slice(1, -1)}</em>`
+        : p
+    )
+    .join('');
+}
+---
+
+<section id="offer" class="section-y bg-bone">
+  <div class="container-edge">
+    <ScrollReveal class="mx-auto max-w-3xl">
+      <SectionHeader
+        eyebrow="What we built"
+        title="One offer. One coordinator. Ninety days."
+        subhead="One price. Ninety days from your signature to your family on the ground in Montevideo, residency filed, apartment furnished, kids enrolled, business uninterrupted. You make decisions. We execute."
+      />
+    </ScrollReveal>
+
+    <ol class="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7">
+      {cards.map((c, i) => (
+        <ScrollReveal class="contents">
+          <li class="contents">
+            <Card as="article" variant="soft" hover class="flex h-full flex-col gap-5">
+              <div class="flex items-center gap-4">
+                <span class="flex h-12 w-12 flex-none items-center justify-center rounded-full bg-oxblood/8 text-oxblood">
+                  <Icon name={c.icon} class="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span class="text-xs font-medium uppercase tracking-eyebrow text-ink-soft">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              </div>
+              <h3
+                class="font-display text-2xl text-ink text-balance"
+                style="font-variation-settings: 'opsz' 96, 'wght' 420; line-height: 1.18;"
+              >
+                {c.title}
+              </h3>
+              <p class="text-[1rem] leading-relaxed text-ink-muted text-pretty" set:html={renderEmphasized(c.body)} />
+            </Card>
+          </li>
+        </ScrollReveal>
+      ))}
+    </ol>
+  </div>
+</section>

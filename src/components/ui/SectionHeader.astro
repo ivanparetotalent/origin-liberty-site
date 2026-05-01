@@ -1,0 +1,45 @@
+---
+import PillBadge from './PillBadge.astro';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subhead?: string;
+  align?: 'left' | 'center';
+  size?: 'md' | 'lg';
+  pillTone?: 'default' | 'oxblood' | 'brass';
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subhead,
+  align = 'center',
+  size = 'md',
+  pillTone = 'default',
+  class: className = '',
+} = Astro.props;
+
+const alignClasses = align === 'center' ? 'text-center mx-auto items-center' : 'text-left items-start';
+const titleSize =
+  size === 'lg'
+    ? 'text-[clamp(2.25rem,4.6vw,3.75rem)] leading-[1.05]'
+    : 'text-[clamp(2rem,4vw,3.5rem)] leading-[1.08]';
+---
+
+<header class={`flex flex-col gap-5 max-w-3xl ${alignClasses} ${className}`.trim()}>
+  {eyebrow && <PillBadge tone={pillTone}>{eyebrow}</PillBadge>}
+  {title && (
+    <h2
+      class={`font-display text-ink ${titleSize} text-balance`}
+      style="font-variation-settings: 'opsz' 96, 'wght' 380;"
+    >
+      {title}
+    </h2>
+  )}
+  {subhead && (
+    <p class="text-lg leading-relaxed text-ink-muted text-pretty md:text-xl">{subhead}</p>
+  )}
+  <slot />
+</header>

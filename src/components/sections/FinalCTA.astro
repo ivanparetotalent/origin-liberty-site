@@ -1,0 +1,49 @@
+---
+import Button from '../ui/Button.astro';
+import PillBadge from '../ui/PillBadge.astro';
+import PullQuote from '../ui/PullQuote.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+---
+
+<section class="section-y relative overflow-hidden bg-bone-deeper">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10"
+    style="background: radial-gradient(ellipse 70% 50% at 50% 30%, #FAF7F1 0%, #EDE6DA 60%, #EDE6DA 100%);"
+  />
+
+  <div class="container-edge">
+    <ScrollReveal class="mx-auto flex max-w-[720px] flex-col items-center gap-7 text-center">
+      <PillBadge tone="oxblood">Final thought</PillBadge>
+
+      <h2
+        class="font-display text-ink text-balance"
+        style="font-size: clamp(2.1rem, 4.4vw, 3.6rem); line-height: 1.06; font-variation-settings: 'opsz' 96, 'wght' 380;"
+      >
+        You read this far. You already know.
+      </h2>
+
+      <div class="flex flex-col gap-5 text-left text-[1.05rem] leading-relaxed text-ink-muted md:text-[1.1rem]">
+        <p>
+          You're not trapped. You're not stuck. You have a passport. You have a business that travels. You have a family that follows you because you've earned that trust.
+        </p>
+        <p>
+          You have everything you need except the mechanism to execute the move you've already decided to make.
+        </p>
+        <p>
+          Book the call. We'll figure out together whether this is right for you. If it isn't, you walk away with a plan that's worth your time anyway.
+        </p>
+      </div>
+
+      <div class="my-2 flex w-full justify-center">
+        <PullQuote>
+          Your origin is not your destiny. The map is editable.
+        </PullQuote>
+      </div>
+
+      <Button href="#book" variant="primary" size="lg">
+        Book your free diagnostic call <span aria-hidden="true">→</span>
+      </Button>
+    </ScrollReveal>
+  </div>
+</section>

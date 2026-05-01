@@ -1,0 +1,41 @@
+---
+interface Props {
+  as?: 'div' | 'article' | 'section' | 'li';
+  variant?: 'soft' | 'deeper' | 'outline' | 'elevated';
+  padding?: 'sm' | 'md' | 'lg' | 'none';
+  hover?: boolean;
+  class?: string;
+}
+
+const {
+  as: Tag = 'div',
+  variant = 'soft',
+  padding = 'md',
+  hover = false,
+  class: className = '',
+} = Astro.props;
+
+const variants: Record<string, string> = {
+  soft: 'bg-bone-soft border border-border-soft',
+  deeper: 'bg-bone-deeper border border-border-soft',
+  outline: 'bg-transparent border border-border-soft',
+  elevated: 'bg-bone-soft border border-border-soft shadow-card',
+};
+
+const pads: Record<string, string> = {
+  none: '',
+  sm: 'p-6',
+  md: 'p-8 md:p-10',
+  lg: 'p-10 md:p-12',
+};
+
+const hoverClasses = hover
+  ? 'transition-[transform,box-shadow] duration-200 ease-editorial hover:-translate-y-0.5 hover:shadow-card-hover'
+  : '';
+
+const classes = `rounded-2xl ${variants[variant]} ${pads[padding]} ${hoverClasses} ${className}`.trim();
+---
+
+<Tag class={classes}>
+  <slot />
+</Tag>

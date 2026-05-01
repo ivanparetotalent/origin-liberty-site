@@ -1,0 +1,27 @@
+---
+interface Props {
+  dot?: boolean;
+  tone?: 'default' | 'oxblood' | 'brass';
+  class?: string;
+}
+const { dot = true, tone = 'default', class: className = '' } = Astro.props;
+
+const tones: Record<string, string> = {
+  default: 'bg-bone-soft text-ink-muted border-border-soft',
+  oxblood: 'bg-oxblood/5 text-oxblood border-oxblood/15',
+  brass: 'bg-brass/10 text-brass-deep border-brass/20',
+};
+
+const dotColors: Record<string, string> = {
+  default: 'bg-brass',
+  oxblood: 'bg-oxblood',
+  brass: 'bg-brass-deep',
+};
+---
+
+<span
+  class={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[0.7rem] font-medium uppercase tracking-eyebrow ${tones[tone]} ${className}`}
+>
+  {dot && <span class={`h-1.5 w-1.5 rounded-full ${dotColors[tone]}`} aria-hidden="true" />}
+  <slot />
+</span>

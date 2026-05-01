@@ -1,0 +1,43 @@
+---
+interface Props {
+  question: string;
+  open?: boolean;
+}
+const { question, open = false } = Astro.props;
+---
+
+<details
+  class="group border-b border-border-soft py-5 transition-colors first:border-t"
+  open={open}
+>
+  <summary
+    class="flex cursor-pointer list-none items-start justify-between gap-6 py-2 text-left text-lg font-medium text-ink transition-colors marker:hidden hover:text-oxblood"
+  >
+    <span class="font-display text-pretty" style="font-variation-settings: 'opsz' 96, 'wght' 400;">{question}</span>
+    <span
+      aria-hidden="true"
+      class="mt-1 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full border border-border-soft text-ink-muted transition-transform duration-300 ease-editorial group-open:rotate-45 group-open:border-oxblood group-open:text-oxblood"
+    >
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+        <path d="M5 1V9M1 5H9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+    </span>
+  </summary>
+  <div
+    class="prose-faq mt-3 max-w-none pr-10 text-[1rem] leading-relaxed text-ink-muted"
+  >
+    <slot />
+  </div>
+</details>
+
+<style>
+  summary::-webkit-details-marker { display: none; }
+  details > div { animation: faq-fade 360ms cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes faq-fade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details > div { animation: none; }
+  }
+</style>

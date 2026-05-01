@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PillBadge from '../components/ui/PillBadge.astro';
+import ScrollReveal from '../components/ui/ScrollReveal.astro';
+---
+
+<Layout
+  title="Your call is booked — Origin Liberty"
+  description="Your diagnostic call is booked. Calendar confirmation incoming."
+  noindex
+  showNavCta={false}
+>
+  <section class="section-y">
+    <div class="container-edge">
+      <ScrollReveal class="mx-auto flex max-w-[640px] flex-col items-center gap-7 text-center">
+        <PillBadge tone="oxblood">We'll be in touch</PillBadge>
+
+        <h1
+          class="font-display text-ink text-balance"
+          style="font-size: clamp(2.5rem, 5.4vw, 4.5rem); line-height: 1.04; font-variation-settings: 'opsz' 96, 'wght' 400; letter-spacing: -0.01em;"
+        >
+          Your call is booked.
+        </h1>
+
+        <div class="flex flex-col gap-5 text-left text-[1.05rem] leading-relaxed text-ink-muted md:text-[1.1rem]">
+          <p>
+            You'll get a calendar confirmation in your inbox within the next minute. Bring your tax bracket, a rough timeline, and any questions you've been collecting. Nothing else.
+          </p>
+          <p>
+            If you don't see the email in 5 minutes, check spam &mdash; and email
+            <a href="mailto:hello@originliberty.com" class="text-oxblood underline-offset-4 hover:underline">
+              hello@originliberty.com
+            </a>.
+          </p>
+        </div>
+
+        <a
+          href="/"
+          class="mt-2 text-sm text-ink-muted underline-offset-4 hover:text-oxblood hover:underline"
+        >
+          &larr; Back to home
+        </a>
+      </ScrollReveal>
+    </div>
+  </section>
+</Layout>

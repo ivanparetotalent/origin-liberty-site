@@ -1,0 +1,40 @@
+---
+import Button from './ui/Button.astro';
+const { ctaHref = '#book' } = Astro.props as { ctaHref?: string };
+---
+
+<header
+  id="site-nav"
+  class="sticky top-0 z-50 w-full border-b border-transparent bg-bone/85 backdrop-blur-md transition-[border-color,background-color] duration-300"
+>
+  <div class="container-edge flex h-16 items-center justify-between md:h-20">
+    <a href="/" class="group flex items-center" aria-label="Origin Liberty — home">
+      <span
+        class="font-display text-[22px] leading-none text-ink"
+        style="font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.01em;"
+      >
+        Origin Liberty
+      </span>
+    </a>
+
+    <Button href={ctaHref} variant="primary" size="sm">
+      Book a call <span aria-hidden="true">→</span>
+    </Button>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const nav = document.getElementById('site-nav');
+    if (!nav) return;
+    const onScroll = () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('border-border-soft');
+      } else {
+        nav.classList.remove('border-border-soft');
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>

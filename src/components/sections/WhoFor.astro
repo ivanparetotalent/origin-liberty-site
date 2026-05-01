@@ -1,0 +1,75 @@
+---
+import { Icon } from 'astro-icon/components';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+const forYou = [
+  'A global founder, 7- to 8-figure operator',
+  'You already think structurally about jurisdictions, taxes, and optionality',
+  "You've decided to move (or you're 90 days from deciding)",
+  'You will not put your business on pause to project-manage your relocation',
+  "You're comfortable spending $20K-$50K to compress nine months of execution into ninety days",
+];
+
+const notForYou = [
+  'Looking for the cheapest immigration filing — try a local Uruguay law firm; budget $1,500-$5,000',
+  'Comparing Uruguay against fifteen countries and want to be sold on one — try Nomad Capitalist; budget $28,000+',
+  'Willing to manage ten Spanish-speaking vendors yourself to save $5,000 — sincerely, good luck',
+  'Moving from a place of fear instead of strategy — the founders who do this well treat it as portfolio construction, not flight',
+  'Just curious. The diagnostic call is for people who can be ready to move within 12 months.',
+];
+---
+
+<section class="section-y bg-bone-deeper/30">
+  <div class="container-edge">
+    <ScrollReveal class="mx-auto max-w-3xl">
+      <SectionHeader eyebrow="Fit" title="Who this is for. Who it isn't." />
+    </ScrollReveal>
+
+    <div class="mx-auto mt-14 grid max-w-5xl grid-cols-1 overflow-hidden rounded-2xl border border-border-soft md:grid-cols-2">
+      <ScrollReveal class="bg-oxblood/5 p-8 md:p-10 lg:p-12">
+        <h3
+          class="font-display text-2xl text-oxblood md:text-3xl"
+          style="font-variation-settings: 'opsz' 96, 'wght' 420;"
+        >
+          This is for you
+        </h3>
+        <ul class="mt-6 flex flex-col gap-4">
+          {forYou.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-oxblood/15 text-oxblood">
+                <Icon name="lucide:check" class="h-3 w-3" aria-hidden="true" />
+              </span>
+              <span class="text-[1rem] leading-relaxed text-ink">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </ScrollReveal>
+
+      <ScrollReveal class="border-t border-border-soft bg-bone-deeper/60 p-8 md:border-l md:border-t-0 md:p-10 lg:p-12">
+        <h3
+          class="font-display text-2xl text-ink-muted md:text-3xl"
+          style="font-variation-settings: 'opsz' 96, 'wght' 420;"
+        >
+          This is not for you
+        </h3>
+        <ul class="mt-6 flex flex-col gap-4">
+          {notForYou.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-ink/8 text-ink-muted">
+                <Icon name="lucide:x" class="h-3 w-3" aria-hidden="true" />
+              </span>
+              <span class="text-[1rem] leading-relaxed text-ink-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </ScrollReveal>
+    </div>
+
+    <ScrollReveal class="mx-auto mt-10 max-w-3xl text-center">
+      <p class="text-base italic leading-relaxed text-ink-muted md:text-[1.05rem]">
+        We turn away as many prospects as we accept. The diagnostic exists to make that mutual.
+      </p>
+    </ScrollReveal>
+  </div>
+</section>

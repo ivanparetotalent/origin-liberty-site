@@ -1,0 +1,35 @@
+---
+interface Props {
+  embedUrl?: string | null;
+  minHeight?: number;
+  title?: string;
+}
+const { embedUrl = null, minHeight = 640, title = 'Book a diagnostic call' } = Astro.props;
+---
+
+{embedUrl ? (
+  <iframe
+    src={embedUrl}
+    title={title}
+    class="w-full rounded-2xl border border-border-soft bg-bone-soft"
+    style={`min-height: ${minHeight}px;`}
+    loading="lazy"
+  />
+) : (
+  <div
+    class="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-bone-soft px-8 py-16 text-center"
+  >
+    <p class="font-display text-xl text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 400;">
+      Booking form will be embedded here.
+    </p>
+    <p class="text-sm text-ink-muted">
+      In the meantime, email
+      <a
+        href="mailto:hello@originliberty.com"
+        class="text-oxblood underline-offset-4 hover:underline"
+      >
+        hello@originliberty.com
+      </a>.
+    </p>
+  </div>
+)}

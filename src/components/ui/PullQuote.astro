@@ -1,0 +1,27 @@
+---
+interface Props {
+  attribution?: string;
+  align?: 'left' | 'center';
+  size?: 'md' | 'lg';
+  class?: string;
+}
+const { attribution, align = 'center', size = 'lg', class: className = '' } = Astro.props;
+const alignment = align === 'center' ? 'text-center mx-auto' : 'text-left';
+const sizes = size === 'lg'
+  ? 'text-[clamp(1.65rem,3.4vw,2.6rem)] leading-[1.18]'
+  : 'text-[clamp(1.35rem,2.5vw,2rem)] leading-[1.25]';
+---
+
+<figure class={`max-w-3xl ${alignment} ${className}`.trim()}>
+  <blockquote
+    class={`font-display italic text-oxblood text-pretty ${sizes}`}
+    style="font-variation-settings: 'opsz' 96, 'wght' 320;"
+  >
+    <slot />
+  </blockquote>
+  {attribution && (
+    <figcaption class="mt-5 text-sm uppercase tracking-eyebrow text-ink-soft">
+      {attribution}
+    </figcaption>
+  )}
+</figure>

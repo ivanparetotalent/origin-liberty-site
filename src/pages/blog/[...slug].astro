@@ -1,0 +1,54 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PillBadge from '../../components/ui/PillBadge.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props { post: CollectionEntry<'blog'> }
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} — Origin Liberty`} description={post.data.description}>
+  <article class="section-y">
+    <div class="container-edge">
+      <header class="mx-auto flex max-w-3xl flex-col items-start gap-5">
+        <PillBadge>
+          {post.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </PillBadge>
+        <h1
+          class="font-display text-ink text-balance"
+          style="font-size: clamp(2.25rem, 4.4vw, 3.5rem); line-height: 1.07; font-variation-settings: 'opsz' 96, 'wght' 400;"
+        >
+          {post.data.title}
+        </h1>
+        <p class="text-lg text-ink-muted text-pretty md:text-xl">{post.data.description}</p>
+        <p class="text-sm text-ink-soft">By {post.data.author}</p>
+      </header>
+
+      <div class="prose-article mx-auto mt-12 max-w-3xl text-[1.05rem] leading-relaxed text-ink">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  .prose-article p { margin: 1em 0; }
+  .prose-article h2 { font-family: 'Fraunces Variable', Fraunces, Georgia, serif; font-size: 1.75rem; margin: 1.6em 0 0.6em; }
+  .prose-article h3 { font-family: 'Fraunces Variable', Fraunces, Georgia, serif; font-size: 1.35rem; margin: 1.4em 0 0.4em; }
+  .prose-article a { color: #591C2A; text-underline-offset: 4px; }
+  .prose-article a:hover { text-decoration: underline; }
+  .prose-article ul, .prose-article ol { padding-left: 1.5rem; }
+  .prose-article li { margin: 0.4em 0; }
+  .prose-article blockquote { border-left: 2px solid #A47148; padding-left: 1rem; color: #5A5A5A; font-style: italic; }
+  .prose-article code { background: #EDE6DA; padding: 0.1em 0.35em; border-radius: 0.25rem; font-size: 0.92em; }
+  .prose-article pre { background: #1B1B1B; color: #F5F0E8; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; }
+</style>

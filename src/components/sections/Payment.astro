@@ -1,0 +1,65 @@
+---
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+const milestones = [
+  {
+    label: 'Kickoff',
+    pct: '30%',
+    body: 'Contract signed; EA assigned within 5 business days.',
+  },
+  {
+    label: 'Landed + filed',
+    pct: '40%',
+    body: 'You and your family are in Montevideo and your residency is filed at the immigration office.',
+  },
+  {
+    label: 'Settled',
+    pct: '30%',
+    body: 'Residency approved, apartment fully set up, everything operational.',
+  },
+];
+---
+
+<section class="section-y bg-bone">
+  <div class="container-edge">
+    <ScrollReveal class="mx-auto max-w-3xl">
+      <SectionHeader
+        eyebrow="Payment"
+        title="Three payments. Tied to milestones."
+        subhead="You don't pay before we deliver."
+      />
+    </ScrollReveal>
+
+    <ol class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {milestones.map((m, i) => (
+        <ScrollReveal class="contents">
+          <li class="contents">
+            <Card as="article" variant="soft" hover class="flex h-full flex-col gap-4">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-medium uppercase tracking-eyebrow text-ink-soft">
+                  Step {String(i + 1).padStart(2, '0')}
+                </span>
+                <span class="font-display text-3xl text-oxblood" style="font-variation-settings: 'opsz' 96, 'wght' 460;">
+                  {m.pct}
+                </span>
+              </div>
+              <h3 class="font-display text-2xl text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420; line-height: 1.2;">
+                {m.label}
+              </h3>
+              <p class="text-[0.98rem] italic leading-relaxed text-ink-muted">{m.body}</p>
+            </Card>
+          </li>
+        </ScrollReveal>
+      ))}
+    </ol>
+
+    <ScrollReveal class="mx-auto mt-12 max-w-3xl text-center">
+      <p class="text-base leading-relaxed text-ink-muted md:text-[1.05rem]">
+        Government fees, security deposits, and recoverable costs (rental deposits, furniture deposits) are disclosed up-front in writing and billed at-cost.
+        <strong class="font-medium text-ink"> Zero markup. Zero surprises.</strong>
+      </p>
+    </ScrollReveal>
+  </div>
+</section>

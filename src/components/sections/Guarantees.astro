@@ -1,0 +1,55 @@
+---
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import { Icon } from 'astro-icon/components';
+
+const guarantees = [
+  {
+    icon: 'lucide:shield-check',
+    title: 'The diagnostic costs you nothing.',
+    body: "The 60-minute call is free. No commitment. If we're not a fit, you keep the strategy doc. If you decide not to move, you keep the strategy doc. The only way you “lose” the call is if you weren't going to do anything anyway.",
+  },
+  {
+    icon: 'lucide:clock-9',
+    title: '90-Day Soft Landing guarantee.',
+    body: "Residency filed at immigration <strong class=\"font-medium text-ink\">and</strong> apartment keys in your hand within 90 days of contract signature. If we miss — assuming you've supplied requested documents on the agreed schedule — <strong class=\"font-medium text-ink\">25% of milestone-2 payment refunds.</strong> This is real. We've actually done it. The 90-day timeline is what my own family's move would have been with this system in place.",
+  },
+  {
+    icon: 'lucide:badge-dollar-sign',
+    title: 'No-surprise pricing.',
+    body: '$20,000 covers everything in the stack above. Government fees, deposits, and recoverable costs disclosed before you sign, billed at-cost. If a number changes between signing and execution, we tell you in writing before you owe a dollar. <strong class="font-medium text-ink">You will never get a bill you weren’t expecting.</strong>',
+  },
+];
+---
+
+<section class="section-y bg-bone-deeper/40">
+  <div class="container-edge">
+    <ScrollReveal class="mx-auto max-w-3xl">
+      <SectionHeader
+        eyebrow="Guarantees"
+        title="What if it doesn't work."
+      />
+    </ScrollReveal>
+
+    <ol class="mx-auto mt-14 flex max-w-3xl flex-col gap-5">
+      {guarantees.map((g) => (
+        <ScrollReveal class="contents">
+          <li class="contents">
+            <Card as="article" variant="soft" class="flex flex-col gap-4 md:flex-row md:items-start md:gap-6">
+              <span class="flex h-12 w-12 flex-none items-center justify-center rounded-full bg-oxblood/8 text-oxblood">
+                <Icon name={g.icon} class="h-5 w-5" aria-hidden="true" />
+              </span>
+              <div class="flex flex-col gap-3">
+                <h3 class="font-display text-2xl text-ink text-balance" style="font-variation-settings: 'opsz' 96, 'wght' 420; line-height: 1.2;">
+                  {g.title}
+                </h3>
+                <p class="text-[1rem] leading-relaxed text-ink-muted text-pretty" set:html={g.body} />
+              </div>
+            </Card>
+          </li>
+        </ScrollReveal>
+      ))}
+    </ol>
+  </div>
+</section>

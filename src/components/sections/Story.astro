@@ -1,0 +1,93 @@
+---
+import PillBadge from '../ui/PillBadge.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+---
+
+<section class="section-y bg-bone-deeper/40">
+  <div class="container-edge">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Text -->
+      <ScrollReveal stagger class="flex flex-col gap-6 lg:col-span-7">
+        <div class="reveal">
+          <PillBadge>My story</PillBadge>
+        </div>
+
+        <h2
+          class="reveal font-display text-ink text-balance"
+          style="font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.07; font-variation-settings: 'opsz' 96, 'wght' 380;"
+        >
+          I've moved twice in my adult life and I'm not done.
+        </h2>
+
+        <p class="reveal text-[1.1rem] leading-relaxed text-ink-muted md:text-[1.15rem]">
+          I think about countries the way you think about suppliers. I think about residency the way you think about LLC structure. I think about my family's physical location the way you think about your data backup strategy &mdash; as a portfolio decision, not a default.
+        </p>
+
+        <div class="reveal flex flex-col gap-5 text-[1.02rem] leading-relaxed text-ink md:text-[1.05rem]">
+          <p>I'm Ivan Bunin. I'm 29.</p>
+
+          <p class="italic text-ink-muted">
+            I was born in Ukraine. I started freelancing as a graphic designer at 15. I built my career with no funding, no luck, and no good reason it should have worked &mdash; just relentless execution. By the time I was 22 I was running technical operations for an 8-figure marketing company. By 27 I'd helped scale that company from 6 employees to 60, and we exited.
+          </p>
+
+          <p>
+            I came to the United States in October 2022 on an H-1B. I built a life. I had a son in Arizona. I bought a house in Wisconsin. I co-founded Pareto Talent with my partner Kasim &mdash; a staffing company that hit $1M revenue in year one and $250K MRR by month sixteen.
+          </p>
+
+          <p>And then I left.</p>
+
+          <p>
+            Not because the U.S. was bad. The U.S. is incredible for building. I left because I could see the math.
+          </p>
+
+          <p>
+            If I sold Pareto for the exit we're targeting, the difference between paying U.S. tax and Uruguay tax was over <strong class="font-medium text-ink">$1.5 million net</strong>. The difference between raising my son in a country I have to navigate carefully and one where the worst thing on the news is a soccer match was unmeasurable. The difference between having an option and having a single point of failure was, to me, the entire game.
+          </p>
+
+          <p>
+            So in early 2026 I sold the Wisconsin house. I let the H-1B expire. I moved my wife, my two-year-old, our pitbull, and our cat to Montevideo.
+          </p>
+
+          <p>
+            The move took nine months and probably nine years off my life.
+          </p>
+
+          <p class="italic text-ink-muted">
+            Not because Uruguay is hard &mdash; Uruguay is genuinely one of the best-run small countries in the world. Because the moving was hard. I had a very good immigration lawyer who didn't speak fluent English. I had an excellent real estate agent who only worked in Spanish. I had a furniture rental company that quoted me one price and invoiced me another. I had a bank that asked me to come in person three times for paperwork that should have been emailed. I had to set up a healthcare provider, a school for my son, a phone number, a tax ID, an electric account in my own name, and a delivery address &mdash; every single one of which required either Spanish I didn't have or a body present in Montevideo I wasn't.
+          </p>
+
+          <p class="italic text-ink-muted">
+            I'm Ukrainian. I've moved before. I had a budget. I had a network. I still missed work. I still had weeks where the move ate the business. I still spent money I didn't need to spend because nobody had told me what the actual price was.
+          </p>
+
+          <p>
+            When I arrived, three different U.S. founders messaged me asking how I did it. Then four. Then ten.
+          </p>
+
+          <p>
+            So I built the thing I wish I'd been able to buy.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      <!-- Portrait -->
+      <ScrollReveal class="lg:col-span-5">
+        <div class="sticky top-28">
+          <div class="relative mx-auto aspect-[3/4] max-w-[420px] overflow-hidden rounded-2xl border border-border-soft bg-bone-deeper shadow-card">
+            <div
+              aria-hidden="true"
+              class="absolute inset-0"
+              style="background: linear-gradient(150deg, #EDE6DA 0%, #C28E63 50%, #7E5635 100%);"
+            />
+            <div class="absolute inset-0 flex flex-col justify-end p-6">
+              <div class="rounded-xl bg-bone/85 px-4 py-3 backdrop-blur-sm">
+                <p class="text-xs uppercase tracking-eyebrow text-ink-soft">Photo placeholder</p>
+                <p class="mt-1 text-sm text-ink-muted">Ivan, Montevideo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
+</section>

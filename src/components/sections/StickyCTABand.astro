@@ -5,7 +5,10 @@ import ScrollReveal from '../ui/ScrollReveal.astro';
 interface Props {
   embedUrl?: string | null;
 }
-const { embedUrl = null } = Astro.props;
+// `undefined` here means "use BookingFormPlaceholder's default" (the
+// production booking URL from src/lib/seo.ts). Pass `null` to force the
+// placeholder card.
+const { embedUrl } = Astro.props;
 ---
 
 <section id="book" class="section-y bg-bone scroll-mt-24">

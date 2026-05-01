@@ -1,20 +1,38 @@
 ---
+import { BOOKING } from '../lib/seo';
+
 interface Props {
   embedUrl?: string | null;
-  minHeight?: number;
+  embedScript?: string | null;
+  iframeId?: string;
   title?: string;
+  minHeight?: number;
 }
-const { embedUrl = null, minHeight = 640, title = 'Book a discovery call' } = Astro.props;
+
+const {
+  embedUrl = BOOKING.embedUrl,
+  embedScript = BOOKING.embedScript,
+  iframeId = BOOKING.iframeId,
+  title = 'Book a discovery call',
+  minHeight = 720,
+} = Astro.props;
 ---
 
 {embedUrl ? (
-  <iframe
-    src={embedUrl}
-    title={title}
-    class="w-full rounded-2xl border border-border-soft bg-bone-soft"
-    style={`min-height: ${minHeight}px;`}
-    loading="lazy"
-  />
+  <div class="overflow-hidden rounded-2xl border border-border-soft bg-bone-soft">
+    <iframe
+      src={embedUrl}
+      title={title}
+      id={iframeId}
+      class="block w-full"
+      style={`min-height: ${minHeight}px; border: 0;`}
+      scrolling="no"
+      loading="lazy"
+    ></iframe>
+    {embedScript && (
+      <script is:inline async src={embedScript}></script>
+    )}
+  </div>
 ) : (
   <div
     class="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-bone-soft px-8 py-16 text-center"

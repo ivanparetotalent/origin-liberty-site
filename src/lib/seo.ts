@@ -9,6 +9,21 @@ export const SITE = {
   twitter: '',
 };
 
+// Booking widget — LeadConnector / GoHighLevel iframe.
+// The form_embed.js script handles postMessage-based auto-resize, so
+// the iframe expands to fit its content and we don't need a fixed height.
+export const BOOKING = {
+  embedUrl: 'https://api.leadconnectorhq.com/widget/booking/raxVUChnhNsLVh3osroB',
+  embedScript: 'https://link.msgsndr.com/js/form_embed.js',
+  // Stable id used by the embed script to target this iframe for resize.
+  iframeId: 'raxVUChnhNsLVh3osroB_origin-liberty',
+};
+
+// Google Analytics 4 measurement ID. Empty string disables the snippet.
+export const ANALYTICS = {
+  ga4MeasurementId: 'G-8Y10X38M8H',
+};
+
 export interface SeoProps {
   title?: string;
   description?: string;

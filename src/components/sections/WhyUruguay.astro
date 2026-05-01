@@ -1,0 +1,226 @@
+---
+import { Icon } from 'astro-icon/components';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+/**
+ * "Why Uruguay" — content-rich horizontal scroll-snap row of 8 reasons.
+ * Image-on-top + text always-visible underneath (no hover-to-reveal —
+ * that pattern reads as tech-dashboard, not editorial luxury).
+ *
+ * Each card's `image` block is currently a tasteful per-card gradient
+ * with a centered Lucide icon and a small caption pill. When real
+ * editorial photography is shot per the spec, each `image` block can
+ * be swapped for <ResponsiveImage /> with one prop change per card.
+ */
+
+interface Card {
+  num: string;
+  icon: string;
+  caption: string;
+  bg: string;
+  iconTone: string;
+  headline: string;
+  body: string;
+}
+
+const cards: Card[] = [
+  {
+    num: '01',
+    icon: 'lucide:calculator',
+    caption: 'Foreign-source income',
+    bg: 'linear-gradient(140deg, #591C2A 0%, #3F1320 100%)',
+    iconTone: 'text-bone',
+    headline: 'The tax math still favors you. Even after 2026.',
+    body: "Uruguay's 2026 reforms tightened the qualification rules but did not change the underlying math. Real residents on the 183-day path still get an 11-year holiday on foreign-source capital income, then 6% for five transitional years. For a founder targeting an exit, the delta versus most onshore alternatives runs into seven figures over a decade.",
+  },
+  {
+    num: '02',
+    icon: 'lucide:shield-check',
+    caption: 'Pocitos at 8 AM',
+    bg: 'linear-gradient(160deg, #1B1B1B 0%, #3a3a3a 100%)',
+    iconTone: 'text-bone',
+    headline: "Latin America's lowest violent crime rate.",
+    body: "Uruguay's homicide rate sits closer to Spain's than to the regional average — meaningfully below Argentina, Chile, and Brazil, and an order of magnitude below the headline-grabbing parts of Mexico or Central America. The quality-of-life upgrade is the smallest unit of daily life: walking to the park at 8 AM without a thought.",
+  },
+  {
+    num: '03',
+    icon: 'lucide:clock',
+    caption: 'GMT−3, ±2h US East',
+    bg: 'linear-gradient(140deg, #A47148 0%, #7E5635 100%)',
+    iconTone: 'text-bone',
+    headline: "Time zones that don't break your business.",
+    body: "Montevideo sits one to two hours ahead of US Eastern depending on the season. Your morning calls happen in your morning. Your team in New York or Austin doesn't feel the move. This is the difference between a relocation and a sabbatical.",
+  },
+  {
+    num: '04',
+    icon: 'lucide:landmark',
+    caption: 'They answer the phone',
+    bg: 'linear-gradient(160deg, #EDE6DA 0%, #D4CFC5 100%)',
+    iconTone: 'text-oxblood',
+    headline: 'Institutions that actually function.',
+    body: "This is the surprise most US founders don't expect. Government offices answer phones. Residency interviews start on time. The public-private healthcare system (mutualista) is reliable, inexpensive, and used by the upper middle class. Uruguay defies the Latin American stereotype most US founders carry into the move.",
+  },
+  {
+    num: '05',
+    icon: 'lucide:globe',
+    caption: '150+ visa-free',
+    bg: 'linear-gradient(150deg, #7B2D3D 0%, #591C2A 100%)',
+    iconTone: 'text-bone',
+    headline: 'A passport that travels.',
+    body: 'Citizenship is available after three years for married couples, five years for single applicants. The Uruguayan passport opens visa-free access to over 150 countries — including the Schengen Area, the UK, Singapore, and Japan. A real Plan B for your family, not a paper one.',
+  },
+  {
+    num: '06',
+    icon: 'lucide:graduation-cap',
+    caption: 'Trilingual without trying',
+    bg: 'linear-gradient(150deg, #7E5635 0%, #4d361f 100%)',
+    iconTone: 'text-bone',
+    headline: "Schools you'd actually send your kids to.",
+    body: "International options like the British School of Montevideo, the Uruguayan American School, and Lycée Français, plus a strong cohort of bilingual private schools. Capacity is tight; sign three or more months ahead of your target start date. The kids who arrive young come out trilingual without trying.",
+  },
+  {
+    num: '07',
+    icon: 'lucide:sun',
+    caption: 'José Ignacio, late summer',
+    bg: 'linear-gradient(140deg, #C28E63 0%, #A47148 100%)',
+    iconTone: 'text-bone',
+    headline: 'Mediterranean lifestyle. Atlantic coast.',
+    body: 'Long summers, mild winters, walkable cities, an Atlantic shoreline, and a food culture built around beef, wine, and slow Sundays. Punta del Este is ninety minutes from Montevideo. The lifestyle most Americans imagine when they think "Italy in 1985" — except the institutions still work and the wifi is faster.',
+  },
+  {
+    num: '08',
+    icon: 'lucide:plane',
+    caption: '8h Miami direct',
+    bg: 'linear-gradient(150deg, #3F1320 0%, #1B1B1B 100%)',
+    iconTone: 'text-bone',
+    headline: 'The closest tax-favorable jurisdiction to the US.',
+    body: 'Direct flights to Miami in eight hours, the same hemisphere, no real jet lag for short trips. Spanish is the most accessible second language for English speakers — your kids learn it without trying. None of the fourteen-hour flight, complete-language-rebuild trade-off you accept moving to Singapore or the UAE.',
+  },
+];
+---
+
+<section class="section-y bg-bone" id="why-uruguay">
+  <div class="container-edge">
+    <ScrollReveal class="mx-auto max-w-3xl">
+      <SectionHeader
+        eyebrow="Why Uruguay"
+        title="Eight reasons the math points here."
+        subhead="The math is not the only reason. It is the one most founders run first. Here are the others."
+      />
+    </ScrollReveal>
+  </div>
+
+  <!--
+    Edge-bleed scroll: the row stretches to the viewport edge so cards
+    can flow off-screen, signaling "more to scroll". Padding inside
+    aligns with container-edge.
+  -->
+  <ScrollReveal class="mt-14 md:mt-16">
+    <div class="relative">
+      <!-- Soft fade-out hints on either side, desktop only -->
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-12 bg-gradient-to-r from-bone to-transparent md:block"
+      ></div>
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-12 bg-gradient-to-l from-bone to-transparent md:block"
+      ></div>
+
+      <ol
+        class="why-row no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 md:gap-6 md:px-10 lg:px-16"
+        data-lenis-prevent
+        data-why-row
+      >
+        {cards.map((c) => (
+          <li class="snap-start shrink-0 w-[78vw] max-w-[340px] md:w-[360px] lg:w-[380px]">
+            <article class="group flex h-full flex-col">
+              <!-- Image slot (gradient + icon — swap to <ResponsiveImage /> when photography lands) -->
+              <div
+                class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border-soft transition-[transform,box-shadow] duration-500 ease-editorial group-hover:-translate-y-1 group-hover:shadow-card"
+              >
+                <div
+                  class="absolute inset-0 transition-transform duration-700 ease-editorial group-hover:scale-[1.02]"
+                  style={`background: ${c.bg};`}
+                ></div>
+                <!-- Subtle film grain over gradient -->
+                <div
+                  aria-hidden="true"
+                  class="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+                  style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E&quot;); background-size: 160px 160px;"
+                ></div>
+
+                <!-- Index numeral, top-left -->
+                <div class={`absolute top-5 left-5 font-display text-[2.4rem] leading-none ${c.iconTone} opacity-70`} style="font-variation-settings: 'opsz' 144, 'wght' 320;">
+                  {c.num}
+                </div>
+
+                <!-- Centered icon -->
+                <div class={`absolute inset-0 flex items-center justify-center ${c.iconTone}`}>
+                  <Icon name={c.icon} class="h-14 w-14 opacity-90" aria-hidden="true" />
+                </div>
+
+                <!-- Caption pill, bottom-left -->
+                <div class="absolute bottom-4 left-4">
+                  <span class={`inline-flex items-center gap-2 rounded-full bg-bone/15 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-eyebrow backdrop-blur-md ${c.iconTone}`}>
+                    <span class={`h-1 w-1 rounded-full bg-current opacity-70`} aria-hidden="true"></span>
+                    {c.caption}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Always-visible text -->
+              <div class="mt-6 flex flex-1 flex-col gap-3">
+                <h3
+                  class="font-display text-[1.35rem] text-ink text-balance md:text-[1.5rem]"
+                  style="font-variation-settings: 'opsz' 96, 'wght' 420; line-height: 1.18;"
+                >
+                  {c.headline}
+                </h3>
+                <p class="text-[0.95rem] leading-relaxed text-ink-muted text-pretty">
+                  {c.body}
+                </p>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <!-- Drag/scroll hint -->
+    <div class="container-edge mt-8 flex items-center justify-center gap-3 text-ink-soft">
+      <span class="h-px w-8 bg-border" aria-hidden="true"></span>
+      <span class="text-[0.7rem] uppercase tracking-eyebrow">Drag, scroll, or use arrow keys</span>
+      <span class="h-px w-8 bg-border" aria-hidden="true"></span>
+    </div>
+  </ScrollReveal>
+</section>
+
+<style>
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Keyboard arrow scrolling — handled in script below */
+  .why-row { scroll-padding-inline: 1.5rem; }
+  @media (min-width: 768px)  { .why-row { scroll-padding-inline: 2.5rem; } }
+  @media (min-width: 1024px) { .why-row { scroll-padding-inline: 4rem; } }
+</style>
+
+<script>
+  // Arrow-key navigation when the section is the active scroller.
+  const row = document.querySelector<HTMLElement>('[data-why-row]');
+  if (row) {
+    row.tabIndex = 0;
+    row.setAttribute('role', 'region');
+    row.setAttribute('aria-label', 'Why Uruguay — 8 reasons');
+
+    row.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const card = row.querySelector('li');
+      const step = card ? card.getBoundingClientRect().width + 24 : 360;
+      row.scrollBy({ left: e.key === 'ArrowRight' ? step : -step, behavior: 'smooth' });
+      e.preventDefault();
+    });
+  }
+</script>

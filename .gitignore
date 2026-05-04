@@ -35,3 +35,9 @@ pnpm-debug.log*
 montevideo.JPG
 *-raw.jpg
 *-raw.png
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

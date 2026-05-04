@@ -118,6 +118,21 @@ const serviceLd = includeServiceSchema ? buildServiceJsonLd() : null;
   </head>
   <body class="min-h-screen flex flex-col">
     {showNavCta && <Nav />}
+    {showNavCta && (
+      <div
+        class="border-b border-border-soft bg-bone-deeper/50"
+        aria-label="Inaugural cohort announcement"
+      >
+        <div class="container-edge py-2.5">
+          <p
+            class="text-center font-display italic text-ink-muted"
+            style="font-size: clamp(0.78rem, 1.5vw, 0.9rem); font-variation-settings: 'opsz' 96, 'wght' 360;"
+          >
+            Inaugural cohort &middot; 8 families &middot; June 2026
+          </p>
+        </div>
+      </div>
+    )}
     <main id="main" class="flex-1">
       <slot />
     </main>

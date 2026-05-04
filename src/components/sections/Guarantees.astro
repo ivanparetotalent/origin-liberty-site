@@ -4,21 +4,39 @@ import SectionHeader from '../ui/SectionHeader.astro';
 import ScrollReveal from '../ui/ScrollReveal.astro';
 import { Icon } from 'astro-icon/components';
 
-const guarantees = [
+interface Tier { label: string; detail: string; }
+interface Guarantee {
+  icon: string;
+  title: string;
+  body: string;
+  tiers?: Tier[];
+}
+
+const guarantees: Guarantee[] = [
   {
     icon: 'lucide:shield-check',
     title: 'The discovery call costs you nothing.',
-    body: "The 30-minute call is free. No commitment. If we're not a fit, you walk away with a clear next step regardless. If you decide not to move, no follow-up pressure. The only way you “lose” the call is if you weren't going to do anything anyway.",
+    body: "Free. No follow-up pressure. If we're not a fit, you walk away with a clearer plan than you had before.",
+  },
+  {
+    icon: 'lucide:file-check-2',
+    title: 'Residency-denial refund.',
+    body: 'Uruguay approves U.S. citizens with clean records and demonstrable income at high rates. We confirm fit before signing. If we sign and your residency is denied, we refund the immigration leg <strong class="font-medium text-ink">in full</strong>.',
   },
   {
     icon: 'lucide:clock-9',
-    title: '90-Day Soft Landing guarantee.',
-    body: "Residency filed at immigration <strong class=\"font-medium text-ink\">and</strong> apartment keys in your hand within 90 days of contract signature. If we miss — assuming you've supplied requested documents on the agreed schedule — <strong class=\"font-medium text-ink\">25% of milestone-2 payment refunds.</strong> This is real. We've actually done it. The 90-day timeline is what my own family's move would have been with this system in place.",
+    title: '90-day soft-landing guarantee.',
+    body: 'Residency filed at immigration <strong class="font-medium text-ink">and</strong> apartment keys in your hand within 90 days of signature. Tiered on miss (assuming you’ve supplied requested documents on the agreed schedule):',
+    tiers: [
+      { label: '90 days', detail: '25% of milestone 2 refunds' },
+      { label: '120 days', detail: '50% refunds' },
+      { label: '150 days', detail: 'full refund of milestones 1 and 2' },
+    ],
   },
   {
-    icon: 'lucide:badge-dollar-sign',
-    title: 'No-surprise pricing.',
-    body: '$20,000 covers everything in the stack above. Government fees, deposits, and recoverable costs disclosed before you sign, billed at-cost. If a number changes between signing and execution, we tell you in writing before you owe a dollar. <strong class="font-medium text-ink">You will never get a bill you weren’t expecting.</strong>',
+    icon: 'lucide:heart-handshake',
+    title: 'Love it or leave it.',
+    body: "If you arrive in Montevideo and within 90 days decide it's wrong, we manage your exit at cost. Your Uruguay residency stays valid. The relationships and infrastructure are portable.",
   },
 ];
 ---
@@ -28,7 +46,7 @@ const guarantees = [
     <ScrollReveal class="mx-auto max-w-3xl">
       <SectionHeader
         eyebrow="Guarantees"
-        title="What if it doesn't work."
+        title="Four guarantees."
       />
     </ScrollReveal>
 
@@ -41,10 +59,25 @@ const guarantees = [
                 <Icon name={g.icon} class="h-5 w-5" aria-hidden="true" />
               </span>
               <div class="flex flex-col gap-3">
-                <h3 class="font-display text-2xl text-ink text-balance" style="font-variation-settings: 'opsz' 96, 'wght' 420; line-height: 1.2;">
+                <h3
+                  class="font-display text-2xl text-ink text-balance"
+                  style="font-variation-settings: 'opsz' 96, 'wght' 420; line-height: 1.2;"
+                >
                   {g.title}
                 </h3>
                 <p class="text-[1rem] leading-relaxed text-ink-muted text-pretty" set:html={g.body} />
+                {g.tiers && (
+                  <ul class="mt-2 flex flex-col gap-2 rounded-xl border border-border-soft bg-bone/60 p-4 text-[0.95rem]">
+                    {g.tiers.map((t) => (
+                      <li class="flex items-baseline gap-3">
+                        <span class="flex-none rounded-full bg-oxblood/10 px-2.5 py-0.5 text-[0.7rem] font-medium uppercase tracking-eyebrow text-oxblood">
+                          {t.label}
+                        </span>
+                        <span class="text-ink-muted">{t.detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </Card>
           </li>

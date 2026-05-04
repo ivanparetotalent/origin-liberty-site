@@ -35,11 +35,7 @@ import ScrollReveal from '../ui/ScrollReveal.astro';
   <div class="container-edge w-full pb-12 md:pb-16">
     <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <!-- Left: copy -->
-      <ScrollReveal stagger class="flex flex-col gap-5 lg:col-span-7 lg:gap-6">
-        <div class="reveal">
-          <PillBadge tone="oxblood">Inaugural cohort &mdash; June 2026</PillBadge>
-        </div>
-
+      <ScrollReveal stagger class="flex flex-col gap-6 lg:col-span-7 lg:gap-7">
         <h1
           class="reveal font-display text-ink text-balance"
           style="font-size: clamp(2rem, 4.6vw, 4rem); line-height: 1.04; font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.02em;"
@@ -47,34 +43,21 @@ import ScrollReveal from '../ui/ScrollReveal.astro';
           The most expensive thing you haven't hedged is the country your family lives in.
         </h1>
 
-        <p class="reveal max-w-xl text-base leading-relaxed text-ink-muted text-pretty md:text-[1.1rem]">
-          You diversify suppliers. You hedge currency. You structure your business across jurisdictions because that's how serious operators think. The country your family physically sleeps in at night is the one variable on your dashboard you haven't restructured. We restructure it.
+        <p class="reveal max-w-xl text-[1.05rem] leading-relaxed text-ink-muted text-pretty md:text-[1.2rem]">
+          We move 7- and 8-figure founder families from the U.S. to Uruguay in 90 days. Residency filed. Apartment furnished. Business uninterrupted.
         </p>
 
-        <p class="reveal max-w-xl text-sm leading-relaxed text-ink-soft md:text-[0.95rem]">
-          Ninety days from your decision: family landed in Uruguay, residency filed, tax structure clean, apartment furnished, business uninterrupted. Built by a founder who just did this himself.
+        <p class="reveal max-w-xl text-sm italic leading-relaxed text-ink-soft md:text-[0.95rem]">
+          Built by a founder who just did this &mdash; with his wife and his two-year-old.
         </p>
 
-        <div class="reveal mt-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
+        <div class="reveal mt-1 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
           <Button href="#book" variant="primary" size="md">
             Book your discovery call <span aria-hidden="true">→</span>
           </Button>
           <Button href="#offer" variant="secondary" size="md">
-            How it works
+            How it works <span aria-hidden="true">↓</span>
           </Button>
-        </div>
-
-        <div class="reveal mt-4 flex items-center gap-3">
-          <div class="flex" aria-hidden="true">
-            {Array.from({ length: 5 }).map(() => (
-              <svg class="h-4 w-4 text-brass" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.77l-5.21 2.74.99-5.79-4.21-4.1 5.82-.85L10 1.5z" />
-              </svg>
-            ))}
-          </div>
-          <p class="text-xs italic text-ink-soft md:text-sm">
-            Inaugural cohort. Eight founder families. June 2026.
-          </p>
         </div>
       </ScrollReveal>
 

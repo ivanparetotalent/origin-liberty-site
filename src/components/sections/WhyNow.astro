@@ -1,0 +1,75 @@
+---
+import PillBadge from '../ui/PillBadge.astro';
+import PullQuote from '../ui/PullQuote.astro';
+import ScrollReveal from '../ui/ScrollReveal.astro';
+
+/**
+ * "Why now — Plan A or Plan B"
+ * Sets up the dual-tier offer narratively (The Hedge / The Move) before
+ * the pricing reveal. Carries the historical pull quote that used to
+ * anchor the History section.
+ */
+---
+
+<section class="section-y bg-bone" id="why-now">
+  <div class="container-edge">
+    <ScrollReveal class="mx-auto max-w-3xl">
+      <div class="flex flex-col items-center gap-5 text-center">
+        <PillBadge>Why now</PillBadge>
+        <h2
+          class="font-display text-ink text-balance"
+          style="font-size: clamp(2.1rem, 4.4vw, 3.6rem); line-height: 1.06; font-variation-settings: 'opsz' 96, 'wght' 380;"
+        >
+          Plan A. Or Plan B.
+        </h2>
+        <p class="text-lg leading-relaxed text-ink-muted text-pretty md:text-xl">
+          Founders come to us for one of two reasons.
+        </p>
+      </div>
+    </ScrollReveal>
+
+    <div class="mx-auto mt-14 grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+      <!-- Plan B -->
+      <ScrollReveal>
+        <article class="flex h-full flex-col gap-4 rounded-2xl border border-border-soft bg-bone-deeper/40 p-8 md:p-10">
+          <h3
+            class="flex items-baseline gap-3 font-display text-2xl text-ink md:text-3xl"
+            style="font-variation-settings: 'opsz' 96, 'wght' 420;"
+          >
+            <span class="text-brass">Plan B.</span>
+          </h3>
+          <p class="text-[1rem] leading-relaxed text-ink-muted text-pretty md:text-[1.05rem]">
+            You're not sure what the next five years look like at home. You're not predicting anything in particular &mdash; you just want a real option, fully prepared, ready to activate. Not a passport you bought and forgot in a drawer. A working second base, with residency filed, your CPA briefed, your apartment in a country you've already visited.
+          </p>
+        </article>
+      </ScrollReveal>
+
+      <!-- Plan A -->
+      <ScrollReveal>
+        <article class="flex h-full flex-col gap-4 rounded-2xl border border-oxblood/15 bg-oxblood/5 p-8 md:p-10">
+          <h3
+            class="flex items-baseline gap-3 font-display text-2xl text-ink md:text-3xl"
+            style="font-variation-settings: 'opsz' 96, 'wght' 420;"
+          >
+            <span class="text-oxblood">Plan A.</span>
+          </h3>
+          <p class="text-[1rem] leading-relaxed text-ink-muted text-pretty md:text-[1.05rem]">
+            You're tired of the noise. You want a quieter main base &mdash; somewhere the news doesn't dominate the dinner table, where your kids can grow up trilingual without trying, where Sunday is genuinely a slower day. You're not running from anything. You're choosing where you build the next decade.
+          </p>
+        </article>
+      </ScrollReveal>
+    </div>
+
+    <ScrollReveal class="mx-auto mt-12 max-w-3xl text-center">
+      <p class="text-base leading-relaxed text-ink-muted md:text-[1.05rem]">
+        Both reasons are valid. Neither requires a strong political opinion. The point is having the option, structured cleanly, before you need it.
+      </p>
+    </ScrollReveal>
+
+    <ScrollReveal class="mt-14 flex justify-center">
+      <PullQuote>
+        The cost of moving early is paperwork. The cost of moving late is everything.
+      </PullQuote>
+    </ScrollReveal>
+  </div>
+</section>

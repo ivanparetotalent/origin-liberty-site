@@ -1,0 +1,480 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import ScrollReveal from '../components/ui/ScrollReveal.astro';
+
+/**
+ * Ukrainian partner page for Daria (Dasha) Podkhaliuzina. Sells a $100
+ * consultation that credits into a $2,000 residency-support package.
+ * Every fact about her move comes from her own Instagram posts
+ * (@_daria_podkhaliuzina, Oct 2026). noindex and out of the sitemap
+ * until she signs off.
+ *
+ * BOOK_URL is the interim CTA (her Instagram DMs). Swap for the payment
+ * + calendar link once it exists.
+ */
+
+const BOOK_URL = 'https://ig.me/m/_daria_podkhaliuzina';
+
+const proof = [
+  { big: '7 днів', small: 'від подачі документів до уругвайських ID для всієї сім’ї' },
+  { big: '$2 000', small: 'наші реальні витрати на документи. Агенція «під ключ» просила $7 900' },
+  { big: '3 роки', small: 'до громадянства для сімейної пари. Паспорт без віз у 150+ країн' },
+];
+
+const criteria = [
+  { t: 'Немає спільного кордону з росією чи білоруссю.', b: 'І далеко від усіх інших гарячих точок. Для нас це було умовою номер один.' },
+  { t: 'Зрозуміла легалізація, а не тимчасовий захист.', b: 'Повноцінна посвідка на проживання з першого дня. Далі постійна резиденція і громадянство.' },
+  { t: 'Адекватні податки.', b: 'Західна Європа відпала саме через це. Уругвай має пільги на іноземний дохід.' },
+  { t: 'Житло в довгу оренду без боротьби.', b: 'Ми подивились 10 квартир за тиждень і обрали ту, що сподобалась. Без конкурсу, без «презентації сім’ї».' },
+];
+
+const compare = [
+  { k: 'Пластикова картка після подачі', cy: '9 місяців (і вона вже була прострочена)', uy: '7 днів' },
+  { k: 'Статус', cy: 'Тимчасовий захист', uy: 'Посвідка на 2 роки → постійна резиденція' },
+  { k: 'Депозит за квартиру', cy: 'Подвійний, з нього ще й утримали €600', uy: 'Не було' },
+  { k: 'Шлях до громадянства', cy: 'Немає', uy: '3 роки для сім’ї' },
+];
+
+const costs = [
+  ['Документи з України (юристи за довіреністю)', '$690'],
+  ['Мита уругвайських держструктур', '$480'],
+  ['Присяжні переклади', '$450'],
+  ['Медичні документи', '$130'],
+  ['Нотаріальна довідка про доходи', '$100'],
+  ['Перекладач на подачу в міграційну службу', '$100'],
+  ['Документи з Кіпру', '$50'],
+];
+
+const includes = [
+  { t: 'Чек-лист саме під вашу ситуацію.', b: 'Які документи потрібні з України, які з країни, де ви зараз, у якому порядку і в якому вигляді.' },
+  { t: 'Документи з України, навіть якщо ви не там.', b: 'Координую замовлення через юристів за довіреністю. Ми самі так робили з Кіпру.' },
+  { t: 'Перевірка кожного документа до вильоту.', b: 'Апостилі, терміни дії, написання імен. Щоб у міграційній не почути «цього не вистачає».' },
+  { t: 'Запис у міграційну службу заздалегідь.', b: 'Слоти бронюються наперед. Я бронювала з Кіпру в липні на вересень. Ви прилітаєте з уже призначеною датою.' },
+  { t: 'Присяжні переклади іспанською.', b: 'Перевірені перекладачі, з якими я працювала сама.' },
+  { t: 'Довідка про доходи і медичні документи.', b: 'Підказую, як отримати нотаріальну довідку про доходи і пройти медогляд.' },
+  { t: 'Подача разом з вами.', b: 'Перекладач на першій подачі обов’язковий, якщо ви не говорите іспанською. Організую.' },
+  { t: 'Cédula для кожного члена сім’ї.', b: 'Уругвайське ID на руках. З ним ви орендуєте житло, відкриваєте рахунок, працюєте.' },
+  { t: 'Особистий чат зі мною до отримання ID.', b: 'Telegram або WhatsApp. Будь-яке питання по ходу, без очікування тижнями.' },
+];
+
+const forYou = [
+  'Ви з України (або з країни, де українцям складно легалізуватись) і шукаєте стабільний статус, а не тимчасовий захист',
+  'Працюєте віддалено, в IT, або маєте свій бізнес онлайн',
+  'Переїжджаєте з дітьми і хочете, щоб усе пройшло спокійно',
+  'Не хочете витрачати тижні на розбір форумів і чатів',
+];
+
+const notForYou = [
+  'Шукаєте, хто «гарантує» результат без ваших документів. Так не буває',
+  'Хочете порівняти 15 країн. Я допомагаю з Уругваєм, бо знаю його зсередини',
+  'Готові розбиратись самі і маєте на це час. Чесно: це реально, я так і зробила',
+];
+
+const minuses = [
+  { t: 'Ціни європейські.', b: 'Найдорожча країна Латинської Америки. Побут приблизно як на Кіпрі. 6 літрів води коштують 160 песо.' },
+  { t: 'Техніка вдвічі дорожча, ніж у Європі.', b: 'Через мита на імпорт. Ми оновили все до переїзду. Вам порадимо те саме.' },
+  { t: 'Без іспанської складно.', b: 'Англійською говорять приблизно 4 з 10 людей. Для побуту іспанська потрібна.' },
+  { t: 'У центрі є сміття і безхатьки.', b: 'Вони мирні, але до цього варто бути готовими. У прибережних районах і Пунта-дель-Есте значно чистіше.' },
+];
+
+const faq = [
+  {
+    q: 'Ви юрист?',
+    a: 'Ні. Я не даю юридичних консультацій. Я пройшла весь процес сама, з сім’єю, і супроводжую вас на практиці: документи, переклади, записи, подача. Якщо у вашому випадку потрібен юрист, я скажу про це на консультації.',
+  },
+  {
+    q: 'Що входить у консультацію за $100?',
+    a: 'Година в Zoom або Telegram. Розбираємо вашу ситуацію: склад сім’ї, де ви зараз, які документи вже є. Після дзвінка ви отримуєте персональний список документів і план дій. Якщо далі берете супровід, $100 зараховуються в оплату.',
+  },
+  {
+    q: 'Скільки часу займає весь процес?',
+    a: 'У нас від подачі документів до ID минув тиждень. Найдовше триває підготовка документів з України, і це залежить від вашої ситуації. Реалістичний термін саме для вас назву на консультації.',
+  },
+  {
+    q: 'Офіційні витрати входять у $2 000?',
+    a: 'Ні. Мита, переклади, довідки і документи з України ви оплачуєте за фактом, без моєї націнки. Для нашої сім’ї з трьох людей це вийшло близько $2 000. Ви наперед знаєте кожну суму.',
+  },
+  {
+    q: 'Я зараз не в Україні. Це проблема?',
+    a: 'Ні. Ми теж були на Кіпрі. Документи з України замовлялись через юристів за довіреністю, а більшу частину пакета я підготувала ще до вильоту.',
+  },
+  {
+    q: 'Чи потрібно знати іспанську?',
+    a: 'Для подачі ні. На першу подачу в міграційну службу потрібен перекладач, його організую я. Працівники ставились до нас добре, хоча наша іспанська на початковому рівні.',
+  },
+  {
+    q: 'Ми їдемо з дитиною. Щось змінюється?',
+    a: 'Ми самі переїжджали з малим, і ID він отримав разом з нами. Для дітей потрібні свої документи, вони будуть у вашому чек-листі.',
+  },
+  {
+    q: 'Як відбувається оплата супроводу?',
+    a: 'Двома частинами. Перша половина на старті (мінус $100 за консультацію), друга після подачі документів у міграційну службу.',
+  },
+];
+
+const steps = [
+  { n: '01', t: 'Консультація', price: '$100', b: 'Година зі мною. Розбираємо вашу ситуацію, ви отримуєте список документів і план дій.' },
+  { n: '02', t: 'Підготовка', price: '', b: 'Збираємо документи, замовляємо з України, робимо переклади, бронюємо дату подачі.' },
+  { n: '03', t: 'Подача', price: '', b: 'Прилітаєте, ідемо в міграційну службу разом з перекладачем.' },
+  { n: '04', t: 'Cédula', price: '', b: 'Уругвайські ID для всієї сім’ї. Можна орендувати, відкривати рахунок, жити.' },
+];
+---
+
+<Layout
+  title="Переїзд в Уругвай з сім’єю: резиденція з супроводом | Origin Liberty Україна"
+  description="Отримали уругвайські ID через 7 днів після подачі. Допомагаю українським сім’ям пройти той самий шлях: документи, переклади, запис, подача. Консультація $100."
+  lang="uk"
+  noindex
+  showNavCta={false}
+  showFooter={false}
+>
+  <!-- Top bar -->
+  <header class="sticky top-0 z-40 border-b border-border-soft bg-bone/90 backdrop-blur">
+    <div class="container-edge flex h-16 items-center justify-between gap-4">
+      <a href="/ua" class="whitespace-nowrap font-display text-[16px] text-ink sm:text-[19px]" style="font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.01em;">
+        Origin Liberty <span class="text-brass">· Україна</span>
+      </a>
+      <Button href="#book" variant="primary" size="sm">Консультація</Button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden pt-10 md:pt-16">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 -z-10"
+      style="background: radial-gradient(ellipse 70% 70% at 100% 0%, rgba(212, 207, 197, 0.55) 0%, rgba(245, 240, 232, 0) 60%), linear-gradient(180deg, #FAF7F1 0%, #F5F0E8 100%);"
+    ></div>
+    <div class="container-edge pb-16 md:pb-24">
+      <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14">
+        <ScrollReveal stagger class="flex flex-col gap-6 lg:col-span-7">
+          <span class="reveal eyebrow">Переїзд в Уругвай · для українських сімей</span>
+          <h1
+            class="reveal font-display text-ink text-balance"
+            style="font-size: clamp(2rem, 4.4vw, 3.75rem); line-height: 1.06; font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.02em;"
+          >
+            Через тиждень після подачі ми тримали в руках уругвайські ID. Я проведу вас тим самим шляхом.
+          </h1>
+          <p class="reveal max-w-xl text-[1.05rem] leading-relaxed text-ink-muted text-pretty md:text-[1.15rem]">
+            Я Даша. У вересні ми з чоловіком і сином переїхали з Кіпру в Монтевідео. Документи збирала сама, без юристів. Подали 24 вересня, ID отримали 1 жовтня. Тепер допомагаю українським сім’ям зробити те саме: без хаосу, переплат і місяців очікування.
+          </p>
+          <div class="reveal flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <Button href="#book" variant="primary" size="md">Записатися на консультацію · $100</Button>
+            <Button href="#offer" variant="secondary" size="md">Що входить <span aria-hidden="true">↓</span></Button>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal class="lg:col-span-5">
+          <figure class="mx-auto w-full max-w-[440px] lg:max-w-none">
+            <picture>
+              <source srcset="/images/ua/dasha-city.webp" type="image/webp" />
+              <img src="/images/ua/dasha-city.jpg" alt="Даша з сином у Монтевідео" class="aspect-[4/5] w-full rounded-2xl border border-border-soft object-cover shadow-card" width="1200" height="1247" fetchpriority="high" />
+            </picture>
+            <figcaption class="mt-3 text-sm italic text-ink-soft">Монтевідео, перший місяць.</figcaption>
+          </figure>
+        </ScrollReveal>
+      </div>
+
+      <ScrollReveal stagger class="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {proof.map((p) => (
+          <div class="reveal rounded-2xl border border-border-soft bg-bone-soft p-6 shadow-card">
+            <p class="font-display text-oxblood" style="font-size: clamp(2rem, 3.5vw, 2.6rem); font-variation-settings: 'opsz' 144, 'wght' 420;">{p.big}</p>
+            <p class="mt-1 text-[0.95rem] leading-snug text-ink-muted">{p.small}</p>
+          </div>
+        ))}
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section-y border-t border-border-soft bg-bone-soft">
+    <div class="container-edge grid grid-cols-1 gap-12 lg:grid-cols-12">
+      <ScrollReveal class="lg:col-span-5">
+        <picture>
+          <source srcset="/images/ua/family-park.webp" type="image/webp" />
+          <img src="/images/ua/family-park.jpg" alt="Даша з чоловіком і сином у парку в Монтевідео" class="aspect-square w-full rounded-2xl border border-border-soft object-cover shadow-card" width="1200" height="1200" loading="lazy" />
+        </picture>
+      </ScrollReveal>
+      <ScrollReveal stagger class="flex flex-col gap-5 lg:col-span-7">
+        <span class="reveal eyebrow">Моя історія</span>
+        <h2 class="reveal font-display text-ink" style="font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1.1; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Це наша друга еміграція. Першу ми прожили на тимчасовому захисті.
+        </h2>
+        <div class="reveal flex flex-col gap-4 text-[1.05rem] leading-relaxed text-ink-muted">
+          <p>Останній рік ми жили на Кіпрі. Пластикову картку тимчасового захисту там видали через 9 місяців після подачі. Коли ми її отримали, вона вже була прострочена.</p>
+          <p>Ми почали шукати країну, де можна жити по-справжньому, а не «на пташиних правах». Розглядали Іспанію, Португалію, Грецію, Чехію, Румунію, ОАЕ, Чорногорію. Десь заважала складна легалізація для нашого випадку, десь завеликі податки.</p>
+          <p>Південна Америка спочатку здавалась занадто авантюрною. Але менш екзотичні варіанти закінчились. У фіналі були Чилі, Аргентина й Уругвай. Обрали Уругвай: стабільніше, безпечніше, зрозуміліше.</p>
+          <p>Життя вмістилося в 4 валізи і пару рюкзаків. 13 годин літаком, півтори години паромом, 3 години автобусом. До переїзду ми ніколи не були на цьому континенті.</p>
+          <p class="text-ink">Після мого посту в соцмережах мені написали сотні людей з одним питанням: «Як ви це зробили?» Ця сторінка і є моя відповідь.</p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Why Uruguay -->
+  <section class="section-y">
+    <div class="container-edge">
+      <ScrollReveal stagger class="max-w-2xl">
+        <span class="reveal eyebrow">Чому Уругвай</span>
+        <h2 class="reveal mt-4 font-display text-ink" style="font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1.1; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Наші чотири критерії. Уругвай пройшов усі.
+        </h2>
+      </ScrollReveal>
+      <ScrollReveal stagger class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {criteria.map((c, i) => (
+          <div class="reveal rounded-2xl border border-border-soft bg-bone-soft p-6 shadow-card">
+            <p class="text-xs font-medium tracking-eyebrow text-brass">0{i + 1}</p>
+            <h3 class="mt-2 font-display text-[1.3rem] leading-snug text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;">{c.t}</h3>
+            <p class="mt-2 leading-relaxed text-ink-muted">{c.b}</p>
+          </div>
+        ))}
+      </ScrollReveal>
+
+      <ScrollReveal class="mt-14">
+        <div class="overflow-hidden rounded-2xl border border-border-soft bg-bone-soft shadow-card">
+          <div class="hidden grid-cols-3 border-b border-border-soft bg-bone-deeper/60 text-sm font-medium text-ink sm:grid">
+            <div class="p-4"></div>
+            <div class="p-4">Кіпр</div>
+            <div class="p-4 text-oxblood">Уругвай</div>
+          </div>
+          {compare.map((r) => (
+            <div class="grid grid-cols-1 border-b border-border-soft p-4 text-[0.95rem] last:border-b-0 sm:grid-cols-3 sm:p-0 md:text-[0.98rem]">
+              <div class="font-medium text-ink sm:p-4">{r.k}</div>
+              <div class="mt-1 text-ink-muted sm:mt-0 sm:p-4"><span class="sm:hidden">Кіпр: </span>{r.cy}</div>
+              <div class="text-ink sm:p-4"><span class="font-medium text-oxblood sm:hidden">Уругвай: </span>{r.uy}</div>
+            </div>
+          ))}
+        </div>
+        <p class="mt-3 text-sm italic text-ink-soft">Наш особистий досвід, 2025–2026.</p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Real costs -->
+  <section class="section-y border-t border-border-soft bg-bone-soft">
+    <div class="container-edge grid grid-cols-1 gap-12 lg:grid-cols-12">
+      <ScrollReveal stagger class="flex flex-col gap-5 lg:col-span-5">
+        <span class="reveal eyebrow">Скільки це коштує насправді</span>
+        <h2 class="reveal font-display text-ink" style="font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1.1; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Нам запропонували «під ключ» за $7 900. Ми зробили самі за $2 000.
+        </h2>
+        <p class="reveal text-[1.05rem] leading-relaxed text-ink-muted">
+          І $7 900 ще не включали документи з України. Різниця в $6 000 мене дуже потішила. Але чесно: самостійно це довго. Тижні на з’ясування, що, де і в якому порядку.
+        </p>
+        <p class="reveal text-[1.05rem] leading-relaxed text-ink">
+          Мій супровід дає вам цей шлях без тих тижнів. Офіційні витрати ви платите за фактом, як ми. Плюс $2 000 за мою роботу. Разом це все одно значно менше, ніж агенція.
+        </p>
+      </ScrollReveal>
+      <ScrollReveal class="lg:col-span-7">
+        <div class="rounded-2xl border border-border-soft bg-bone p-6 shadow-card md:p-8">
+          <p class="text-sm font-medium text-ink">Наші витрати на резиденцію: 2 дорослих + 1 дитина</p>
+          <ul class="mt-4 divide-y divide-border-soft">
+            {costs.map(([label, amount]) => (
+              <li class="flex items-baseline justify-between gap-4 py-3 text-[0.97rem]">
+                <span class="text-ink-muted">{label}</span>
+                <span class="font-medium tabular-nums text-ink">{amount}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-2 flex items-baseline justify-between border-t-2 border-ink pt-4">
+            <span class="font-medium text-ink">Разом</span>
+            <span class="font-display text-[1.6rem] text-oxblood" style="font-variation-settings: 'opsz' 96, 'wght' 460;">$2 000</span>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Offer -->
+  <section id="offer" class="section-y">
+    <div class="container-edge">
+      <ScrollReveal stagger class="max-w-2xl">
+        <span class="reveal eyebrow">Як ми працюємо</span>
+        <h2 class="reveal mt-4 font-display text-ink" style="font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1.1; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Від першого дзвінка до ID у вашій руці.
+        </h2>
+      </ScrollReveal>
+
+      <ScrollReveal stagger class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s) => (
+          <div class="reveal flex flex-col rounded-2xl border border-border-soft bg-bone-soft p-6 shadow-card">
+            <p class="text-xs font-medium tracking-eyebrow text-brass">{s.n}</p>
+            <h3 class="mt-2 font-display text-[1.3rem] text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;">
+              {s.t} {s.price && <span class="text-oxblood">· {s.price}</span>}
+            </h3>
+            <p class="mt-2 leading-relaxed text-ink-muted">{s.b}</p>
+          </div>
+        ))}
+      </ScrollReveal>
+
+      <div class="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <!-- Consultation card -->
+        <ScrollReveal class="lg:col-span-5">
+          <div class="flex h-full flex-col rounded-2xl border border-border-soft bg-bone-soft p-7 shadow-card md:p-9">
+            <span class="eyebrow">Крок 1</span>
+            <h3 class="mt-3 font-display text-[1.8rem] text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 400;">Консультація</h3>
+            <p class="mt-4 font-display text-[3rem] leading-none text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 380;">$100</p>
+            <p class="mt-2 text-sm text-ink-muted">60 хвилин · Zoom або Telegram</p>
+            <ul class="mt-6 flex flex-col gap-3 text-[0.98rem] leading-relaxed text-ink-muted">
+              <li>— Розбираємо вашу ситуацію: хто їде, де ви зараз, які документи вже є</li>
+              <li>— Чи підходить вам Уругвай. Якщо ні, скажу чесно</li>
+              <li>— Персональний список документів і план дій після дзвінка</li>
+              <li>— Реалістичні терміни і бюджет саме для вашої сім’ї</li>
+            </ul>
+            <p class="mt-6 rounded-xl bg-bone-deeper/70 p-4 text-[0.95rem] text-ink">
+              <strong>$100 зараховуються</strong> в оплату супроводу, якщо продовжуєте зі мною.
+            </p>
+            <div class="mt-auto pt-7">
+              <Button href="#book" variant="secondary" size="md" class="w-full">Записатися</Button>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        <!-- Package card -->
+        <ScrollReveal class="lg:col-span-7">
+          <div class="flex h-full flex-col rounded-2xl border-2 border-oxblood bg-bone-soft p-7 shadow-card-hover md:p-9">
+            <span class="eyebrow text-oxblood">Крок 2 · Основна пропозиція</span>
+            <h3 class="mt-3 font-display text-[1.8rem] text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 400;">Резиденція з супроводом</h3>
+            <p class="mt-4 font-display text-[3rem] leading-none text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 380;">$2 000</p>
+            <p class="mt-2 text-sm text-ink-muted">за сім’ю до 4 людей · офіційні витрати окремо, за фактом, без націнки</p>
+            <ul class="mt-6 flex flex-col gap-4">
+              {includes.map((it) => (
+                <li class="text-[0.98rem] leading-relaxed">
+                  <span class="font-medium text-ink">{it.t}</span>
+                  <span class="text-ink-muted"> {it.b}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="mt-6 rounded-xl bg-bone-deeper/70 p-4 text-[0.95rem] text-ink">
+              Оплата двома частинами: половина на старті, половина після подачі документів.
+            </p>
+            <div class="mt-auto pt-7">
+              <Button href="#book" variant="primary" size="md" class="w-full">Почати з консультації</Button>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+
+      <ScrollReveal class="mt-6">
+        <p class="text-center text-sm text-ink-soft">
+          Пізніше можу допомогти і з житлом та першими тижнями: оренда, банк, мобільний зв’язок. Обговоримо на консультації.
+        </p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Honest minuses -->
+  <section class="section-y border-t border-border-soft bg-bone-soft">
+    <div class="container-edge grid grid-cols-1 gap-12 lg:grid-cols-12">
+      <ScrollReveal stagger class="flex flex-col gap-5 lg:col-span-5">
+        <span class="reveal eyebrow">Чесно про мінуси</span>
+        <h2 class="reveal font-display text-ink" style="font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1.1; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Уругвай «рівний». Тут немає вау-ефекту, і я не буду його продавати.
+        </h2>
+        <p class="reveal text-[1.05rem] leading-relaxed text-ink-muted">
+          Зате є океан за 5 хвилин від дому, прекрасна набережна, парки, дитячі майданчики, смачні продукти, доставка меблів день у день і державні служби, які працюють. Але вам варто знати й інше.
+        </p>
+        <picture class="reveal">
+          <source srcset="/images/ua/rambla.webp" type="image/webp" />
+          <img src="/images/ua/rambla.jpg" alt="Даша з сином на набережній Монтевідео" class="w-full rounded-2xl border border-border-soft object-cover shadow-card" width="1200" height="862" loading="lazy" />
+        </picture>
+      </ScrollReveal>
+      <ScrollReveal stagger class="flex flex-col gap-4 lg:col-span-7">
+        {minuses.map((m) => (
+          <div class="reveal rounded-2xl border border-border-soft bg-bone p-6">
+            <h3 class="font-display text-[1.25rem] text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;"><span class="text-brass">—</span> {m.t}</h3>
+            <p class="mt-2 leading-relaxed text-ink-muted">{m.b}</p>
+          </div>
+        ))}
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Fit -->
+  <section class="section-y">
+    <div class="container-edge">
+      <ScrollReveal stagger class="max-w-2xl">
+        <span class="reveal eyebrow">Кому це підходить</span>
+        <h2 class="reveal mt-4 font-display text-ink" style="font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1.1; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Я беру обмежену кількість сімей, бо веду кожну сама.
+        </h2>
+      </ScrollReveal>
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <ScrollReveal>
+          <div class="h-full rounded-2xl border border-border-soft bg-bone-soft p-7 shadow-card">
+            <h3 class="font-display text-[1.35rem] text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;">Вам підійде, якщо</h3>
+            <ul class="mt-4 flex flex-col gap-3 leading-relaxed text-ink-muted">
+              {forYou.map((x) => <li>+ {x}</li>)}
+            </ul>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal>
+          <div class="h-full rounded-2xl border border-border-soft bg-bone p-7">
+            <h3 class="font-display text-[1.35rem] text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;">Не підійде, якщо</h3>
+            <ul class="mt-4 flex flex-col gap-3 leading-relaxed text-ink-muted">
+              {notForYou.map((x) => <li>– {x}</li>)}
+            </ul>
+          </div>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-y border-t border-border-soft bg-bone-soft">
+    <div class="container-edge max-w-3xl">
+      <ScrollReveal stagger>
+        <span class="reveal eyebrow">Питання</span>
+        <h2 class="reveal mt-4 font-display text-ink" style="font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1.1; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Що мене питають найчастіше.
+        </h2>
+      </ScrollReveal>
+      <div class="mt-10 divide-y divide-border-soft border-y border-border-soft">
+        {faq.map((f) => (
+          <details class="group py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-ink">
+              {f.q}
+              <span class="text-brass transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 leading-relaxed text-ink-muted">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Book -->
+  <section id="book" class="section-y bg-oxblood text-bone">
+    <div class="container-edge max-w-3xl text-center">
+      <ScrollReveal stagger class="flex flex-col items-center gap-6">
+        <h2 class="reveal font-display text-bone" style="font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.08; font-variation-settings: 'opsz' 144, 'wght' 380;">
+          Почніть з однієї години, а не з тижнів на форумах.
+        </h2>
+        <p class="reveal max-w-xl text-[1.08rem] leading-relaxed text-bone/80">
+          Консультація $100. Після неї ви точно знатимете, чи підходить вам Уругвай, які документи збирати і скільки все коштуватиме. Якщо йдемо далі разом, $100 зараховуються.
+        </p>
+        <ol class="reveal grid w-full grid-cols-1 gap-3 text-left sm:grid-cols-3">
+          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">1.</span> Напишіть мені «Консультація»</li>
+          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">2.</span> Оберіть зручний час і оплатіть $100</li>
+          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">3.</span> Заповніть коротку анкету перед дзвінком</li>
+        </ol>
+        <a
+          href={BOOK_URL}
+          target="_blank"
+          rel="noopener"
+          class="reveal inline-flex items-center justify-center gap-2 rounded-full bg-bone px-8 py-4 text-base font-medium text-oxblood transition-colors hover:bg-bone-deeper"
+        >
+          Записатися на консультацію <span aria-hidden="true">→</span>
+        </a>
+        <p class="reveal text-sm text-bone/60">Відповідаю особисто, зазвичай протягом дня.</p>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <footer class="border-t border-border-soft bg-bone">
+    <div class="container-edge flex flex-col gap-3 py-10 text-sm text-ink-soft md:flex-row md:items-center md:justify-between">
+      <p>Origin Liberty · Україна · Монтевідео, Уругвай</p>
+      <p class="max-w-xl md:text-right">Практичний супровід переїзду. Не є юридичною фірмою і не надає юридичних консультацій.</p>
+    </div>
+  </footer>
+</Layout>

@@ -1,0 +1,44 @@
+---
+import UaShell from '../../../components/ua/UaShell.astro';
+import Button from '../../../components/ui/Button.astro';
+import { UA } from '../../../components/ua/config';
+
+const start = new Date(UA.efir.iso);
+const end = new Date(start.getTime() + UA.efir.durationMin * 60_000);
+const fmt = (d: Date) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+const gcal =
+  'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+  `&text=${encodeURIComponent('Ефір: переїзд в Уругвай (Даша)')}` +
+  `&dates=${fmt(start)}/${fmt(end)}` +
+  `&details=${encodeURIComponent('Посилання на Zoom — у листі-підтвердженні.')}`;
+---
+
+<UaShell title="Ви зареєстровані на ефір | Origin Liberty Україна" description="Ви зареєстровані на безкоштовний ефір про переїзд в Уругвай.">
+  <section class="py-16 md:py-24">
+    <div class="container-edge max-w-3xl">
+      <span class="eyebrow">Ви в списку</span>
+      <h1 class="mt-4 font-display text-ink" style="font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.06; font-variation-settings: 'opsz' 144, 'wght' 380;">
+        Чудово<span id="ty-name"></span>! До зустрічі в ефірі.
+      </h1>
+      <p class="mt-5 text-[1.15rem] font-medium text-ink">{UA.efir.labelDate} · {UA.efir.labelTime}</p>
+      <p class="mt-3 text-[1.05rem] leading-relaxed text-ink-muted">
+        Посилання на Zoom уже в пошті. Додайте ефір у календар, щоб не пропустити. Нагадування прийде за день і за годину.
+      </p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <Button href={gcal} variant="primary" size="md">Додати в Google Календар</Button>
+        <Button href="/ua/efir.ics" variant="secondary" size="md">Apple / Outlook (.ics)</Button>
+      </div>
+
+      <div class="mt-14 rounded-2xl border border-border-soft bg-bone-soft p-7 shadow-card">
+        <h2 class="font-display text-[1.4rem] text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 400;">Поки чекаєте ефіру</h2>
+        <p class="mt-2 text-ink-muted">Завантажте безкоштовний чек-лист: усі документи, етапи і наш реальний бюджет. Так ви прийдете на ефір з точнішими питаннями.</p>
+        <div class="mt-5"><Button href={UA.checklistPdf} variant="secondary" size="md">Відкрити чек-лист</Button></div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const n = new URLSearchParams(location.search).get('name');
+    const el = document.getElementById('ty-name');
+    if (n && el) el.textContent = ', ' + n.slice(0, 40);
+  </script>
+</UaShell>

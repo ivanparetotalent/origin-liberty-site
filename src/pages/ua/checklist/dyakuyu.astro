@@ -1,0 +1,42 @@
+---
+import UaShell from '../../../components/ua/UaShell.astro';
+import Button from '../../../components/ui/Button.astro';
+import { UA } from '../../../components/ua/config';
+---
+
+<UaShell title="Чек-лист уже летить до вас | Origin Liberty Україна" description="Перевірте пошту: чек-лист переїзду в Уругвай уже там.">
+  <section class="py-16 md:py-24">
+    <div class="container-edge max-w-3xl">
+      <span class="eyebrow">Готово</span>
+      <h1 class="mt-4 font-display text-ink" style="font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.06; font-variation-settings: 'opsz' 144, 'wght' 380;">
+        Дякую<span id="ty-name"></span>! Чек-лист уже летить до вас.
+      </h1>
+      <p class="mt-5 text-[1.1rem] leading-relaxed text-ink-muted">
+        Перевірте пошту за хвилину. Якщо листа немає, загляньте в «Промоакції» або «Спам» і перетягніть його у «Вхідні», щоб наступні листи не загубились.
+      </p>
+      <div class="mt-6">
+        <Button href={UA.checklistPdf} variant="secondary" size="md">Відкрити PDF зараз</Button>
+      </div>
+
+      <div class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div class="rounded-2xl border border-border-soft bg-bone-soft p-7 shadow-card">
+          <span class="eyebrow">Безкоштовно</span>
+          <h2 class="mt-3 font-display text-[1.5rem] text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 400;">Живий ефір у Zoom</h2>
+          <p class="mt-2 text-ink-muted">{UA.efir.labelDate}, {UA.efir.labelTime}. Відповідаю на всі ваші питання про переїзд.</p>
+          <div class="mt-6"><Button href="/ua/efir" variant="primary" size="md">Зареєструватися</Button></div>
+        </div>
+        <div class="rounded-2xl border border-border-soft bg-bone-soft p-7 shadow-card">
+          <span class="eyebrow">$100</span>
+          <h2 class="mt-3 font-display text-[1.5rem] text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 400;">Особиста консультація</h2>
+          <p class="mt-2 text-ink-muted">Година про вашу ситуацію. Після неї у вас буде свій список документів і план. $100 зараховуються в супровід.</p>
+          <div class="mt-6"><Button href="/ua#book" variant="secondary" size="md">Записатися</Button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const n = new URLSearchParams(location.search).get('name');
+    const el = document.getElementById('ty-name');
+    if (n && el) el.textContent = ', ' + n.slice(0, 40);
+  </script>
+</UaShell>

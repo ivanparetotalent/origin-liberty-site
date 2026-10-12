@@ -1,7 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Button from '../components/ui/Button.astro';
-import ScrollReveal from '../components/ui/ScrollReveal.astro';
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+import ScrollReveal from '../../components/ui/ScrollReveal.astro';
+import { UA } from '../../components/ua/config';
 
 /**
  * Ukrainian partner page for Daria (Dasha) Podkhaliuzina. Sells a $100
@@ -10,11 +11,11 @@ import ScrollReveal from '../components/ui/ScrollReveal.astro';
  * (@_daria_podkhaliuzina, Oct 2026). noindex and out of the sitemap
  * until she signs off.
  *
- * BOOK_URL is the interim CTA (her Instagram DMs). Swap for the payment
- * + calendar link once it exists.
+ * Booking: UA.calendarEmbed (GHL calendar with $100 payment). Until it
+ * is set, the CTA falls back to her Instagram DMs.
  */
 
-const BOOK_URL = 'https://ig.me/m/_daria_podkhaliuzina';
+const BOOK_URL = UA.dm;
 
 const proof = [
   { big: '7 днів', small: 'від подачі документів до уругвайських ID для всієї сім’ї' },
@@ -363,6 +364,31 @@ const steps = [
     </div>
   </section>
 
+  <!-- Free entry points: checklist + live -->
+  <section class="py-14 md:py-20">
+    <div class="container-edge grid grid-cols-1 gap-5 md:grid-cols-2">
+      <ScrollReveal>
+        <a href="/ua/checklist" class="group flex h-full gap-5 rounded-2xl border border-border-soft bg-bone-soft p-6 shadow-card transition-shadow hover:shadow-card-hover md:p-7">
+          <img src="/images/ua/checklist-p1.jpg" alt="Обкладинка чек-листа" class="w-24 flex-none rounded-md border border-border-soft object-cover shadow-card md:w-28" width="640" height="905" loading="lazy" />
+          <div>
+            <span class="eyebrow">Безкоштовно</span>
+            <h3 class="mt-2 font-display text-[1.35rem] leading-snug text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;">Чек-лист переїзду в Уругвай</h3>
+            <p class="mt-2 text-[0.97rem] leading-relaxed text-ink-muted">Усі документи, етапи і наш реальний бюджет на 5 сторінках.</p>
+            <p class="mt-3 text-[0.95rem] font-medium text-oxblood group-hover:underline">Отримати PDF →</p>
+          </div>
+        </a>
+      </ScrollReveal>
+      <ScrollReveal>
+        <a href="/ua/efir" class="group flex h-full flex-col rounded-2xl border border-border-soft bg-bone-soft p-6 shadow-card transition-shadow hover:shadow-card-hover md:p-7">
+          <span class="eyebrow">Безкоштовний ефір у Zoom</span>
+          <h3 class="mt-2 font-display text-[1.35rem] leading-snug text-ink" style="font-variation-settings: 'opsz' 96, 'wght' 420;">Питання-відповіді про переїзд</h3>
+          <p class="mt-2 text-[0.97rem] leading-relaxed text-ink-muted">{UA.efir.labelDate}, {UA.efir.labelTime}. Розповім, як ми це зробили, і відповім на ваші питання.</p>
+          <p class="mt-auto pt-3 text-[0.95rem] font-medium text-oxblood group-hover:underline">Зареєструватися →</p>
+        </a>
+      </ScrollReveal>
+    </div>
+  </section>
+
   <!-- Honest minuses -->
   <section class="section-y border-t border-border-soft bg-bone-soft">
     <div class="container-edge grid grid-cols-1 gap-12 lg:grid-cols-12">
@@ -454,18 +480,24 @@ const steps = [
           Консультація $100. Після неї ви точно знатимете, чи підходить вам Уругвай, які документи збирати і скільки все коштуватиме. Якщо йдемо далі разом, $100 зараховуються.
         </p>
         <ol class="reveal grid w-full grid-cols-1 gap-3 text-left sm:grid-cols-3">
-          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">1.</span> Напишіть мені «Консультація»</li>
-          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">2.</span> Оберіть зручний час і оплатіть $100</li>
-          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">3.</span> Заповніть коротку анкету перед дзвінком</li>
+          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">1.</span> Оберіть зручний час нижче</li>
+          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">2.</span> Оплатіть $100 карткою</li>
+          <li class="rounded-xl bg-bone/10 p-4 text-[0.95rem]"><span class="font-medium">3.</span> Отримайте посилання на Zoom і коротку анкету</li>
         </ol>
-        <a
-          href={BOOK_URL}
-          target="_blank"
-          rel="noopener"
-          class="reveal inline-flex items-center justify-center gap-2 rounded-full bg-bone px-8 py-4 text-base font-medium text-oxblood transition-colors hover:bg-bone-deeper"
-        >
-          Записатися на консультацію <span aria-hidden="true">→</span>
-        </a>
+        {UA.calendarEmbed ? (
+          <div class="reveal w-full overflow-hidden rounded-2xl bg-bone">
+            <iframe src={UA.calendarEmbed} title="Запис на консультацію" class="h-[760px] w-full border-0" loading="lazy"></iframe>
+          </div>
+        ) : (
+          <a
+            href={BOOK_URL}
+            target="_blank"
+            rel="noopener"
+            class="reveal inline-flex items-center justify-center gap-2 rounded-full bg-bone px-8 py-4 text-base font-medium text-oxblood transition-colors hover:bg-bone-deeper"
+          >
+            Записатися на консультацію <span aria-hidden="true">→</span>
+          </a>
+        )}
         <p class="reveal text-sm text-bone/60">Відповідаю особисто, зазвичай протягом дня.</p>
       </ScrollReveal>
     </div>

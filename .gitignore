@@ -35,3 +35,6 @@ pnpm-debug.log*
 montevideo.JPG
 *-raw.jpg
 *-raw.png
+
+ua-kit/checklist/page-*.png
+__pycache__/

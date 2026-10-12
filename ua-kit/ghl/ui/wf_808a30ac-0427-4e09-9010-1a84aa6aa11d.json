@@ -1,0 +1,83 @@
+{
+ "_id": "808a30ac-0427-4e09-9010-1a84aa6aa11d",
+ "locationId": "bvVdY6uxwZibc7vKkknQ",
+ "companyId": "kqlzGbwBzw3A8Vspaz2A",
+ "companyAge": 24,
+ "name": "UA · Consultation booked",
+ "status": "draft",
+ "version": 3,
+ "dataVersion": 7,
+ "allowMultiple": true,
+ "timezone": "account",
+ "removeContactFromLastStep": true,
+ "filePath": "location/bvVdY6uxwZibc7vKkknQ/workflows/808a30ac-0427-4e09-9010-1a84aa6aa11d/3",
+ "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FbvVdY6uxwZibc7vKkknQ%2Fworkflows%2F808a30ac-0427-4e09-9010-1a84aa6aa11d%2F3?alt=media&token=26a9276f-d778-40c4-a162-233d43dfd677",
+ "stopOnResponse": false,
+ "autoMarkAsRead": false,
+ "permission": 380,
+ "type": "workflow",
+ "parentId": null,
+ "meta": null,
+ "updatedBy": "lEV2NQ0qxzT2E98vXuLn",
+ "createdAt": "2026-10-12T15:57:34.798Z",
+ "updatedAt": "2026-10-12T15:58:20.977Z",
+ "deleted": false,
+ "allowMultipleOpportunity": true,
+ "creationSource": "workflow_ai",
+ "isTriggerBucketMigrated": true,
+ "originType": "user",
+ "__v": 0,
+ "eventStartDate": null,
+ "window": null,
+ "workflowNote": null,
+ "triggersFilePath": "location/bvVdY6uxwZibc7vKkknQ/workflow-triggers/808a30ac-0427-4e09-9010-1a84aa6aa11d/3",
+ "id": "808a30ac-0427-4e09-9010-1a84aa6aa11d",
+ "workflowData": {
+  "templates": [
+   {
+    "id": "6dd3e26b-47ee-4585-8e9c-5678da4e6bb5",
+    "order": 0,
+    "attributes": {
+     "type": "add_contact_tag",
+     "tags": [
+      "ua-consult-booked"
+     ]
+    },
+    "name": "Add tag ua-consult-booked",
+    "type": "add_contact_tag",
+    "next": "fe4060c5-0165-4290-b958-b36c59030515"
+   },
+   {
+    "id": "fe4060c5-0165-4290-b958-b36c59030515",
+    "order": 1,
+    "attributes": {
+     "type": "create_opportunity",
+     "pipeline_id": "whlIW5yUQy9IRHJwlTYx",
+     "pipeline_stage_id": "0367022c-8b58-4794-b2a2-6e658406e418",
+     "opportunity_name": "{{contact.first_name}} · консультація",
+     "monetary_value": 100
+    },
+    "name": "Create or update consultation opportunity",
+    "type": "create_opportunity",
+    "parentKey": "6dd3e26b-47ee-4585-8e9c-5678da4e6bb5",
+    "next": "4722b7bf-8213-41de-a6cf-fe742952d1af"
+   },
+   {
+    "id": "4722b7bf-8213-41de-a6cf-fe742952d1af",
+    "order": 2,
+    "attributes": {
+     "subject": "Консультацію підтверджено",
+     "template_id": "6accf597a5a0e7f60141662b",
+     "templatesource": "email-builder"
+    },
+    "name": "Send consultation confirmation",
+    "type": "email",
+    "parentKey": "fe4060c5-0165-4290-b958-b36c59030515"
+   }
+  ]
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ }
+}

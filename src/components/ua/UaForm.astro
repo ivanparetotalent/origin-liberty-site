@@ -1,0 +1,123 @@
+---
+/**
+ * Native form that posts to a GHL inbound-webhook workflow, then
+ * redirects to a thank-you page. No webhook yet → the submit sends the
+ * visitor to Dasha's DMs instead, so the page never dead-ends.
+ */
+import { UA } from './config';
+
+interface Props {
+  id: string;
+  webhook: string;
+  source: string;
+  redirect: string;
+  submitLabel: string;
+  askFamily?: boolean;
+}
+
+const { id, webhook, source, redirect, submitLabel, askFamily = true } = Astro.props;
+const input =
+  'w-full rounded-xl border border-border bg-bone-soft px-4 py-3 text-[1rem] text-ink placeholder:text-ink-soft focus:border-oxblood focus:outline-none';
+const label = 'mb-1.5 block text-sm font-medium text-ink';
+---
+
+<form
+  id={id}
+  class="ua-form flex flex-col gap-4"
+  data-webhook={webhook}
+  data-redirect={redirect}
+  data-fallback={UA.dm}
+  novalidate
+>
+  <input type="hidden" name="source" value={source} />
+  <div>
+    <label class={label} for={`${id}-name`}>Ім’я</label>
+    <input class={input} id={`${id}-name`} name="first_name" autocomplete="given-name" required placeholder="Як до вас звертатись" />
+  </div>
+  <div>
+    <label class={label} for={`${id}-email`}>Email</label>
+    <input class={input} id={`${id}-email`} name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+  </div>
+  <div>
+    <label class={label} for={`${id}-phone`}>WhatsApp або Telegram</label>
+    <input class={input} id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" placeholder="+380 …" />
+  </div>
+  {askFamily && (
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div>
+        <label class={label} for={`${id}-country`}>Де ви зараз живете</label>
+        <input class={input} id={`${id}-country`} name="country_now" placeholder="Наприклад, Польща" />
+      </div>
+      <div>
+        <label class={label} for={`${id}-when`}>Коли плануєте переїзд</label>
+        <select class={input} id={`${id}-when`} name="move_timeline">
+          <option value="">Оберіть</option>
+          <option>Протягом 3 місяців</option>
+          <option>Через 3–6 місяців</option>
+          <option>Через 6–12 місяців</option>
+          <option>Поки просто вивчаю</option>
+        </select>
+      </div>
+      <div>
+        <label class={label} for={`${id}-family`}>Хто переїжджає</label>
+        <select class={input} id={`${id}-family`} name="family">
+          <option value="">Оберіть</option>
+          <option>Я сам(а)</option>
+          <option>Пара</option>
+          <option>Сім’я з дітьми</option>
+        </select>
+      </div>
+      <div>
+        <label class={label} for={`${id}-biz`}>У вас власний бізнес з оборотом понад $500 000 на рік?</label>
+        <select class={input} id={`${id}-biz`} name="business_500k">
+          <option value="">Оберіть</option>
+          <option>Так</option>
+          <option>Ні</option>
+        </select>
+      </div>
+    </div>
+  )}
+  <button type="submit" class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-oxblood px-8 py-4 text-base font-medium text-bone transition-colors hover:bg-oxblood-deep disabled:opacity-60">
+    {submitLabel} <span aria-hidden="true">→</span>
+  </button>
+  <p class="ua-form-error hidden text-sm text-oxblood" role="alert">Перевірте ім’я та email.</p>
+  <p class="text-xs leading-relaxed text-ink-soft">Ніякого спаму. Можна відписатися в один клік.</p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.ua-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = form.querySelector<HTMLElement>('.ua-form-error');
+      const name = (form.elements.namedItem('first_name') as HTMLInputElement).value.trim();
+      const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
+      if (!name || !/^\S+@\S+\.\S+$/.test(email)) {
+        err?.classList.remove('hidden');
+        return;
+      }
+      err?.classList.add('hidden');
+      const btn = form.querySelector('button');
+      if (btn) btn.disabled = true;
+
+      const data = new URLSearchParams();
+      new FormData(form).forEach((v, k) => data.append(k, String(v)));
+      const params = new URLSearchParams(location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach((k) => {
+        const v = params.get(k);
+        if (v) data.append(k, v);
+      });
+
+      const hook = form.dataset.webhook;
+      if (!hook) {
+        location.href = form.dataset.fallback!;
+        return;
+      }
+      try {
+        await fetch(hook, { method: 'POST', mode: 'no-cors', body: data });
+      } catch {}
+      const next = new URL(form.dataset.redirect!, location.origin);
+      next.searchParams.set('name', name);
+      location.href = next.toString();
+    });
+  });
+</script>

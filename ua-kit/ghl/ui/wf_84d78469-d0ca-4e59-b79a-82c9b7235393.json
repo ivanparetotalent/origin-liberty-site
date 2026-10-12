@@ -1,0 +1,339 @@
+{
+ "_id": "84d78469-d0ca-4e59-b79a-82c9b7235393",
+ "locationId": "bvVdY6uxwZibc7vKkknQ",
+ "companyId": "kqlzGbwBzw3A8Vspaz2A",
+ "companyAge": 24,
+ "name": "UA · Pipeline stage emails",
+ "status": "draft",
+ "version": 3,
+ "dataVersion": 7,
+ "allowMultiple": true,
+ "timezone": "account",
+ "removeContactFromLastStep": true,
+ "filePath": "location/bvVdY6uxwZibc7vKkknQ/workflows/84d78469-d0ca-4e59-b79a-82c9b7235393/3",
+ "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FbvVdY6uxwZibc7vKkknQ%2Fworkflows%2F84d78469-d0ca-4e59-b79a-82c9b7235393%2F3?alt=media&token=f014b0c3-fa09-4ceb-af1b-6334c7b9fcb0",
+ "stopOnResponse": false,
+ "autoMarkAsRead": false,
+ "permission": 380,
+ "type": "workflow",
+ "parentId": null,
+ "meta": null,
+ "updatedBy": "lEV2NQ0qxzT2E98vXuLn",
+ "createdAt": "2026-10-12T16:01:42.799Z",
+ "updatedAt": "2026-10-12T16:02:49.830Z",
+ "deleted": false,
+ "allowMultipleOpportunity": true,
+ "creationSource": "workflow_ai",
+ "isTriggerBucketMigrated": true,
+ "originType": "user",
+ "__v": 0,
+ "eventStartDate": null,
+ "window": null,
+ "workflowNote": null,
+ "triggersFilePath": "location/bvVdY6uxwZibc7vKkknQ/workflow-triggers/84d78469-d0ca-4e59-b79a-82c9b7235393/3",
+ "id": "84d78469-d0ca-4e59-b79a-82c9b7235393",
+ "workflowData": {
+  "templates": [
+   {
+    "id": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "order": 0,
+    "attributes": {
+     "currentRecipeType": "CUSTOM",
+     "conditionName": "Opportunity pipeline stage",
+     "operator": "and",
+     "if": true,
+     "version": 2,
+     "noneBranchName": "None",
+     "branches": [
+      {
+       "name": "Супровід придбано",
+       "operator": "and",
+       "segments": [
+        {
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "opportunities",
+           "conditionSubType": "pipelineStageId",
+           "conditionOperator": "==",
+           "conditionValue": "9405f7d6-b4b4-42d4-a2a4-c94ae2645f0e"
+          }
+         ]
+        }
+       ],
+       "id": "727da3b7-b965-4050-b7ec-d61406cc4300",
+       "__irBranchId__": "супровід придбано"
+      },
+      {
+       "name": "Не зараз",
+       "operator": "and",
+       "segments": [
+        {
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "opportunities",
+           "conditionSubType": "pipelineStageId",
+           "conditionOperator": "==",
+           "conditionValue": "e50a83a3-ff2a-41ad-a200-8b13c82dd37a"
+          }
+         ]
+        }
+       ],
+       "id": "edebcc5a-b81b-4620-afa2-fcf87424f108",
+       "__irBranchId__": "не зараз"
+      },
+      {
+       "name": "Документи подано",
+       "operator": "and",
+       "segments": [
+        {
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "opportunities",
+           "conditionSubType": "pipelineStageId",
+           "conditionOperator": "==",
+           "conditionValue": "a8a6db11-c29f-475b-9a7a-e990e09342e4"
+          }
+         ]
+        }
+       ],
+       "id": "8c530553-583b-4fa0-ba3c-27cd689361d9",
+       "__irBranchId__": "документи подано"
+      },
+      {
+       "name": "ID отримано",
+       "operator": "and",
+       "segments": [
+        {
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "opportunities",
+           "conditionSubType": "pipelineStageId",
+           "conditionOperator": "==",
+           "conditionValue": "72fc3b49-41be-43d8-8167-42b856d741ae"
+          }
+         ]
+        }
+       ],
+       "id": "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a",
+       "__irBranchId__": "id отримано"
+      }
+     ],
+     "showErrors": false,
+     "branchNameError": "Branch name cannot be empty!"
+    },
+    "name": "Route by opportunity pipeline stage",
+    "type": "if_else",
+    "cat": "conditions",
+    "nodeType": "condition-node",
+    "next": [
+     "727da3b7-b965-4050-b7ec-d61406cc4300",
+     "edebcc5a-b81b-4620-afa2-fcf87424f108",
+     "8c530553-583b-4fa0-ba3c-27cd689361d9",
+     "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a",
+     "694de1c1-a48d-5110-a40d-15bf550d24c3"
+    ]
+   },
+   {
+    "id": "727da3b7-b965-4050-b7ec-d61406cc4300",
+    "order": 1,
+    "attributes": {
+     "if": false,
+     "conditionName": "Condition",
+     "operator": "and",
+     "branches": []
+    },
+    "name": "Супровід придбано",
+    "type": "if_else",
+    "cat": "conditions",
+    "parent": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "parentKey": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "sibling": [
+     "edebcc5a-b81b-4620-afa2-fcf87424f108",
+     "8c530553-583b-4fa0-ba3c-27cd689361d9",
+     "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a",
+     "694de1c1-a48d-5110-a40d-15bf550d24c3"
+    ],
+    "nodeType": "branch-yes",
+    "next": "237037be-1606-4d44-a277-32e345431506"
+   },
+   {
+    "id": "237037be-1606-4d44-a277-32e345431506",
+    "order": 0,
+    "attributes": {
+     "type": "add_contact_tag",
+     "tags": [
+      "ua-client"
+     ]
+    },
+    "name": "Add tag ua-client",
+    "type": "add_contact_tag",
+    "parent": "727da3b7-b965-4050-b7ec-d61406cc4300",
+    "parentKey": "727da3b7-b965-4050-b7ec-d61406cc4300",
+    "next": "b982cf8b-021b-444f-a805-6c46674813e1"
+   },
+   {
+    "id": "b982cf8b-021b-444f-a805-6c46674813e1",
+    "order": 1,
+    "attributes": {
+     "subject": "Ласкаво просимо! Наступні кроки",
+     "template_id": "6accf599e508bc12289b1ee7",
+     "templatesource": "email-builder"
+    },
+    "name": "UA 11 · Ласкаво просимо! Наступні кроки",
+    "type": "email",
+    "parentKey": "237037be-1606-4d44-a277-32e345431506",
+    "parent": "727da3b7-b965-4050-b7ec-d61406cc4300"
+   },
+   {
+    "id": "edebcc5a-b81b-4620-afa2-fcf87424f108",
+    "order": 1,
+    "attributes": {
+     "if": false,
+     "conditionName": "Condition",
+     "operator": "and",
+     "branches": []
+    },
+    "name": "Не зараз",
+    "type": "if_else",
+    "cat": "conditions",
+    "parent": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "parentKey": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "sibling": [
+     "727da3b7-b965-4050-b7ec-d61406cc4300",
+     "8c530553-583b-4fa0-ba3c-27cd689361d9",
+     "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a",
+     "694de1c1-a48d-5110-a40d-15bf550d24c3"
+    ],
+    "nodeType": "branch-yes",
+    "next": "ea0ef259-c3d3-4bb4-8e3a-0530dbe0383c"
+   },
+   {
+    "id": "ea0ef259-c3d3-4bb4-8e3a-0530dbe0383c",
+    "order": 0,
+    "attributes": {
+     "type": "add_contact_tag",
+     "tags": [
+      "ua-not-now"
+     ]
+    },
+    "name": "Add tag ua-not-now",
+    "type": "add_contact_tag",
+    "parent": "edebcc5a-b81b-4620-afa2-fcf87424f108",
+    "parentKey": "edebcc5a-b81b-4620-afa2-fcf87424f108",
+    "next": "96b39eda-157a-4dc3-9fc5-dd1b26d29d07"
+   },
+   {
+    "id": "96b39eda-157a-4dc3-9fc5-dd1b26d29d07",
+    "order": 1,
+    "attributes": {
+     "subject": "Дякую за розмову",
+     "template_id": "6accf59a3c31397cd5977446",
+     "templatesource": "email-builder"
+    },
+    "name": "UA 12 · Дякую за розмову",
+    "type": "email",
+    "parentKey": "ea0ef259-c3d3-4bb4-8e3a-0530dbe0383c",
+    "parent": "edebcc5a-b81b-4620-afa2-fcf87424f108"
+   },
+   {
+    "id": "8c530553-583b-4fa0-ba3c-27cd689361d9",
+    "order": 1,
+    "attributes": {
+     "if": false,
+     "conditionName": "Condition",
+     "operator": "and",
+     "branches": []
+    },
+    "name": "Документи подано",
+    "type": "if_else",
+    "cat": "conditions",
+    "parent": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "parentKey": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "sibling": [
+     "727da3b7-b965-4050-b7ec-d61406cc4300",
+     "edebcc5a-b81b-4620-afa2-fcf87424f108",
+     "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a",
+     "694de1c1-a48d-5110-a40d-15bf550d24c3"
+    ],
+    "nodeType": "branch-yes",
+    "next": "aacb231f-4f78-449d-b69f-75982a265123"
+   },
+   {
+    "id": "aacb231f-4f78-449d-b69f-75982a265123",
+    "order": 0,
+    "attributes": {
+     "subject": "Документи подано! Друга частина оплати",
+     "template_id": "6accf59c135ffc9841e45a32",
+     "templatesource": "email-builder"
+    },
+    "name": "UA 13 · Документи подано! Друга частина оплати",
+    "type": "email",
+    "parent": "8c530553-583b-4fa0-ba3c-27cd689361d9",
+    "parentKey": "8c530553-583b-4fa0-ba3c-27cd689361d9"
+   },
+   {
+    "id": "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a",
+    "order": 1,
+    "attributes": {
+     "if": false,
+     "conditionName": "Condition",
+     "operator": "and",
+     "branches": []
+    },
+    "name": "ID отримано",
+    "type": "if_else",
+    "cat": "conditions",
+    "parent": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "parentKey": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "sibling": [
+     "727da3b7-b965-4050-b7ec-d61406cc4300",
+     "edebcc5a-b81b-4620-afa2-fcf87424f108",
+     "8c530553-583b-4fa0-ba3c-27cd689361d9",
+     "694de1c1-a48d-5110-a40d-15bf550d24c3"
+    ],
+    "nodeType": "branch-yes",
+    "next": "5a36863d-d27b-4516-ba5d-4a639303dc61"
+   },
+   {
+    "id": "5a36863d-d27b-4516-ba5d-4a639303dc61",
+    "order": 0,
+    "attributes": {
+     "subject": "Вітаю з уругвайськими ID!",
+     "template_id": "6accf59d62f9c2d878f0cc35",
+     "templatesource": "email-builder"
+    },
+    "name": "UA 14 · Вітаю з уругвайськими ID!",
+    "type": "email",
+    "parent": "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a",
+    "parentKey": "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a"
+   },
+   {
+    "id": "694de1c1-a48d-5110-a40d-15bf550d24c3",
+    "order": 1,
+    "attributes": {
+     "else": true
+    },
+    "name": "None",
+    "type": "if_else",
+    "cat": "conditions",
+    "parent": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "parentKey": "6d32ab7b-0a9e-4776-bc4f-e379fc21b8c2",
+    "sibling": [
+     "727da3b7-b965-4050-b7ec-d61406cc4300",
+     "edebcc5a-b81b-4620-afa2-fcf87424f108",
+     "8c530553-583b-4fa0-ba3c-27cd689361d9",
+     "e1e28d97-6197-4bdc-9ae4-77b5532dbd2a"
+    ],
+    "nodeType": "branch-no"
+   }
+  ]
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ }
+}

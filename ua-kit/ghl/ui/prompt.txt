@@ -1,0 +1,8 @@
+Build this exact workflow, named "UA · Pipeline stage emails":
+Trigger: Pipeline Stage Changed, filtered to pipeline "UA · Dasha residency".
+Then an If/Else on the opportunity's current pipeline stage, with these branches:
+- Stage "Супровід придбано": add tag ua-client, send email template "UA 11 · Ласкаво просимо! Наступні кроки" with subject "Ласкаво просимо! Наступні кроки".
+- Stage "Не зараз": add tag ua-not-now, send email template "UA 12 · Дякую за розмову" with subject "Дякую за розмову".
+- Stage "Документи подано": send email template "UA 13 · Документи подано! Друга частина оплати" with subject "Документи подано! Друга частина оплати".
+- Stage "ID отримано": send email template "UA 14 · Вітаю з уругвайськими ID!" with subject "Вітаю з уругвайськими ID!".
+- Otherwise: do nothing.

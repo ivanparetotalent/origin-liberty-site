@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+const { title, description, ctaHref = '/ua#book', ctaLabel = 'Консультація' } = Astro.props;
+---
+
+<Layout title={title} description={description} lang="uk" noindex showNavCta={false} showFooter={false}>
+  <header class="sticky top-0 z-40 border-b border-border-soft bg-bone/90 backdrop-blur">
+    <div class="container-edge flex h-16 items-center justify-between gap-4">
+      <a href="/ua" class="whitespace-nowrap font-display text-[16px] text-ink sm:text-[19px]" style="font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.01em;">
+        Origin Liberty <span class="text-brass">· Україна</span>
+      </a>
+      <Button href={ctaHref} variant="primary" size="sm">{ctaLabel}</Button>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="border-t border-border-soft bg-bone">
+    <div class="container-edge flex flex-col gap-3 py-10 text-sm text-ink-soft md:flex-row md:items-center md:justify-between">
+      <p>Origin Liberty · Україна · Монтевідео, Уругвай</p>
+      <p class="max-w-xl md:text-right">Практичний супровід переїзду. Не є юридичною фірмою і не надає юридичних консультацій.</p>
+    </div>
+  </footer>
+</Layout>

@@ -1,0 +1,75 @@
+---
+import UaShell from '../../components/ua/UaShell.astro';
+import UaForm from '../../components/ua/UaForm.astro';
+import ScrollReveal from '../../components/ui/ScrollReveal.astro';
+import { UA } from '../../components/ua/config';
+
+const inside = [
+  'П’ять етапів у правильному порядку: від документів з України до ID на руках',
+  'Повний список документів для сім’ї, з позначками, де потрібен апостиль',
+  'Коли бронювати запис у міграційну службу, щоб не чекати місяцями',
+  'Як знайти квартиру за тиждень і які три платежі готувати при заселенні',
+  'Наш реальний бюджет: $10 000 на сім’ю з трьох, і як вкластися в $7 000',
+  'Чотири помилки, які коштують місяців і грошей',
+];
+---
+
+<UaShell
+  title="Чек-лист переїзду в Уругвай: безкоштовно | Origin Liberty Україна"
+  description="Усе, що ми зробили, щоб переїхати в Уругвай з дитиною й отримати ID через тиждень після подачі. З реальними сумами. Безкоштовний PDF від Даші."
+>
+  <section class="relative isolate overflow-hidden pt-10 md:pt-16">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10" style="background: radial-gradient(ellipse 70% 70% at 100% 0%, rgba(212, 207, 197, 0.55) 0%, rgba(245, 240, 232, 0) 60%), linear-gradient(180deg, #FAF7F1 0%, #F5F0E8 100%);"></div>
+    <div class="container-edge pb-20 md:pb-28">
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <ScrollReveal stagger class="flex flex-col gap-6 lg:col-span-6">
+          <span class="reveal eyebrow">Безкоштовний PDF · 5 сторінок</span>
+          <h1 class="reveal font-display text-ink text-balance" style="font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.06; font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.02em;">
+            Чек-лист переїзду в Уругвай. Усе, що ми зробили, з реальними сумами.
+          </h1>
+          <p class="reveal max-w-xl text-[1.05rem] leading-relaxed text-ink-muted md:text-[1.15rem]">
+            Ми переїхали з Кіпру в Монтевідео з дитиною і отримали уругвайські ID через тиждень після подачі. Документи я збирала сама. Тут усе, що я хотіла б знати до початку.
+          </p>
+          <ul class="reveal flex flex-col gap-3">
+            {inside.map((x) => (
+              <li class="flex gap-3 text-[1rem] leading-relaxed text-ink">
+                <span class="mt-[0.45rem] h-2 w-2 flex-none rounded-full bg-brass" aria-hidden="true"></span>
+                {x}
+              </li>
+            ))}
+          </ul>
+          <div class="reveal mt-2 hidden gap-4 lg:flex">
+            <img src="/images/ua/checklist-p1.jpg" alt="Обкладинка чек-листа" class="w-40 rounded-lg border border-border-soft shadow-card" width="640" height="905" loading="lazy" />
+            <img src="/images/ua/checklist-p2.jpg" alt="Сторінка з документами" class="w-40 rounded-lg border border-border-soft shadow-card" width="640" height="905" loading="lazy" />
+            <img src="/images/ua/checklist-p4.jpg" alt="Сторінка з бюджетом" class="w-40 rounded-lg border border-border-soft shadow-card" width="640" height="905" loading="lazy" />
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal class="lg:col-span-6">
+          <div id="form" class="rounded-2xl border border-border-soft bg-bone-soft p-6 shadow-card-hover md:p-9">
+            <h2 class="font-display text-[1.6rem] leading-tight text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 400;">Куди надіслати чек-лист?</h2>
+            <p class="mt-2 text-[0.98rem] text-ink-muted">PDF прийде на пошту за хвилину. Відповіді на питання нижче допоможуть мені підказати саме вам.</p>
+            <div class="mt-6">
+              <UaForm id="checklist-form" webhook={UA.webhookChecklist} source="ua-checklist" redirect="/ua/checklist/dyakuyu" submitLabel="Отримати чек-лист" />
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-border-soft bg-bone-soft py-16 md:py-20">
+    <div class="container-edge grid grid-cols-1 items-center gap-10 md:grid-cols-12">
+      <ScrollReveal class="md:col-span-4">
+        <img src="/images/ua/family-park.jpg" alt="Даша з чоловіком і сином у Монтевідео" class="aspect-square w-full rounded-2xl border border-border-soft object-cover shadow-card" width="1200" height="1200" loading="lazy" />
+      </ScrollReveal>
+      <ScrollReveal stagger class="flex flex-col gap-4 md:col-span-8">
+        <span class="reveal eyebrow">Хто я</span>
+        <p class="reveal font-display text-[1.5rem] leading-snug text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 380;">
+          «Після мого посту про переїзд мені написали сотні людей з одним питанням: як ви це зробили? Цей чек-лист — моя відповідь кожному.»
+        </p>
+        <p class="reveal text-ink-muted">Даша. Друга еміграція: Україна, потім Кіпр на тимчасовому захисті, тепер Уругвай з посвідкою на проживання. Подали документи 24 вересня, ID отримали 1 жовтня.</p>
+      </ScrollReveal>
+    </div>
+  </section>
+</UaShell>

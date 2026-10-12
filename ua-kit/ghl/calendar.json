@@ -1,0 +1,125 @@
+{
+ "id": "gEDUJUGoIzYCUppxlDuG",
+ "locationId": "bvVdY6uxwZibc7vKkknQ",
+ "teamMembers": [
+  {
+   "priority": 0.5,
+   "selected": true,
+   "userId": "lEV2NQ0qxzT2E98vXuLn",
+   "meetingLocationType": "custom",
+   "meetingLocation": "Zoom: посилання прийде в листі",
+   "isZoomAdded": "false",
+   "locationConfigurations": [
+    {
+     "kind": "custom",
+     "location": "Zoom: посилання прийде в листі",
+     "position": 0,
+     "zoomOauthId": "",
+     "meetingId": "custom_0"
+    }
+   ]
+  }
+ ],
+ "eventType": "RoundRobin_OptimizeForAvailability",
+ "name": "Консультація з Дашею (60 хв)",
+ "description": "Година про вашу ситуацію: хто їде, де ви зараз, які документи вже є. Після дзвінка ви отримаєте свій список документів і план. $100 зараховуються в супровід.",
+ "slug": "ua-konsultatsiya",
+ "widgetSlug": "ua-konsultatsiya",
+ "calendarType": "round_robin",
+ "widgetType": "classic",
+ "eventTitle": "Консультація: {{contact.name}}",
+ "eventColor": "#591C2A",
+ "slotDuration": 60,
+ "slotDurationUnit": "mins",
+ "slotInterval": 60,
+ "slotIntervalUnit": "mins",
+ "slotBuffer": 15,
+ "slotBufferUnit": "mins",
+ "appoinmentPerSlot": 1,
+ "appoinmentPerDay": 4,
+ "appointmentPerSlot": 1,
+ "appointmentPerDay": 4,
+ "openHours": [
+  {
+   "daysOfTheWeek": [
+    1
+   ],
+   "hours": [
+    {
+     "openHour": 10,
+     "openMinute": 0,
+     "closeHour": 15,
+     "closeMinute": 0
+    }
+   ]
+  },
+  {
+   "daysOfTheWeek": [
+    2
+   ],
+   "hours": [
+    {
+     "openHour": 10,
+     "openMinute": 0,
+     "closeHour": 15,
+     "closeMinute": 0
+    }
+   ]
+  },
+  {
+   "daysOfTheWeek": [
+    3
+   ],
+   "hours": [
+    {
+     "openHour": 10,
+     "openMinute": 0,
+     "closeHour": 15,
+     "closeMinute": 0
+    }
+   ]
+  },
+  {
+   "daysOfTheWeek": [
+    4
+   ],
+   "hours": [
+    {
+     "openHour": 10,
+     "openMinute": 0,
+     "closeHour": 15,
+     "closeMinute": 0
+    }
+   ]
+  },
+  {
+   "daysOfTheWeek": [
+    5
+   ],
+   "hours": [
+    {
+     "openHour": 10,
+     "openMinute": 0,
+     "closeHour": 15,
+     "closeMinute": 0
+    }
+   ]
+  }
+ ],
+ "enableRecurring": false,
+ "autoConfirm": true,
+ "googleInvitationEmails": true,
+ "allowReschedule": true,
+ "allowCancellation": true,
+ "formSubmitType": "ThankYouMessage",
+ "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+ "availabilities": [],
+ "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+ "allowBookingAfterUnit": "hours",
+ "allowBookingAfter": 12,
+ "allowBookingFor": 30,
+ "allowBookingForUnit": "days",
+ "preBufferUnit": "mins",
+ "isActive": true,
+ "enableClientPortalBooking": false
+}

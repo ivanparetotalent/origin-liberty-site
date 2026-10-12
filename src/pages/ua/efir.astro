@@ -1,0 +1,64 @@
+---
+import UaShell from '../../components/ua/UaShell.astro';
+import UaForm from '../../components/ua/UaForm.astro';
+import ScrollReveal from '../../components/ui/ScrollReveal.astro';
+import { UA } from '../../components/ua/config';
+
+const agenda = [
+  { t: 'Чому саме Уругвай', b: 'Наші чотири критерії і чому відпали Іспанія, Португалія, Чехія, ОАЕ та інші.' },
+  { t: 'Документи крок за кроком', b: 'Що замовляти з України, що з країни, де ви зараз, і як зробити це дистанційно.' },
+  { t: 'Подача і ID за тиждень', b: 'Як ми бронювали запис з Кіпру і що відбувається в міграційній службі.' },
+  { t: 'Житло і реальний бюджет', b: 'Оренда, комісії, страховка і скільки коштує переїзд сім’ї.' },
+  { t: 'Ваші питання', b: 'Друга половина ефіру — відповіді на все, що ви запитаєте.' },
+];
+---
+
+<UaShell
+  title="Безкоштовний ефір: переїзд в Уругвай | Origin Liberty Україна"
+  description="45 хвилин у Zoom з Дашею: як ми переїхали в Уругвай і отримали ID за тиждень після подачі. Відповіді на ваші питання. Безкоштовно."
+  ctaHref="#form"
+  ctaLabel="Зареєструватися"
+>
+  <section class="relative isolate overflow-hidden pt-10 md:pt-16">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10" style="background: radial-gradient(ellipse 70% 70% at 100% 0%, rgba(212, 207, 197, 0.55) 0%, rgba(245, 240, 232, 0) 60%), linear-gradient(180deg, #FAF7F1 0%, #F5F0E8 100%);"></div>
+    <div class="container-edge pb-20 md:pb-28">
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <ScrollReveal stagger class="flex flex-col gap-6 lg:col-span-7">
+          <span class="reveal eyebrow">Безкоштовний ефір у Zoom · {UA.efir.durationMin} хвилин</span>
+          <h1 class="reveal font-display text-ink text-balance" style="font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.06; font-variation-settings: 'opsz' 144, 'wght' 380; letter-spacing: -0.02em;">
+            Переїзд в Уругвай: розповім, як ми це зробили, і відповім на ваші питання.
+          </h1>
+          <div class="reveal flex flex-wrap gap-3">
+            <span class="rounded-full border border-border-soft bg-bone-soft px-4 py-2 text-[0.95rem] font-medium text-ink">{UA.efir.labelDate}</span>
+            <span class="rounded-full border border-border-soft bg-bone-soft px-4 py-2 text-[0.95rem] text-ink-muted">{UA.efir.labelTime}</span>
+          </div>
+          <p class="reveal max-w-xl text-[1.05rem] leading-relaxed text-ink-muted md:text-[1.15rem]">
+            Мені написали сотні людей, і я не встигаю відповісти кожному окремо. Тому збираю всіх в одному ефірі. Приходьте з питаннями.
+          </p>
+          <ol class="reveal mt-2 flex flex-col divide-y divide-border-soft border-y border-border-soft">
+            {agenda.map((a, i) => (
+              <li class="flex gap-4 py-4">
+                <span class="font-display text-[1.3rem] text-brass">0{i + 1}</span>
+                <div>
+                  <p class="font-medium text-ink">{a.t}</p>
+                  <p class="text-[0.95rem] text-ink-muted">{a.b}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </ScrollReveal>
+
+        <ScrollReveal class="lg:col-span-5">
+          <div id="form" class="rounded-2xl border border-border-soft bg-bone-soft p-6 shadow-card-hover md:p-9 lg:sticky lg:top-24">
+            <img src="/images/ua/rambla.jpg" alt="Даша з сином на набережній Монтевідео" class="mb-6 aspect-[16/10] w-full rounded-xl object-cover" width="1200" height="862" loading="lazy" />
+            <h2 class="font-display text-[1.6rem] leading-tight text-ink" style="font-variation-settings: 'opsz' 144, 'wght' 400;">Займіть місце</h2>
+            <p class="mt-2 text-[0.98rem] text-ink-muted">Посилання на Zoom прийде на пошту, а нагадування — за день і за годину до ефіру.</p>
+            <div class="mt-6">
+              <UaForm id="efir-form" webhook={UA.webhookEfir} source="ua-efir" redirect="/ua/efir/dyakuyu" submitLabel="Зареєструватися безкоштовно" askFamily={false} />
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+</UaShell>

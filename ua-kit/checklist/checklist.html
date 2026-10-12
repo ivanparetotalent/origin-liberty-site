@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Чек-лист переїзду в Уругвай</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --ink:#1B1B1B; --muted:#5A5A5A; --soft:#7A7A7A; --bone:#F5F0E8; --bone-soft:#FAF7F1; --bone-deep:#EDE6DA; --ox:#591C2A; --brass:#A47148; --line:#D4CFC5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--bone); font-size: 10.5pt; line-height: 1.5; }
+  .page { width: 210mm; height: 297mm; padding: 18mm 18mm 16mm; position: relative; overflow: hidden; page-break-after: always; background: var(--bone); }
+  .page:last-child { page-break-after: auto; }
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 400; letter-spacing: -0.01em; }
+  .eyebrow { font-size: 8pt; text-transform: uppercase; letter-spacing: .12em; color: var(--brass); font-weight: 600; }
+  .foot { position: absolute; left: 18mm; right: 18mm; bottom: 10mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: var(--soft); border-top: 1px solid var(--line); padding-top: 3mm; }
+
+  /* cover */
+  .cover { padding: 0; display: flex; flex-direction: column; }
+  .cover .photo { height: 150mm; background: url('dasha-city.jpg') center 30% / cover; }
+  .cover .body { padding: 14mm 18mm 0; flex: 1; }
+  .cover h1 { font-size: 34pt; line-height: 1.05; margin: 4mm 0 5mm; }
+  .cover .sub { font-size: 12.5pt; color: var(--muted); max-width: 150mm; }
+  .stats { display: flex; gap: 5mm; margin-top: 9mm; }
+  .stat { flex: 1; background: var(--bone-soft); border: 1px solid var(--line); border-radius: 4mm; padding: 4mm 5mm; }
+  .stat b { display: block; font-family: 'Fraunces', serif; font-weight: 500; color: var(--ox); font-size: 18pt; line-height: 1.1; }
+  .stat span { font-size: 8.5pt; color: var(--muted); }
+  .author { margin-top: 8mm; font-size: 9pt; color: var(--muted); }
+
+  /* content */
+  .section { margin-top: 7mm; }
+  .section:first-of-type { margin-top: 0; }
+  .stage { display: flex; align-items: baseline; gap: 4mm; margin-bottom: 3mm; }
+  .stage .num { font-family: 'Fraunces', serif; color: var(--brass); font-size: 20pt; line-height: 1; min-width: 12mm; }
+  .stage h2 { font-size: 17pt; line-height: 1.15; }
+  .stage .when { font-size: 8.5pt; color: var(--soft); margin-left: auto; white-space: nowrap; }
+  ul.check { list-style: none; }
+  ul.check li { position: relative; padding: 2.2mm 0 2.2mm 9mm; border-bottom: 1px solid var(--line); }
+  ul.check li:last-child { border-bottom: 0; }
+  ul.check li::before { content: ''; position: absolute; left: 0; top: 2.9mm; width: 4.2mm; height: 4.2mm; border: 1.3px solid var(--ox); border-radius: 1mm; background: #fff; }
+  ul.check li .cost { color: var(--ox); font-weight: 600; white-space: nowrap; }
+  ul.check li .note { display: block; color: var(--muted); font-size: 9pt; margin-top: .5mm; }
+  .tip { background: var(--bone-soft); border-left: 3px solid var(--brass); padding: 3.5mm 5mm; margin-top: 4mm; font-size: 9.5pt; color: var(--ink); border-radius: 0 2mm 2mm 0; }
+  .tip b { color: var(--ox); }
+
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3mm; margin: 5mm 0 2mm; }
+  .timeline div { background: var(--bone-soft); border: 1px solid var(--line); border-radius: 3mm; padding: 3mm; font-size: 8.5pt; color: var(--muted); }
+  .timeline b { display: block; color: var(--ox); font-family: 'Fraunces', serif; font-weight: 500; font-size: 11pt; margin-bottom: 1mm; }
+  .intro h1 { font-size: 24pt; line-height: 1.1; margin: 3mm 0 3mm; }
+  .intro p { color: var(--muted); max-width: 160mm; }
+
+  table.budget { width: 100%; border-collapse: collapse; margin-top: 3mm; font-size: 10pt; }
+  table.budget td { padding: 2.6mm 0; border-bottom: 1px solid var(--line); }
+  table.budget td:last-child { text-align: right; font-weight: 600; white-space: nowrap; }
+  table.budget tr.total td { border-bottom: 0; border-top: 2px solid var(--ink); font-family: 'Fraunces', serif; font-size: 14pt; color: var(--ox); font-weight: 500; }
+  .compare { display: flex; gap: 5mm; margin-top: 5mm; }
+  .compare div { flex: 1; border-radius: 3mm; padding: 4mm 5mm; border: 1px solid var(--line); background: var(--bone-soft); }
+  .compare b { display: block; font-family: 'Fraunces', serif; font-size: 20pt; font-weight: 500; }
+  .compare .them b { color: var(--soft); text-decoration: line-through; }
+  .compare .us b { color: var(--ox); }
+  .compare span { font-size: 8.5pt; color: var(--muted); }
+
+  .mistakes li { margin-bottom: 3.5mm; padding-left: 0; }
+  .mistakes { list-style: none; counter-reset: m; }
+  .mistakes li { counter-increment: m; position: relative; padding-left: 11mm; }
+  .mistakes li::before { content: counter(m); position: absolute; left: 0; top: -1mm; font-family: 'Fraunces', serif; font-size: 18pt; color: var(--brass); }
+  .mistakes li b { display: block; font-size: 11pt; }
+  .mistakes li span { color: var(--muted); font-size: 9.5pt; }
+
+  .cta { background: var(--ox); color: var(--bone); border-radius: 5mm; padding: 9mm 10mm; margin-top: 8mm; position: relative; overflow: hidden; }
+  .cta h2 { color: var(--bone); font-size: 20pt; line-height: 1.15; margin-bottom: 3mm; }
+  .cta p { color: rgba(245,240,232,.82); font-size: 10pt; max-width: 120mm; }
+  .cta .rows { display: flex; gap: 5mm; margin-top: 6mm; }
+  .cta .rows div { flex: 1; background: rgba(245,240,232,.1); border-radius: 3mm; padding: 4mm; font-size: 9pt; }
+  .cta .rows b { display: block; font-size: 11pt; margin-bottom: 1mm; color: #fff; }
+  .cta a { color: #fff; }
+  .signoff { display: flex; gap: 6mm; align-items: center; margin-top: 8mm; }
+  .signoff .ph { width: 26mm; height: 26mm; border-radius: 50%; background: url('family-park.jpg') center 35% / cover; flex: none; }
+  .signoff p { font-size: 9.5pt; color: var(--muted); }
+  .signoff p b { color: var(--ink); font-family: 'Fraunces', serif; font-weight: 500; font-size: 12pt; display: block; }
+</style>
+</head>
+<body>
+
+<!-- 1. Cover -->
+<section class="page cover">
+  <div class="photo"></div>
+  <div class="body">
+    <div class="eyebrow">Безкоштовний гайд · Origin Liberty Україна</div>
+    <h1>Чек-лист переїзду в Уругвай</h1>
+    <p class="sub">Усе, що ми зробили, щоб переїхати з Кіпру в Монтевідео з дитиною й отримати уругвайські ID через тиждень після подачі. З реальними сумами.</p>
+    <div class="stats">
+      <div class="stat"><b>7 днів</b><span>від подачі документів до ID для всієї сім’ї</span></div>
+      <div class="stat"><b>$2 000</b><span>наші витрати на документи, без агенції</span></div>
+      <div class="stat"><b>3 роки</b><span>до громадянства для сімейної пари</span></div>
+    </div>
+    <p class="author">Даша · @_daria_podkhaliuzina · Монтевідео, жовтень 2026</p>
+  </div>
+</section>
+
+<!-- 2. Overview + Stage 1 -->
+<section class="page">
+  <div class="intro">
+    <div class="eyebrow">Як користуватись</div>
+    <h1>П’ять етапів. Відмічайте галочки, поки рухаєтесь.</h1>
+    <p>Я зібрала тут усе, що робила сама, в тому порядку, в якому це варто робити. Кожна сума — наша реальна, для сім’ї з двох дорослих і дитини.</p>
+  </div>
+  <div class="timeline">
+    <div><b>1</b>Документи з України</div>
+    <div><b>2</b>Запис у міграційну службу</div>
+    <div><b>3</b>Переліт і речі</div>
+    <div><b>4</b>Житло</div>
+    <div><b>5</b>Подача і ID</div>
+  </div>
+
+  <div class="section">
+    <div class="stage"><span class="num">01</span><h2>Документи з України</h2><span class="when">за 3–4 місяці</span></div>
+    <ul class="check">
+      <li>Закордонні паспорти всіх членів сім’ї з запасом терміну дії</li>
+      <li>Свідоцтва про народження кожного і свідоцтво про шлюб, з апостилем</li>
+      <li>Довідка про несудимість з України, з апостилем</li>
+      <li>Довідка про несудимість з країни, де ви жили останнім часом <span class="cost">у нас $50</span><span class="note">Ми жили на Кіпрі, тож замовляли кіпрську.</span></li>
+      <li>Карта щеплень дитини</li>
+      <li>Не в Україні? Замовте все через юриста за довіреністю <span class="cost">у нас $690</span><span class="note">Ми так і зробили з Кіпру. Більшу частину пакета я підготувала ще до вильоту.</span></li>
+    </ul>
+    <div class="tip"><b>Порада.</b> Починайте з документів з України: це найдовший етап. Усе інше можна зробити швидко, а без апостилів подача не відбудеться.</div>
+  </div>
+  <div class="foot"><span>Чек-лист переїзду в Уругвай</span><span>originliberty.com/ua</span></div>
+</section>
+
+<!-- 3. Stages 2–4 -->
+<section class="page">
+  <div class="section">
+    <div class="stage"><span class="num">02</span><h2>Запис у міграційну службу</h2><span class="when">за 2 місяці</span></div>
+    <ul class="check">
+      <li>Забронюйте дату подачі заздалегідь<span class="note">Слоти розбирають наперед. Я бронювала з Кіпру в липні на вересень.</span></li>
+      <li>Плануйте приліт щонайменше за тиждень до подачі<span class="note">Щоб спокійно зробити переклади і медогляд на місці.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="stage"><span class="num">03</span><h2>Переліт і речі</h2><span class="when">за 1 місяць</span></div>
+    <ul class="check">
+      <li>Оберіть маршрут<span class="note">Є прямі рейси Мадрид–Монтевідео. Ми летіли через Буенос-Айрес: так бізнес-клас був набагато дешевшим.</span></li>
+      <li>Буенос-Айрес → Колонія швидкісним паромом <span class="cost">у нас $170</span></li>
+      <li>Колонія → Монтевідео автобусом <span class="cost">~$30</span></li>
+      <li>Купіть техніку до переїзду<span class="note">Через мита на імпорт більшість техніки в Уругваї приблизно вдвічі дорожча, ніж у Європі.</span></li>
+      <li>Пакуйтесь легко<span class="note">Наше життя вмістилося в 4 валізи і пару рюкзаків.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="stage"><span class="num">04</span><h2>Житло</h2><span class="when">перші 2 тижні</span></div>
+    <ul class="check">
+      <li>Перші дні на Airbnb, поки шукаєте постійне <span class="cost">у нас 12 діб за $729</span></li>
+      <li>Шукайте довгу оренду на місці<span class="note">Пристойні квартири в столиці від ~$1 000 на місяць. Ми знайшли за тиждень, з 10 переглядів. Обираєте ви, а не вас.</span></li>
+      <li>Відкладіть три платежі на заселення<span class="note">Перший місяць оренди, комісія рієлтора (100% місячної оренди) і страховка (~70% місячної оренди). Депозиту в нас не було.</span></li>
+    </ul>
+    <div class="tip"><b>Порада.</b> Страховка замінює депозит і захищає власника від несплати. Закладіть її в бюджет одразу, щоб не було сюрпризу при отриманні ключів.</div>
+  </div>
+  <div class="foot"><span>Чек-лист переїзду в Уругвай</span><span>originliberty.com/ua</span></div>
+</section>
+
+<!-- 4. Stage 5 + budget -->
+<section class="page">
+  <div class="section">
+    <div class="stage"><span class="num">05</span><h2>Подача і ID</h2><span class="when">після прильоту</span></div>
+    <ul class="check">
+      <li>Присяжні переклади всіх документів іспанською <span class="cost">$450</span></li>
+      <li>Медичні документи <span class="cost">$130</span></li>
+      <li>Нотаріальна довідка про доходи <span class="cost">$100</span></li>
+      <li>Перекладач на першу подачу <span class="cost">$100</span><span class="note">Обов’язково, якщо ви не говорите іспанською на достатньому рівні.</span></li>
+      <li>Державні мита <span class="cost">$480</span></li>
+      <li>Подача в міграційну службу, потім cédula<span class="note">Ми подали 24 вересня, а перший пластик отримали 1 жовтня. Посвідка на 2 роки, далі постійна резиденція.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Бюджет</div>
+    <h2 style="font-size:17pt;margin-top:2mm">Скільки коштував наш переїзд</h2>
+    <table class="budget">
+      <tr><td>Документи на резиденцію (самостійно)</td><td>$2 000</td></tr>
+      <tr><td>Переліт бізнес-класом, пором, автобус, ніч у Колонії</td><td>$3 587</td></tr>
+      <tr><td>Житло: Airbnb і заселення в постійну квартиру</td><td>$4 003</td></tr>
+      <tr class="total"><td>Разом</td><td>~$10 000</td></tr>
+    </table>
+    <p style="font-size:9pt;color:var(--muted);margin-top:2mm">Економ-клас і дешевше житло на перші тижні знижують суму приблизно до $7 000.</p>
+    <div class="compare">
+      <div class="them"><b>$7 900</b><span>Стільки агенція «під ключ» просила лише за документи, і без українських</span></div>
+      <div class="us"><b>$2 000</b><span>Стільки документи коштували нам, коли ми робили все самі</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>Чек-лист переїзду в Уругвай</span><span>originliberty.com/ua</span></div>
+</section>
+
+<!-- 5. Mistakes + CTA -->
+<section class="page">
+  <div class="eyebrow">Чого уникати</div>
+  <h2 style="font-size:22pt;margin:2mm 0 6mm">Чотири помилки, які коштують місяців і грошей</h2>
+  <ol class="mistakes">
+    <li><b>Почати з квитків, а не з документів</b><span>Документи з України з апостилями займають найбільше часу. Без них подача не відбудеться, навіть якщо ви вже на місці.</span></li>
+    <li><b>Шукати запис у міграційну службу після прильоту</b><span>Слоти бронюються заздалегідь. Бронюйте ще з тієї країни, де ви зараз.</span></li>
+    <li><b>Купувати техніку в Уругваї</b><span>Через мита вона приблизно вдвічі дорожча. Оновіть усе до переїзду.</span></li>
+    <li><b>Не закласти в бюджет заселення</b><span>Комісія рієлтора і страховка разом — це майже ще дві місячні оренди зверху до першого місяця.</span></li>
+  </ol>
+
+  <div class="cta">
+    <h2>Хочете пройти цей шлях спокійно, зі мною?</h2>
+    <p>Я допомагаю українським сім’ям з тим самим, що пройшла сама: документи, переклади, запис, подача. Почніть з того, що вам зручніше.</p>
+    <div class="rows">
+      <div><b>Безкоштовний ефір</b>Регулярно в Zoom відповідаю на всі питання про переїзд.<br><a href="https://originliberty.com/ua/efir">originliberty.com/ua/efir</a></div>
+      <div><b>Консультація, $100</b>Година про вашу ситуацію і ваш список документів. $100 зараховуються в супровід.<br><a href="https://originliberty.com/ua#book">originliberty.com/ua</a></div>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="ph"></div>
+    <p><b>Даша</b>Ми переїхали з Кіпру в Монтевідео у вересні 2026 разом з чоловіком і сином. Це наша друга еміграція, і цього разу все пройшло спокійно. Сподіваюсь, і у вас пройде.</p>
+  </div>
+  <div class="foot"><span>Практичний супровід переїзду, не юридична консультація. Суми — наш досвід, 2026.</span><span>originliberty.com/ua</span></div>
+</section>
+
+</body>
+</html>

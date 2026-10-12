@@ -11,6 +11,8 @@ interface Props {
   noindex?: boolean;
   showNavCta?: boolean;
   includeServiceSchema?: boolean;
+  lang?: string;
+  showFooter?: boolean;
 }
 
 const {
@@ -20,6 +22,8 @@ const {
   noindex = false,
   showNavCta = true,
   includeServiceSchema = false,
+  lang = 'en',
+  showFooter = true,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
@@ -30,7 +34,7 @@ const serviceLd = includeServiceSchema ? buildServiceJsonLd() : null;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-bone">
+<html lang={lang} class="bg-bone">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -136,7 +140,7 @@ const serviceLd = includeServiceSchema ? buildServiceJsonLd() : null;
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer />
+    {showFooter && <Footer />}
 
     <!--
       Lenis: refined smooth scroll (Framer-style inertia) for the premium

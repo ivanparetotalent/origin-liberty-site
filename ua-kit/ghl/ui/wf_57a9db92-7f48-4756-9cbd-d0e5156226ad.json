@@ -1,0 +1,183 @@
+{
+ "_id": "57a9db92-7f48-4756-9cbd-d0e5156226ad",
+ "locationId": "bvVdY6uxwZibc7vKkknQ",
+ "companyId": "kqlzGbwBzw3A8Vspaz2A",
+ "companyAge": 24,
+ "name": "UA · Live Q&A registration",
+ "status": "draft",
+ "version": 3,
+ "dataVersion": 7,
+ "allowMultiple": true,
+ "timezone": "account",
+ "removeContactFromLastStep": true,
+ "filePath": "location/bvVdY6uxwZibc7vKkknQ/workflows/57a9db92-7f48-4756-9cbd-d0e5156226ad/3",
+ "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FbvVdY6uxwZibc7vKkknQ%2Fworkflows%2F57a9db92-7f48-4756-9cbd-d0e5156226ad%2F3?alt=media&token=79955e53-ec65-4a97-9d14-c2e26a252059",
+ "stopOnResponse": false,
+ "autoMarkAsRead": false,
+ "permission": 380,
+ "type": "workflow",
+ "parentId": null,
+ "meta": null,
+ "updatedBy": "lEV2NQ0qxzT2E98vXuLn",
+ "createdAt": "2026-10-12T15:52:55.526Z",
+ "updatedAt": "2026-10-12T15:54:42.533Z",
+ "deleted": false,
+ "allowMultipleOpportunity": true,
+ "creationSource": "workflow_ai",
+ "isTriggerBucketMigrated": true,
+ "originType": "user",
+ "__v": 0,
+ "eventStartDate": null,
+ "window": null,
+ "workflowNote": null,
+ "triggersFilePath": "location/bvVdY6uxwZibc7vKkknQ/workflow-triggers/57a9db92-7f48-4756-9cbd-d0e5156226ad/3",
+ "id": "57a9db92-7f48-4756-9cbd-d0e5156226ad",
+ "workflowData": {
+  "templates": [
+   {
+    "id": "7ae1dcb0-f3d1-4145-94f8-a1b0dc25ec4a",
+    "order": 0,
+    "attributes": {
+     "actionType": "update_field_data",
+     "fields": []
+    },
+    "name": "Create/Update contact from webhook data",
+    "type": "create_update_contact",
+    "next": "8b863b62-6541-4ee3-b8c8-cacbdf412360"
+   },
+   {
+    "id": "8b863b62-6541-4ee3-b8c8-cacbdf412360",
+    "order": 1,
+    "attributes": {
+     "type": "add_contact_tag",
+     "tags": [
+      "ua-lead",
+      "ua-efir"
+     ]
+    },
+    "name": "Add tags: ua-lead, ua-efir",
+    "type": "add_contact_tag",
+    "parentKey": "7ae1dcb0-f3d1-4145-94f8-a1b0dc25ec4a",
+    "next": "6eec410f-478e-4481-b743-812db0e6994b"
+   },
+   {
+    "id": "6eec410f-478e-4481-b743-812db0e6994b",
+    "order": 2,
+    "attributes": {
+     "template_id": "6accf591bdd646ee7c5d39f4",
+     "templatesource": "email-builder",
+     "subject": "Ви зареєстровані на ефір про Уругвай"
+    },
+    "name": "UA 06 · Ви зареєстровані на ефір про Уругвай",
+    "type": "email",
+    "parentKey": "8b863b62-6541-4ee3-b8c8-cacbdf412360",
+    "next": "2c8883f6-c83f-4573-9112-abd1b9a8a0b6"
+   },
+   {
+    "id": "2c8883f6-c83f-4573-9112-abd1b9a8a0b6",
+    "order": 3,
+    "attributes": {
+     "type": "specific_date",
+     "specificDate": "2026-10-28",
+     "specificTimeHour": 5,
+     "specificTimeMinute": 0,
+     "specificTimePeriod": "PM",
+     "specificDateProceed": "on",
+     "specificDatePassed": "skip",
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait until 2026-10-28 17:00",
+    "type": "wait",
+    "parentKey": "6eec410f-478e-4481-b743-812db0e6994b",
+    "next": "a78ee280-98be-4b12-97e9-8cf7d3fe96c4"
+   },
+   {
+    "id": "a78ee280-98be-4b12-97e9-8cf7d3fe96c4",
+    "order": 4,
+    "attributes": {
+     "template_id": "6accf5939fd718579f7085cd",
+     "templatesource": "email-builder",
+     "subject": "Завтра ефір про переїзд в Уругвай"
+    },
+    "name": "UA 07 · Завтра ефір про переїзд в Уругвай",
+    "type": "email",
+    "parentKey": "2c8883f6-c83f-4573-9112-abd1b9a8a0b6",
+    "next": "b54fcd19-fa36-4487-8ae2-4945f9426f61"
+   },
+   {
+    "id": "b54fcd19-fa36-4487-8ae2-4945f9426f61",
+    "order": 5,
+    "attributes": {
+     "type": "specific_date",
+     "specificDate": "2026-10-29",
+     "specificTimeHour": 1,
+     "specificTimeMinute": 0,
+     "specificTimePeriod": "PM",
+     "specificDateProceed": "on",
+     "specificDatePassed": "skip",
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait until 2026-10-29 13:00",
+    "type": "wait",
+    "parentKey": "a78ee280-98be-4b12-97e9-8cf7d3fe96c4",
+    "next": "47a9f550-63c3-44e0-b217-83fef3243018"
+   },
+   {
+    "id": "47a9f550-63c3-44e0-b217-83fef3243018",
+    "order": 6,
+    "attributes": {
+     "template_id": "6accf594bdd646ee7c5d3a6b",
+     "templatesource": "email-builder",
+     "subject": "Через годину починаємо"
+    },
+    "name": "UA 08 · Через годину починаємо",
+    "type": "email",
+    "parentKey": "b54fcd19-fa36-4487-8ae2-4945f9426f61",
+    "next": "f530c69f-67e4-442c-bb8a-9d188dd8d532"
+   },
+   {
+    "id": "f530c69f-67e4-442c-bb8a-9d188dd8d532",
+    "order": 7,
+    "attributes": {
+     "type": "specific_date",
+     "specificDate": "2026-10-30",
+     "specificTimeHour": 12,
+     "specificTimeMinute": 0,
+     "specificTimePeriod": "PM",
+     "specificDateProceed": "on",
+     "specificDatePassed": "skip",
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait until 2026-10-30 12:00",
+    "type": "wait",
+    "parentKey": "47a9f550-63c3-44e0-b217-83fef3243018",
+    "next": "3ff15dc9-3cca-4448-8436-b74a2927fa10"
+   },
+   {
+    "id": "3ff15dc9-3cca-4448-8436-b74a2927fa10",
+    "order": 8,
+    "attributes": {
+     "template_id": "6accf596a5a0e7f601416607",
+     "templatesource": "email-builder",
+     "subject": "Запис ефіру і наступний крок"
+    },
+    "name": "UA 09 · Запис ефіру і наступний крок",
+    "type": "email",
+    "parentKey": "f530c69f-67e4-442c-bb8a-9d188dd8d532"
+   }
+  ]
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ }
+}

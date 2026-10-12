@@ -28,7 +28,8 @@ def call(method, path, body=None, version="2021-07-28"):
     req = urllib.request.Request(API + path, method=method,
                                  data=json.dumps(body).encode() if body is not None else None,
                                  headers={"Authorization": f"Bearer {TOKEN}", "Version": version,
-                                          "Content-Type": "application/json", "Accept": "application/json"})
+                                          "Content-Type": "application/json", "Accept": "application/json",
+                                          "User-Agent": "OriginLiberty-Build/1.0 (+https://originliberty.com)"})
     try:
         with urllib.request.urlopen(req) as r:
             raw = r.read()

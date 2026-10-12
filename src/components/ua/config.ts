@@ -8,7 +8,7 @@ export const UA = {
   webhookChecklist: '',
   webhookEfir: '',
   /** GHL calendar embed URL for the paid $100 consultation. */
-  calendarEmbed: '',
+  calendarEmbed: 'https://api.leadconnectorhq.com/widget/booking/gEDUJUGoIzYCUppxlDuG',
   /** Fallback contact while GHL is not wired. */
   dm: 'https://ig.me/m/_daria_podkhaliuzina',
   checklistPdf: '/ua/uruguay-checklist.pdf',

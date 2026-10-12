@@ -1,0 +1,14 @@
+const f = () => page.frames().find(f => f.url().includes('client-app-automation-workflows'));
+await page.mouse.click(420, 144); await page.waitForTimeout(1200);
+await f().getByText('Create/Update contact from webhook').last().click(); await page.waitForTimeout(3000);
+await page.mouse.click(1381, 597); await page.waitForTimeout(800);
+await f().getByText('Dynamic', { exact: true }).last().click(); await page.waitForTimeout(800);
+const eds = f().locator('.cv-tiptap-input__prosemirror');
+await eds.nth(0).click(); await page.keyboard.type('{{inboundWebhookRequest.country_now}}');
+await eds.nth(1).click(); await page.keyboard.type('{{inboundWebhookRequest.move_timeline}}');
+await page.waitForTimeout(500);
+await f().getByRole('button', { name: 'Save action' }).click(); await page.waitForTimeout(6000);
+const hdr = JSON.parse(require('fs').readFileSync('hdr.json'));
+const r = await ctx.request.get('https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ/7e15b85d-c61c-4e34-aca0-2c6da0a65afa', { headers: hdr });
+const j = await r.json(); require('fs').writeFileSync('wf_checklist.json', JSON.stringify(j,null,1));
+return j.workflowData.templates[0].attributes;

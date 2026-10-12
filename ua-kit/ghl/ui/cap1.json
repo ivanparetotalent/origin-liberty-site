@@ -1,0 +1,37 @@
+[
+ {
+  "m": "POST",
+  "u": "https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ",
+  "body": "{\"name\":\"New Workflow : 1791819290832\",\"status\":\"draft\",\"parentId\":null,\"updatedBy\":\"lEV2NQ0qxzT2E98vXuLn\",\"modifiedSteps\":[],\"workflowData\":{\"templates\":[]},\"deletedSteps\":[],\"createdSteps\":[],\"senderAddress\":{},\"stopOnResponse\":false,\"allowMultiple\":true,\"allowMultipleOpportunity\":true,\"autoMarkAsRead\":false,\"eventStartDate\":\"\",\"timezone\":\"\",\"triggersChanged\":false,\"company_id\":\"kqlzGbwBzw3A8Vspaz2A\",\"company_age\":24}"
+ },
+ {
+  "m": "POST",
+  "u": "https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ/v3/ai/message",
+  "body": "{\"sessionId\":\"v3-7e15b85d-c61c-4e34-aca0-2c6da0a65afa-bvVdY6uxwZibc7vKkknQ\",\"messages\":[{\"id\":\"authoring-control-1791819291378\",\"role\":\"user\",\"parts\":[{\"type\":\"text\",\"text\":\"Continue workflow authoring\"}]}],\"state\":{\"workflow\":{\"actions\":[],\"triggers\":[]},\"availableActions\":[],\"availableTriggers\":[],\"actionConfigs\":{\"create_update_contact\":{\"name\":\"Create contact\",\"description\":\"Automatically creates new contacts or updates existing ones\",\"category\":\"contact\",\"type\":\"create_update_contact\",\"attributes\":{\"type\":\"create_update_contact\",\"fields\":[]}},\"find_contact\":{\"name\":\"Find contact\",\"description\":\"Find a contact with the matching values\",\"category\":\"contact\",\"type\":\"find_contact\",\"attributes\":{\"type\":\"find_contact\",\"fields\":[],\"convertToMultipath\":true,\"name\":\"Find contact\",\"cat\":\"multi-path\"}},\"update_contact_field\":{\"name\":\"Update contact field\",\"description\":\"Update a field in the contact record\",\"category\":\"contact\",\"type\":\"update_contact_field\",\"attributes\":{\"type\":\"update_contact_field\",\"actionType\":\"update_field_data\",\"fields\":[]}},\"add_contact_tag\":{\"name\":\"Add contact tag\",\"description\":\"Adds specified tags to the contact\",\"category\":\"contact\",\"type\":\"add_contact_tag\",\"attributes\":{\"tags\":[]}},\"remove_contact_tag\":{\"name\":\"Remove contact tag\",\"description\":\"Removes specified tags from the contact\",\"category\":\"contact\",\"type\":\"remove_contact_tag\",\"attributes\":{\"tags\":[]}},\"assign_user\":{\"name\":\"Assign user\",\"description\":\"Assigns the contact to a user. Specify the u"
+ },
+ {
+  "m": "POST",
+  "u": "https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ/validate-assets",
+  "body": "{\"templates\":[],\"triggers\":[],\"companyId\":\"kqlzGbwBzw3A8Vspaz2A\"}"
+ },
+ {
+  "resp": "https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ",
+  "status": 200,
+  "body": "{\"id\":\"7e15b85d-c61c-4e34-aca0-2c6da0a65afa\",\"assetWarnings\":[]}"
+ },
+ {
+  "m": "POST",
+  "u": "https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ/validate-assets",
+  "body": "{\"templates\":[],\"triggers\":[],\"companyId\":\"kqlzGbwBzw3A8Vspaz2A\"}"
+ },
+ {
+  "m": "POST",
+  "u": "https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ/7e15b85d-c61c-4e34-aca0-2c6da0a65afa/validate-workflows",
+  "body": "{\"_id\":\"7e15b85d-c61c-4e34-aca0-2c6da0a65afa\",\"locationId\":\"bvVdY6uxwZibc7vKkknQ\",\"companyId\":\"kqlzGbwBzw3A8Vspaz2A\",\"companyAge\":24,\"name\":\"New Workflow : 1791819290832\",\"status\":\"draft\",\"version\":1,\"dataVersion\":7,\"allowMultiple\":true,\"timezone\":\"account\",\"removeContactFromLastStep\":true,\"filePath\":\"location/bvVdY6uxwZibc7vKkknQ/workflows/7e15b85d-c61c-4e34-aca0-2c6da0a65afa/1\",\"fileUrl\":\"https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FbvVdY6uxwZibc7vKkknQ%2Fworkflows%2F7e15b85d-c61c-4e34-aca0-2c6da0a65afa%2F1?alt=media&token=8e604fe5-f9c9-478e-8334-95622ecd786d\",\"stopOnResponse\":false,\"autoMarkAsRead\":false,\"permission\":380,\"type\":\"workflow\",\"parentId\":null,\"meta\":null,\"updatedBy\":\"lEV2NQ0qxzT2E98vXuLn\",\"createdAt\":\"2026-10-12T15:34:57.393Z\",\"updatedAt\":\"2026-10-12T15:34:57.393Z\",\"deleted\":false,\"allowMultipleOpportunity\":true,\"creationSource\":\"builder\",\"isTriggerBucketMigrated\":true,\"originType\":\"user\",\"__v\":0,\"id\":\"7e15b85d-c61c-4e34-aca0-2c6da0a65afa\",\"workflowData\":{\"templates\":[]},\"permissionMeta\":{\"canRead\":true,\"canWrite\":true},\"scheduledPauseDates\":[],\"newTriggers\":[]}"
+ },
+ {
+  "resp": "https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ/7e15b85d-c61c-4e34-aca0-2c6da0a65afa/validate-workflows",
+  "status": 200,
+  "body": "{\"valid\":true,\"message\":\"Validation successful\",\"assetWarnings\":[]}"
+ }
+]

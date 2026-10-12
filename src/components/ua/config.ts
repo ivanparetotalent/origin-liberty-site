@@ -5,8 +5,8 @@
  */
 export const UA = {
   /** GHL workflow "Inbound Webhook" trigger URLs (one per form). */
-  webhookChecklist: '',
-  webhookEfir: '',
+  webhookChecklist: 'https://services.leadconnectorhq.com/hooks/bvVdY6uxwZibc7vKkknQ/webhook-trigger/ZLgrT9V2oCcYSsHLXxAn',
+  webhookEfir: 'https://services.leadconnectorhq.com/hooks/bvVdY6uxwZibc7vKkknQ/webhook-trigger/hHPodaTmISJzNYPiDqFe',
   /** GHL calendar embed URL for the paid $100 consultation. */
   calendarEmbed: 'https://api.leadconnectorhq.com/widget/booking/gEDUJUGoIzYCUppxlDuG',
   /** Fallback contact while GHL is not wired. */

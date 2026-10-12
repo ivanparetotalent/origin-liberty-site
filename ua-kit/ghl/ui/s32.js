@@ -1,0 +1,1 @@
+const f = page.frames().find(f => f.url().includes("client-app-automation-workflows")); await f.getByRole("button", { name: "Create workflow" }).first().click(); await page.waitForTimeout(2500); return (await f.evaluate(() => document.body.innerText)).slice(0,600);

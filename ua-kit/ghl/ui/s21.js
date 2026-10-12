@@ -1,0 +1,10 @@
+const log=[];
+ctx.on('request', r => { const u=r.url(); if (/backend\.leadconnectorhq\.com\/workflow\/bvVdY6uxwZibc7vKkknQ\/7e15b85d/.test(u) && ['PUT','PATCH','POST'].includes(r.method()) && !/validate|ai\//.test(u)) log.push({m:r.method(), u, body:r.postData()}); });
+const f = () => page.frames().find(f => f.url().includes('client-app-automation-workflows'));
+await page.mouse.click(32, 472); await page.waitForTimeout(2500);
+const ta = f().locator('textarea').last();
+await ta.fill('Rename the action "Premium UA lead notification" to "Notify Ivan: premium UA lead". Change nothing else.');
+await ta.press('Enter');
+await page.waitForTimeout(75000);
+require('fs').writeFileSync('cap_save.json', JSON.stringify(log,null,1));
+return log.map(x=>x.m+' '+x.u+' '+(x.body||'').length);

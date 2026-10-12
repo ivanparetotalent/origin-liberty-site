@@ -1,0 +1,449 @@
+{
+ "_id": "7e15b85d-c61c-4e34-aca0-2c6da0a65afa",
+ "locationId": "bvVdY6uxwZibc7vKkknQ",
+ "companyId": "kqlzGbwBzw3A8Vspaz2A",
+ "companyAge": 24,
+ "name": "UA · Checklist opt-in",
+ "status": "draft",
+ "version": 8,
+ "dataVersion": 7,
+ "allowMultiple": true,
+ "timezone": "account",
+ "removeContactFromLastStep": true,
+ "filePath": "location/bvVdY6uxwZibc7vKkknQ/workflows/7e15b85d-c61c-4e34-aca0-2c6da0a65afa/8",
+ "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FbvVdY6uxwZibc7vKkknQ%2Fworkflows%2F7e15b85d-c61c-4e34-aca0-2c6da0a65afa%2F8?alt=media&token=31bc6c97-7bdb-4eef-ab89-51591b8029b5",
+ "stopOnResponse": false,
+ "autoMarkAsRead": false,
+ "permission": 380,
+ "type": "workflow",
+ "parentId": null,
+ "meta": {
+  "advanceCanvasMeta": {
+   "enabled": false,
+   "disabledAt": "2026-10-12T15:45:48.085Z"
+  }
+ },
+ "updatedBy": "lEV2NQ0qxzT2E98vXuLn",
+ "createdAt": "2026-10-12T15:34:57.393Z",
+ "updatedAt": "2026-10-12T15:49:01.063Z",
+ "deleted": false,
+ "allowMultipleOpportunity": true,
+ "creationSource": "workflow_ai",
+ "isTriggerBucketMigrated": true,
+ "originType": "user",
+ "__v": 0,
+ "eventStartDate": null,
+ "window": null,
+ "workflowNote": null,
+ "triggersFilePath": "location/bvVdY6uxwZibc7vKkknQ/workflow-triggers/7e15b85d-c61c-4e34-aca0-2c6da0a65afa/8",
+ "id": "7e15b85d-c61c-4e34-aca0-2c6da0a65afa",
+ "workflowData": {
+  "templates": [
+   {
+    "id": "5c1a7209-b1cb-49ea-93d7-dcd7b7872f15",
+    "order": 0,
+    "attributes": {
+     "type": "create_update_contact",
+     "actionType": "update_field_data",
+     "fields": [
+      {
+       "field": "bf8qUVf5CtxwbYnLK3xo",
+       "title": "Country now",
+       "type": "string",
+       "value": "{{inboundWebhookRequest.country_now}}"
+      },
+      {
+       "field": "yhWglYDhbv6B7YJ54Aj2",
+       "title": "Move timeline",
+       "type": "select",
+       "value": "{{inboundWebhookRequest.move_timeline}}",
+       "__customFieldType__": "customValues"
+      },
+      {
+       "field": "n7G1d2yWVX2jJLsrzQUN",
+       "title": "Family",
+       "type": "select",
+       "value": "{{inboundWebhookRequest.family}}",
+       "__customFieldType__": "customValues"
+      },
+      {
+       "field": "K7amJlaWRM9F7KSHdYYO",
+       "title": "Business 500k",
+       "type": "select",
+       "value": "{{inboundWebhookRequest.business_500k}}",
+       "__customFieldType__": "customValues"
+      },
+      {
+       "field": "xHjjoaHF3oLB6YoZqXXD",
+       "title": "Lead source page",
+       "type": "string",
+       "value": "{{inboundWebhookRequest.source}}"
+      },
+      {
+       "field": "firstName",
+       "value": "{{inboundWebhookRequest.first_name}}",
+       "title": "First name",
+       "type": "string",
+       "date": ""
+      },
+      {
+       "field": "email",
+       "value": "{{inboundWebhookRequest.email}}",
+       "title": "Email",
+       "type": "string",
+       "date": ""
+      },
+      {
+       "field": "phone",
+       "value": "{{inboundWebhookRequest.phone}}",
+       "title": "Phone",
+       "type": "string",
+       "date": ""
+      }
+     ]
+    },
+    "name": "Create/Update contact from webhook",
+    "type": "create_update_contact",
+    "next": "6c1f668c-cca2-47c0-9150-1e6450ad06f1"
+   },
+   {
+    "id": "6c1f668c-cca2-47c0-9150-1e6450ad06f1",
+    "order": 1,
+    "attributes": {
+     "type": "add_contact_tag",
+     "tags": [
+      "ua-lead",
+      "ua-checklist"
+     ]
+    },
+    "name": "Add ua-lead and ua-checklist",
+    "type": "add_contact_tag",
+    "parentKey": "5c1a7209-b1cb-49ea-93d7-dcd7b7872f15",
+    "next": "501e317b-e657-432e-85c3-a208cb4342cb"
+   },
+   {
+    "id": "501e317b-e657-432e-85c3-a208cb4342cb",
+    "order": 2,
+    "attributes": {
+     "subject": "Ваш чек-лист переїзду в Уругвай",
+     "template_id": "6accf588bdd646ee7c5d38cf",
+     "templatesource": "email-builder",
+     "emailRecipients": "enrolled_contacts"
+    },
+    "name": "UA 00 · Ваш чек-лист переїзду в Уругвай",
+    "type": "email",
+    "parentKey": "6c1f668c-cca2-47c0-9150-1e6450ad06f1",
+    "next": "3d01faaf-de6e-4190-ab60-ee1f96e38188"
+   },
+   {
+    "id": "3d01faaf-de6e-4190-ab60-ee1f96e38188",
+    "order": 3,
+    "attributes": {
+     "currentRecipeType": "CUSTOM",
+     "conditionName": "Business 500k is Так?",
+     "operator": "and",
+     "if": true,
+     "version": 2,
+     "noneBranchName": "Otherwise",
+     "branches": [
+      {
+       "name": "Premium",
+       "operator": "and",
+       "segments": [
+        {
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "K7amJlaWRM9F7KSHdYYO",
+           "conditionOperator": "==",
+           "conditionValue": "Так"
+          }
+         ]
+        }
+       ],
+       "id": "b3906c21-137c-4925-9b71-4fd5c0f10a24",
+       "__irBranchId__": "premium"
+      }
+     ],
+     "showErrors": false,
+     "branchNameError": "Branch name cannot be empty!"
+    },
+    "name": "business_500k is Так?",
+    "type": "if_else",
+    "cat": "conditions",
+    "nodeType": "condition-node",
+    "parentKey": "501e317b-e657-432e-85c3-a208cb4342cb",
+    "next": [
+     "b3906c21-137c-4925-9b71-4fd5c0f10a24",
+     "1ac29e57-3327-53eb-a2fa-e35d17664c04"
+    ]
+   },
+   {
+    "id": "b3906c21-137c-4925-9b71-4fd5c0f10a24",
+    "order": 4,
+    "attributes": {
+     "if": false,
+     "conditionName": "Condition",
+     "operator": "and",
+     "branches": []
+    },
+    "name": "Premium",
+    "type": "if_else",
+    "cat": "conditions",
+    "parent": "3d01faaf-de6e-4190-ab60-ee1f96e38188",
+    "parentKey": "3d01faaf-de6e-4190-ab60-ee1f96e38188",
+    "sibling": [
+     "1ac29e57-3327-53eb-a2fa-e35d17664c04"
+    ],
+    "nodeType": "branch-yes",
+    "next": "1a25e355-b9ef-4ba4-bb05-e0dc486a9e60"
+   },
+   {
+    "id": "1a25e355-b9ef-4ba4-bb05-e0dc486a9e60",
+    "order": 0,
+    "attributes": {
+     "type": "add_contact_tag",
+     "tags": [
+      "ua-premium"
+     ]
+    },
+    "name": "Add ua-premium",
+    "type": "add_contact_tag",
+    "parent": "b3906c21-137c-4925-9b71-4fd5c0f10a24",
+    "parentKey": "b3906c21-137c-4925-9b71-4fd5c0f10a24",
+    "next": "4c57cff2-44fd-4993-b7ae-80504ad151bd"
+   },
+   {
+    "id": "4c57cff2-44fd-4993-b7ae-80504ad151bd",
+    "order": 1,
+    "attributes": {
+     "type": "email",
+     "email": {
+      "userType": "custom_email",
+      "to": "ivan@ivanbunin.com",
+      "subject": "Premium UA lead: {{contact.first_name}}",
+      "html": "<p>Premium lead from Dasha's Ukrainian funnel. Name: {{contact.first_name}}. Email: {{contact.email}}. Phone: {{contact.phone}}. Country: {{contact.country_now}}. Timeline: {{contact.move_timeline}}. Family: {{contact.family}}.</p>"
+     }
+    },
+    "name": "Notify Ivan: premium UA lead",
+    "type": "internal_notification",
+    "parentKey": "1a25e355-b9ef-4ba4-bb05-e0dc486a9e60",
+    "parent": "b3906c21-137c-4925-9b71-4fd5c0f10a24",
+    "next": "d83554a6-22dd-40de-ac32-99ca90a89c14"
+   },
+   {
+    "id": "d83554a6-22dd-40de-ac32-99ca90a89c14",
+    "order": 2,
+    "attributes": {
+     "targetNodeId": "1ce55003-f0a7-4699-bb8f-50a9d1747abc",
+     "type": "goto"
+    },
+    "name": "Goto",
+    "type": "goto",
+    "parentKey": "4c57cff2-44fd-4993-b7ae-80504ad151bd",
+    "parent": "b3906c21-137c-4925-9b71-4fd5c0f10a24"
+   },
+   {
+    "id": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "order": 4,
+    "attributes": {
+     "else": true
+    },
+    "name": "Otherwise",
+    "type": "if_else",
+    "cat": "conditions",
+    "parent": "3d01faaf-de6e-4190-ab60-ee1f96e38188",
+    "parentKey": "3d01faaf-de6e-4190-ab60-ee1f96e38188",
+    "sibling": [
+     "b3906c21-137c-4925-9b71-4fd5c0f10a24"
+    ],
+    "nodeType": "branch-no",
+    "next": "1ce55003-f0a7-4699-bb8f-50a9d1747abc"
+   },
+   {
+    "id": "1ce55003-f0a7-4699-bb8f-50a9d1747abc",
+    "order": 0,
+    "attributes": {
+     "type": "time",
+     "startAfter": {
+      "when": "after",
+      "type": "days",
+      "value": 1
+     },
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait 1 day",
+    "type": "wait",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "parentKey": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "63a60197-dc4d-44fd-9dbf-9d2df110ba26"
+   },
+   {
+    "id": "63a60197-dc4d-44fd-9dbf-9d2df110ba26",
+    "order": 1,
+    "attributes": {
+     "subject": "Як нас занесло в Латинську Америку",
+     "template_id": "6accf58962f9c2d878f0c9c1",
+     "templatesource": "email-builder",
+     "emailRecipients": "enrolled_contacts"
+    },
+    "name": "UA 01 · Як нас занесло в Латинську Америку",
+    "type": "email",
+    "parentKey": "1ce55003-f0a7-4699-bb8f-50a9d1747abc",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "367fca84-1639-4786-a63a-b03e273b351b"
+   },
+   {
+    "id": "367fca84-1639-4786-a63a-b03e273b351b",
+    "order": 2,
+    "attributes": {
+     "type": "time",
+     "startAfter": {
+      "when": "after",
+      "type": "days",
+      "value": 2
+     },
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait 2 days",
+    "type": "wait",
+    "parentKey": "63a60197-dc4d-44fd-9dbf-9d2df110ba26",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "6a4097df-bb55-4779-84ca-c75ede1c8eb4"
+   },
+   {
+    "id": "6a4097df-bb55-4779-84ca-c75ede1c8eb4",
+    "order": 3,
+    "attributes": {
+     "subject": "$7 900 чи $2 000?",
+     "template_id": "6accf58b5033a762e336818c",
+     "templatesource": "email-builder",
+     "emailRecipients": "enrolled_contacts"
+    },
+    "name": "UA 02 · $7 900 чи $2 000?",
+    "type": "email",
+    "parentKey": "367fca84-1639-4786-a63a-b03e273b351b",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "8887b08a-941b-45bd-be20-adcb4df231df"
+   },
+   {
+    "id": "8887b08a-941b-45bd-be20-adcb4df231df",
+    "order": 4,
+    "attributes": {
+     "type": "time",
+     "startAfter": {
+      "when": "after",
+      "type": "days",
+      "value": 2
+     },
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait 2 days",
+    "type": "wait",
+    "parentKey": "6a4097df-bb55-4779-84ca-c75ede1c8eb4",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "7b1c899b-7642-4476-b77e-3f018b62ff4c"
+   },
+   {
+    "id": "7b1c899b-7642-4476-b77e-3f018b62ff4c",
+    "order": 5,
+    "attributes": {
+     "subject": "4 помилки, які коштують місяців",
+     "template_id": "6accf58cf90a672e6e30aa80",
+     "templatesource": "email-builder",
+     "emailRecipients": "enrolled_contacts"
+    },
+    "name": "UA 03 · 4 помилки, які коштують місяців",
+    "type": "email",
+    "parentKey": "8887b08a-941b-45bd-be20-adcb4df231df",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "3192dca0-0300-4080-9ace-241e7097cd1f"
+   },
+   {
+    "id": "3192dca0-0300-4080-9ace-241e7097cd1f",
+    "order": 6,
+    "attributes": {
+     "type": "time",
+     "startAfter": {
+      "when": "after",
+      "type": "days",
+      "value": 2
+     },
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait 2 days",
+    "type": "wait",
+    "parentKey": "7b1c899b-7642-4476-b77e-3f018b62ff4c",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "ffdbd36d-0f71-4ea7-b501-84cbcd3eb709"
+   },
+   {
+    "id": "ffdbd36d-0f71-4ea7-b501-84cbcd3eb709",
+    "order": 7,
+    "attributes": {
+     "subject": "Запрошую на ефір (і про консультацію)",
+     "template_id": "6accf58ee508bc12289b1d96",
+     "templatesource": "email-builder",
+     "emailRecipients": "enrolled_contacts"
+    },
+    "name": "UA 04 · Запрошую на ефір (і про консультацію)",
+    "type": "email",
+    "parentKey": "3192dca0-0300-4080-9ace-241e7097cd1f",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "e62a45fa-5b21-41c2-966a-cb86aec3655e"
+   },
+   {
+    "id": "e62a45fa-5b21-41c2-966a-cb86aec3655e",
+    "order": 8,
+    "attributes": {
+     "type": "time",
+     "startAfter": {
+      "when": "after",
+      "type": "days",
+      "value": 3
+     },
+     "isHybridAction": true,
+     "hybridActionType": "wait",
+     "convertToMultipath": false,
+     "transitions": []
+    },
+    "name": "Wait 3 days",
+    "type": "wait",
+    "parentKey": "ffdbd36d-0f71-4ea7-b501-84cbcd3eb709",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04",
+    "next": "b285ade0-e090-4f30-9aa5-5a6f804af875"
+   },
+   {
+    "id": "b285ade0-e090-4f30-9aa5-5a6f804af875",
+    "order": 9,
+    "attributes": {
+     "subject": "Останнє на сьогодні від мене",
+     "template_id": "6accf58ff90a672e6e30aaeb",
+     "templatesource": "email-builder",
+     "emailRecipients": "enrolled_contacts"
+    },
+    "name": "UA 05 · Останнє на сьогодні від мене",
+    "type": "email",
+    "parentKey": "e62a45fa-5b21-41c2-966a-cb86aec3655e",
+    "parent": "1ac29e57-3327-53eb-a2fa-e35d17664c04"
+   }
+  ]
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ }
+}

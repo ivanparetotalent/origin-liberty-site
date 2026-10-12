@@ -1,0 +1,10 @@
+const seen=[];
+ctx.on('request', async r => { if (r.url().includes('backend.leadconnectorhq.com/workflow/')) { const h = await r.allHeaders(); seen.push(h); } });
+await page.reload({waitUntil:'domcontentloaded'}); await page.waitForTimeout(12000);
+const hdr = seen.find(h => h['token-id'] || h['authorization']);
+if (!hdr) return 'none of ' + seen.length;
+const keep = {}; for (const k of ['authorization','token-id','channel','source','version']) if (hdr[k]) keep[k]=hdr[k];
+require('fs').writeFileSync('hdr.json', JSON.stringify(keep));
+const r = await ctx.request.get('https://backend.leadconnectorhq.com/workflow/bvVdY6uxwZibc7vKkknQ/7e15b85d-c61c-4e34-aca0-2c6da0a65afa', { headers: keep });
+const t = await r.text(); require('fs').writeFileSync('wf_checklist.json', t);
+return { status: r.status(), hdrKeys: Object.keys(keep), len: t.length, head: t.slice(0,300) };
